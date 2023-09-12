@@ -20,8 +20,26 @@ function preload() {
  * Description of setup
 */
 function setup() {
-createCanvas(640, 640);
-background(255, 0, 0,);
+
+createCanvas(500, 500);
+
+background(70, 0, 50,);
+
+stroke('purple');
+
+strokeWeight(10);
+
+point(50,50);
+
+point(70,70);
+
+rect(0, 0, 250,250 );
+
+line(0,0, 500,500);
+
+ellipseMode(CORNER);
+ellipse(250,250, 100, 100);
+
 }
 
 
