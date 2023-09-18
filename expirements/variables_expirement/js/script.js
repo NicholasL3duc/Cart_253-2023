@@ -87,6 +87,7 @@ ellipse(320,275,60,40);
     
  // hat attempt
 fill(105,105,105)
+rect.mouseY = constrain(rect.mouseY,height,0)
  rect(250, mouseY, 140,20);
 
  fill(0)
@@ -97,10 +98,10 @@ rect(290,mouseY, 60,-70);
 rect.fill = map(0,mouseY,width,0,15);
 fill(rect.fill);
 fill(mouseY)
-   rect(275,200,40,15);
+   rect(275,210,40,15);
 
 fill(mouseY)
-   rect(320,200,40,15);
+   rect(320,210,40,15);
 
 
    
