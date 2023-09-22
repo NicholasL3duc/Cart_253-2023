@@ -14,7 +14,7 @@ y: 250,
 size: 20,
 vx: 0,
 vy: 0,
-speed: 3,
+speed: 2,
 fill: {
     r:20,
     g:70,
@@ -32,6 +32,17 @@ r:60,
 g:100,
 b:240,
 }
+}
+let whaleTail = {
+x:250,
+y:250,
+size: 70,
+fill: {
+r:70,
+g:100,
+b:230,
+}
+
 
 };
 
@@ -84,6 +95,14 @@ if (fishes.x > width){
 whale.x = mouseX;
 whale.y = mouseY;
 
+whaleTail.x = mouseX;
+whaleTail.y = mouseY;
+
+// keeping the fishes away
+
+
+
+
 //display for fishes
 
 fill(fishes.fill.r,fishes.fill.g,fishes.fill.b);
@@ -93,6 +112,11 @@ ellipse(fishes.x,fishes.y,fishes.size);
 fill(whale.fill.r,whale.fill.g,whale.fill.b);
 ellipse(whale.x, whale.y, whale.size);
 
+//whale tail
+fill(whaleTail.fill.r,whaleTail.fill.g,whaleTail.fill.b)
+ellipse (whaleTail.x, whaleTail.y, 20,80)
+
+//whale
 
 
 }
