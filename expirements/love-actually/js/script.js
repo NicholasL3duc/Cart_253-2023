@@ -34,6 +34,8 @@ speed: 3,
 
 };
 
+let state = 'title'; 
+
 /**
  * Description of setup
 */
@@ -62,13 +64,55 @@ function draw() {
 
 background(0);
 
-move();
-checkOffscreen();
-checkOverlap();
-display();
 
+if (state === 'title'){
+    title();
 
 }
+else if (state === 'simulation'){
+simulation();
+}
+else if (state === 'love') {
+    love();
+}
+else if (state === 'sadness') {
+     sadness();
+    }
+}
+function title(){
+    push();
+    textSize(64);
+    fill(200,100,100);
+    textAlign(CENTER,CENTER);
+    text('LOVE?', width/2,height/2);
+    pop();
+}
+
+function simulation(){
+    move();
+    checkOffscreen();
+    checkOverlap();
+    display();
+}
+function love(){
+    push();
+    textSize(64);
+    fill(255,150,150);
+    textAlign(CENTER,CENTER);
+    text('SOULMATES!', width/2,height/2);
+    pop();
+
+}
+function sadness(){
+    push();
+    textSize(40);
+    fill(150,150,255);
+    textAlign(CENTER,CENTER);
+    text('Other Bears in the forest :(', width/2,height/2);
+    pop();
+
+}
+
 function move(){
 
 // moves the bears
@@ -85,7 +129,7 @@ function checkOffscreen(){
 // check if the bears are long gone
 if (PapaBear.x < 0 || PapaBear.x > width || PapaBear.y < 0 || PapaBear.y > height || MamaBear.x < 0 || MamaBear.x > width || MamaBear.y < 0 || MamaBear.y > height){
     // tear jerking ending
-
+    state = 'sadness';
     }
 }
 
@@ -94,7 +138,7 @@ function checkOverlap(){
 let d = dist(PapaBear.x,PapaBear.y,MamaBear.x,MamaBear.y);
 if (d < PapaBear.size/2 + MamaBear.size/2){
     // BEST ENDING EVEEEEEER, they get married and happy ever after
-
+    state = 'love';
 }
 
 }
@@ -103,5 +147,12 @@ function display(){
 // display the bears
 ellipse(PapaBear.x,PapaBear.y,PapaBear.size);
 ellipse(MamaBear.x,MamaBear.y,MamaBear.size);
+
+}
+function mousePressed(){
+    if (state === 'title'){
+        state = 'simulation';
+    }
+
 
 }
