@@ -62,6 +62,16 @@ function draw() {
 
 background(0);
 
+move();
+checkOffscreen();
+checkOverlap();
+display();
+
+
+}
+function move(){
+
+// moves the bears
 PapaBear.x = PapaBear.x + PapaBear.vx;
 PapaBear.y = PapaBear.y + PapaBear.vy;
 
@@ -69,6 +79,28 @@ PapaBear.y = PapaBear.y + PapaBear.vy;
 MamaBear.x = MamaBear.x + MamaBear.vx;
 MamaBear.y = MamaBear.y + MamaBear.vy;
 
+}
+
+function checkOffscreen(){
+// check if the bears are long gone
+if (PapaBear.x < 0 || PapaBear.x > width || PapaBear.y < 0 || PapaBear.y > height || MamaBear.x < 0 || MamaBear.x > width || MamaBear.y < 0 || MamaBear.y > height){
+    // tear jerking ending
+
+    }
+}
+
+function checkOverlap(){
+// check if the bears meet
+let d = dist(PapaBear.x,PapaBear.y,MamaBear.x,MamaBear.y);
+if (d < PapaBear.size/2 + MamaBear.size/2){
+    // BEST ENDING EVEEEEEER, they get married and happy ever after
+
+}
+
+}
+
+function display(){
+// display the bears
 ellipse(PapaBear.x,PapaBear.y,PapaBear.size);
 ellipse(MamaBear.x,MamaBear.y,MamaBear.size);
 
