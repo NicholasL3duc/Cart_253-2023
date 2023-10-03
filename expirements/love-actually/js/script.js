@@ -17,20 +17,43 @@ function preload() {
 let PapaBear = {
 x: undefined,
 y: 250,
+headSizeP:100,
+eyes:{
+    size: 15,
+    xOffset: 25,
+    yOffset: 10
+},
+mouthSizeP:{
+    size: 10
+},
+PapaBearEar :{
+    size : 30,
+    xOffset: 30,
+    yOffset: 10,
+},
 size: 100,
 vx: 0,
 vy: 0,
-speed: 3
+speed: 2
 
 };
 
 let MamaBear = {
 x: undefined,
 y: 250,
-size: 100,
+headSizeM: 100,
+eyes:{
+    size: 15,
+    xOffset: 25,
+    yOffset: 10
+},
+mouthSizeM:{
+    size:10
+},
+size:100,
 vx: 0,
 vy: 0,
-speed: 3,
+speed: 2,
 
 };
 
@@ -63,8 +86,8 @@ MamaBear.vy = random(-MamaBear.speed,MamaBear.speed);
 function draw() {
 
 background(0);
-
-
+MamaBear.eyes.xOffset = map(height, 0, width, 10, 30);
+PapaBear.eyes.xOffset = map(height, 0, width, 10, 30);
 if (state === 'title'){
     title();
 
@@ -111,6 +134,8 @@ function sadness(){
     text('Other Bears in the forest :(', width/2,height/2);
     pop();
 
+
+
 }
 
 function move(){
@@ -145,9 +170,65 @@ if (d < PapaBear.size/2 + MamaBear.size/2){
 
 function display(){
 // display the bears
-ellipse(PapaBear.x,PapaBear.y,PapaBear.size);
-ellipse(MamaBear.x,MamaBear.y,MamaBear.size);
 
+// papabear display
+// ellipse(PapaBear.x,PapaBear.y,PapaBear.size);
+
+
+noStroke();
+
+
+// this is the right Ear
+fill(199,21,133);
+ellipse(PapaBear.x,PapaBear.y,PapaBear.size);
+
+fill(255,228,196);
+ellipse(PapaBear.x,PapaBear.y,PapaBear.size);
+
+
+// this is the left Ear
+fill(199,21,133);
+ellipse(PapaBear.x,PapaBear.y,30);
+
+fill(255,228,196);
+ellipse(PapaBear.x,PapaBear.y,30);
+
+
+
+// this is the Head
+fill(199,21,133);
+ellipse(PapaBear.x,PapaBear.y,PapaBear.headSizeM);
+
+// fill(255,228,196);
+// ellipse(PapaBear.x,PapaBear.y,PapaBear.size);
+
+//eyes
+//left eye
+fill(255,250,240);
+ellipse(PapaBear.x - PapaBear.eyes.xOffset, PapaBear.y - PapaBear.eyes.yOffset, PapaBear.eyes.size);
+
+//right eye
+fill(255,250,240);
+ellipse(PapaBear.x + PapaBear.eyes.xOffset, PapaBear.y - PapaBear.eyes.yOffset, PapaBear.eyes.size);
+
+//mouth
+fill(199,21,133);
+ellipse(PapaBear.x,PapaBear.y, 30);
+
+
+
+// mamabear display
+fill(130,255,80)
+ ellipse(MamaBear.x,MamaBear.y,MamaBear.size);
+ 
+ //left eye
+ fill(255,250,240);
+ ellipse(MamaBear.x - MamaBear.eyes.xOffset, MamaBear.y - MamaBear.eyes.yOffset, MamaBear.eyes.size);
+ 
+ //right eye
+ fill(255,250,240);
+ ellipse(MamaBear.x + MamaBear.eyes.xOffset, MamaBear.y - MamaBear.eyes.yOffset, MamaBear.eyes.size);
+ 
 }
 function mousePressed(){
     if (state === 'title'){
