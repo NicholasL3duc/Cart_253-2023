@@ -14,48 +14,108 @@
 function preload() {
 
 }
-let PapaBear = {
-x: undefined,
-y: 250,
-headSizeP:100,
-eyes:{
-    size: 15,
-    xOffset: 25,
-    yOffset: 10
-},
-mouthSizeP:{
-    size: 10
-},
-PapaBearEar :{
-    size : 30,
-    xOffset: 30,
-    yOffset: 10,
-},
-size: 100,
-vx: 0,
-vy: 0,
-speed: 2
+let papaBear = {
+    x: undefined,
+    y: 250,
+    headSizeP:100,
+    eyes:{
+        size: 15,
+        xOffset: 25,
+        yOffset: 10
+    },
+    mouthSizeP:{
+        x:10,
+        y:10,
+    
+        size: 20
+    },
+    nose :{
+        xOffset: 40,
+        yOffset: - 50,
+        w: 80,
+        h: 70,
+
+    },
+    ear :{
+        outside:{
+            xOffset: 40,
+            yOffset: - 50,
+            w: 80,
+            h: 70,
+        },
+
+        inside:{
+            xOffset: 40,
+            yOffset:-50,
+            w: 65,
+            h: 55
+
+        },
+        size : 30,
+        xOffset: 30,
+        yOffset: 10,
+    },
+
+
+    
+    size: 100,
+    vx: 0,
+    vy: 0,
+    speed: 2
 
 };
 
-let MamaBear = {
-x: undefined,
-y: 250,
-headSizeM: 100,
-eyes:{
-    size: 15,
-    xOffset: 25,
-    yOffset: 10
-},
-mouthSizeM:{
-    size:10
-},
-size:100,
-vx: 0,
-vy: 0,
-speed: 2,
+let mamaBear = {
+    x: undefined,
+    y: 250,
+    headSizeM:100,
+    eyes:{
+        size: 15,
+        xOffset: 25,
+        yOffset: 10
+    },
+    mouthSizeM:{
+        x:10,
+        y:10,
+    
+        size: 20
+    },
+    nose :{
+        xOffset: 40,
+        yOffset: - 50,
+        w: 80,
+        h: 70,
+
+    },
+    ear :{
+        outside:{
+            xOffset: 40,
+            yOffset: - 50,
+            w: 80,
+            h: 70,
+        },
+
+        inside:{
+            xOffset: 40,
+            yOffset:-50,
+            w: 65,
+            h: 55
+
+        },
+        size : 30,
+        xOffset: 30,
+        yOffset: 10,
+    },
+
+
+    
+    size: 100,
+    vx: 0,
+    vy: 0,
+    speed: 2,
 
 };
+
 
 let state = 'title'; 
 
@@ -64,18 +124,18 @@ let state = 'title';
 */
 function setup() {
 
-createCanvas (500,500)
+createCanvas (windowWidth,windowHeight);
 
 
-// set up for PapaBear
-PapaBear.x = width/3 ;
- PapaBear.vx = random(-PapaBear.speed,PapaBear.speed);
- PapaBear.vy = random(-PapaBear.speed,PapaBear.speed);
-// set up for MamaBear
+// set up for papaBear
+papaBear.x = width/3 ;
+ papaBear.vx = random(-papaBear.speed,papaBear.speed);
+ papaBear.vy = random(-papaBear.speed,papaBear.speed);
+// set up for mamaBear
 
-MamaBear.x = 2 * width /3;
-MamaBear.vx = random(-MamaBear.speed,MamaBear.speed);
-MamaBear.vy = random(-MamaBear.speed,MamaBear.speed);
+mamaBear.x = 2 * width /3;
+mamaBear.vx = random(-mamaBear.speed,mamaBear.speed);
+mamaBear.vy = random(-mamaBear.speed,mamaBear.speed);
 
 }
 
@@ -86,8 +146,8 @@ MamaBear.vy = random(-MamaBear.speed,MamaBear.speed);
 function draw() {
 
 background(0);
-MamaBear.eyes.xOffset = map(height, 0, width, 10, 30);
-PapaBear.eyes.xOffset = map(height, 0, width, 10, 30);
+mamaBear.eyes.xOffset = map(height, 0, width, 10, 30);
+papaBear.eyes.xOffset = map(height, 0, width, 10, 30);
 if (state === 'title'){
     title();
 
@@ -100,6 +160,9 @@ else if (state === 'love') {
 }
 else if (state === 'sadness') {
      sadness();
+    }
+    else if (state === 'egg'){
+        egg();
     }
 }
 function title(){
@@ -116,6 +179,8 @@ function simulation(){
     checkOffscreen();
     checkOverlap();
     display();
+    controlUser();
+    papaOffscreen();
 }
 function love(){
     push();
@@ -133,35 +198,74 @@ function sadness(){
     textAlign(CENTER,CENTER);
     text('Other Bears in the forest :(', width/2,height/2);
     pop();
+}
+function egg(){
+    push();
+    textSize(40);
+    fill(199,21,133);
+    textAlign(CENTER,CENTER);
+    text('You Are One Picky Bear???', width/2,height/2);
+    pop();
 
 
 
 }
+function controlUser(){
+if (keyIsDown(87)) {    //moving using the W key
+    papaBear.vy = -papaBear.speed;
+}
+else if (keyIsDown(83)) {
+    papaBear.vy = papaBear.speed;
+}
+else {
+    papaBear.vy =0;
+}
 
+if (keyIsDown(68)) {
+    papaBear.vx = papaBear.speed;
+}
+else if (keyIsDown(65)) {
+    papaBear.vx = -papaBear.speed;
+}
+else{
+    papaBear.vx = 0;
+}
+papaBear.x += papaBear.vx
+papaBear.y += papaBear.vy
+
+}
 function move(){
 
 // moves the bears
-PapaBear.x = PapaBear.x + PapaBear.vx;
-PapaBear.y = PapaBear.y + PapaBear.vy;
+//papaBear.x = papaBear.x + papaBear.vx;
+//papaBear.y = papaBear.y + papaBear.vy;
 
 
-MamaBear.x = MamaBear.x + MamaBear.vx;
-MamaBear.y = MamaBear.y + MamaBear.vy;
+mamaBear.x = mamaBear.x + mamaBear.vx;
+mamaBear.y = mamaBear.y + mamaBear.vy;
 
 }
-
+function papaOffscreen(){
+    // check if the bears are long gone
+    if (papaBear.x < 0 || papaBear.x > width || papaBear.y < 0 || papaBear.y > height ){
+        // secret end
+        state = 'egg';
+        
+        }
+    }
 function checkOffscreen(){
 // check if the bears are long gone
-if (PapaBear.x < 0 || PapaBear.x > width || PapaBear.y < 0 || PapaBear.y > height || MamaBear.x < 0 || MamaBear.x > width || MamaBear.y < 0 || MamaBear.y > height){
+if (papaBear.x < 0 || papaBear.x > width || papaBear.y < 0 || papaBear.y > height || mamaBear.x < 0 || mamaBear.x > width || mamaBear.y < 0 || mamaBear.y > height){
     // tear jerking ending
     state = 'sadness';
+    
     }
 }
 
 function checkOverlap(){
 // check if the bears meet
-let d = dist(PapaBear.x,PapaBear.y,MamaBear.x,MamaBear.y);
-if (d < PapaBear.size/2 + MamaBear.size/2){
+let d = dist(papaBear.x,papaBear.y,mamaBear.x,mamaBear.y);
+if (d < papaBear.size/2 + mamaBear.size/2){
     // BEST ENDING EVEEEEEER, they get married and happy ever after
     state = 'love';
 }
@@ -171,8 +275,8 @@ if (d < PapaBear.size/2 + MamaBear.size/2){
 function display(){
 // display the bears
 
-// papabear display
-// ellipse(PapaBear.x,PapaBear.y,PapaBear.size);
+// papaBear display
+// ellipse(papaBear.x,papaBear.y,papaBear.size);
 
 
 noStroke();
@@ -180,54 +284,97 @@ noStroke();
 
 // this is the right Ear
 fill(199,21,133);
-ellipse(PapaBear.x,PapaBear.y,PapaBear.size);
+ellipse(papaBear.x + papaBear.ear.outside.xOffset,papaBear.y + papaBear.ear.outside.yOffset,papaBear.ear.outside.w,papaBear.ear.outside.h);
 
 fill(255,228,196);
-ellipse(PapaBear.x,PapaBear.y,PapaBear.size);
+ellipse(papaBear.x + papaBear.ear.inside.xOffset,papaBear.y + papaBear.ear.inside.yOffset,papaBear.ear.inside.w,papaBear.ear.inside.h);
 
 
 // this is the left Ear
 fill(199,21,133);
-ellipse(PapaBear.x,PapaBear.y,30);
+ellipse(papaBear.x - papaBear.ear.outside.xOffset,papaBear.y + papaBear.ear.outside.yOffset,papaBear.ear.outside.w,papaBear.ear.outside.h);
+
 
 fill(255,228,196);
-ellipse(PapaBear.x,PapaBear.y,30);
+ellipse(papaBear.x - papaBear.ear.inside.xOffset,papaBear.y + papaBear.ear.inside.yOffset,papaBear.ear.inside.w,papaBear.ear.inside.h);
 
 
 
 // this is the Head
 fill(199,21,133);
-ellipse(PapaBear.x,PapaBear.y,PapaBear.headSizeM);
+ellipse(papaBear.x,papaBear.y,papaBear.headSizeP);
 
-// fill(255,228,196);
-// ellipse(PapaBear.x,PapaBear.y,PapaBear.size);
+ fill(255,228,196);
+ ellipse(papaBear.x,papaBear.y,papaBear.mouthSizeP);
 
 //eyes
 //left eye
 fill(255,250,240);
-ellipse(PapaBear.x - PapaBear.eyes.xOffset, PapaBear.y - PapaBear.eyes.yOffset, PapaBear.eyes.size);
+ellipse(papaBear.x - papaBear.eyes.xOffset, papaBear.y - papaBear.eyes.yOffset, papaBear.eyes.size);
 
 //right eye
 fill(255,250,240);
-ellipse(PapaBear.x + PapaBear.eyes.xOffset, PapaBear.y - PapaBear.eyes.yOffset, PapaBear.eyes.size);
+ellipse(papaBear.x + papaBear.eyes.xOffset, papaBear.y - papaBear.eyes.yOffset, papaBear.eyes.size);
 
-//mouth
-fill(199,21,133);
-ellipse(PapaBear.x,PapaBear.y, 30);
+//nose
+ fill(199,21,133);
+ellipse(papaBear.x + papaBear.nose.xOffset, papaBear.y - papaBear.nose.yOffset, papaBear.nose.size);
 
 
 
-// mamabear display
+
+// mamaBear display
+
+//  this is the right Ear
+fill(170,250,100);
+ellipse(mamaBear.x + mamaBear.ear.outside.xOffset,mamaBear.y + mamaBear.ear.outside.yOffset,mamaBear.ear.outside.w,mamaBear.ear.outside.h);
+
+fill(255,228,196);
+ellipse(mamaBear.x + mamaBear.ear.inside.xOffset,mamaBear.y + mamaBear.ear.inside.yOffset,mamaBear.ear.inside.w,mamaBear.ear.inside.h);
+
+
+// this is the left Ear
+fill(170,240,100);
+ellipse(mamaBear.x - mamaBear.ear.outside.xOffset,mamaBear.y + mamaBear.ear.outside.yOffset,mamaBear.ear.outside.w,mamaBear.ear.outside.h);
+
+
+fill(255,228,196);
+ellipse(mamaBear.x - mamaBear.ear.inside.xOffset,mamaBear.y + mamaBear.ear.inside.yOffset,mamaBear.ear.inside.w,mamaBear.ear.inside.h);
+
+
+
+// this is the Head
+fill(130,255,80);
+ellipse(mamaBear.x,mamaBear.y,mamaBear.headSizeP);
+
+ fill(255,228,196);
+ ellipse(mamaBear.x,mamaBear.y,mamaBear.mouthSizeP);
+
+
+//nose
+ fill(130,255,80);
+ellipse(mamaBear.x + mamaBear.nose.xOffset, mamaBear.y - mamaBear.nose.yOffset, mamaBear.nose.size);
+
+
+
+
+
+
+
+
+
+
+
 fill(130,255,80)
- ellipse(MamaBear.x,MamaBear.y,MamaBear.size);
+ ellipse(mamaBear.x,mamaBear.y,mamaBear.size);
  
  //left eye
  fill(255,250,240);
- ellipse(MamaBear.x - MamaBear.eyes.xOffset, MamaBear.y - MamaBear.eyes.yOffset, MamaBear.eyes.size);
+ ellipse(mamaBear.x - mamaBear.eyes.xOffset, mamaBear.y - mamaBear.eyes.yOffset, mamaBear.eyes.size);
  
  //right eye
  fill(255,250,240);
- ellipse(MamaBear.x + MamaBear.eyes.xOffset, MamaBear.y - MamaBear.eyes.yOffset, MamaBear.eyes.size);
+ ellipse(mamaBear.x + mamaBear.eyes.xOffset, mamaBear.y - mamaBear.eyes.yOffset, mamaBear.eyes.size);
  
 }
 function mousePressed(){
