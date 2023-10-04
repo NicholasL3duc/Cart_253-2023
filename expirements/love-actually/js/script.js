@@ -61,7 +61,7 @@ let papaBear = {
     size: 100,
     vx: 0,
     vy: 0,
-    speed: 2
+    speed: 3
 
 };
 
@@ -81,8 +81,8 @@ let mamaBear = {
         size: 20
     },
     nose :{
-        xOffset: 40,
-        yOffset: - 50,
+        xOffset: 5,
+        yOffset: 5,
         w: 80,
         h: 70,
 
