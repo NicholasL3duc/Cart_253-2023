@@ -85,9 +85,9 @@ let whaleBelly ={
     }
 }
 let whaleArm ={
-        x:250,
-        y:280,
-        size: 40,
+        x:170,
+        y:110,
+        size: 207652,
         fill: {
         r:70,
         g:80,
@@ -97,8 +97,8 @@ let whaleArm ={
 
     }
     let whaleEye = {
-    x:250,
-    y:280,
+    x:310,
+    y:250,
     size: 40,
     fill: (255)
     };
@@ -160,23 +160,21 @@ fishes.y = fishes.y + fishes.vy;
 if (fishes.x > width){
     fishes.x = 0;
     fishes.y =random (0,height);
-// fish tail movement
 
-fishTail.x =fishTail.x + fishTail.vx;
-fishTail.y = fishTail.y + fishTail.vy;
-
-if (fishTail.x > width){
-    fishTail.x = 0;
-    fishTail.y =random (0,height);
-}
 }
 // the whales movement
+
+
 
 //whale.x = mouseX;
 //whale.y = mouseY;
 
 // the whale Tail Movement
 
+//whaleTail.x =whaleTailx + whaleTail.vx;
+//whaleTail.y =whaletaily +whaleTail.vy;
+
+//if (whaleTaile)
 
 
 
@@ -235,15 +233,25 @@ fill(whaleEnd.fill.r,whaleEnd.fill.g,whaleEnd.fill.b)
 noStroke()
 ellipse (whaleEnd.x, whaleEnd.y, 20,70)
 
+fill(0,0,)
+noStroke()
+ellipse (20,20,20,20)
+
 //whale Arm
 
+
+
+
+push();
+let angle = map(30,0,50,80,0);
+translate(whaleArm.x, whaleArm.y);
+rotate(angle);
 fill(whaleArm.fill.r,whaleArm.fill.g,whaleArm.fill.b);
-ellipse(whaleArm.x, whaleArm.y, 60,100);
-
-
+ellipse(whaleArm.x, whaleArm.y, 50,100);
+pop()
 // whale eye
 
-fill(whaleEye.fill.r,whaleEye.fill.g,whaleEye.fill.b);
+fill(0);
 ellipse(whaleEye.x, whaleEye.y, 10,10);
 
 
