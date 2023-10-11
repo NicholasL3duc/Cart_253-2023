@@ -16,7 +16,7 @@ function preload() {
 }
 //Krab object  
 let Krab = {
-    x: undefined,
+    x: 100,
     y: 250,
     headSizeK:70,
     eyes:{
@@ -37,6 +37,11 @@ let Krab = {
         h: 70,
     },
     
+    size: 100,
+    vx: 0,
+    vy: 0,
+    speed: 3
+
     
 
 };
@@ -63,6 +68,7 @@ function setup() {
 function draw() {
 // background and function information
 background (194, 178, 128)
+
 
 if (state === 'title'){
     title();
@@ -148,33 +154,38 @@ noStroke();
     
 // body
    fill(194, 99, 31);
-   ellipse(Krab.x,Krab.y,Krab.headSizeK);
+   ellipse(Krab.x,Krab.y,60,40,Krab.headSizeK);
 // legs
-
+    fill (194, 99, 31);
+    line(Krab.legs.x,Krab.legs.y,Krab.legs.size);
 // claws
 
-//eyes 
-    Krab.eyes.xOffset = map(height, 0, width, 10, 30);
+//eyes
+    // left eye
+    Krab.eyes.xOffset = map(height, 0, width, 5, 20);
+    fill (0);
+    ellipse (Krab.x - Krab.eyes.xOffset, Krab.y - Krab.eyes.yOffset, Krab.eyes.size);
+    // right eye
+    fill(0);
+    ellipse(Krab.x + Krab.eyes.xOffset, Krab.y - Krab.eyes.yOffset, Krab.eyes.size);
 
 // maze display
 
-// // Obstacles and Walls
-// fill(0);
-// // Big Walls
-// rect(120,0, 100, 460);
-// rect(220,360, 260, 100);
-// rect(340,130, 260, 110);
-// rect(430,0, 100, 110);
-// // End Maze
-// rect(340,30, 60, 100);
-// rect(530,100, 50, 10);
-// rect(550,70, 50, 10);
-// rect(530,40, 50, 10);
-// // Bubble Run
-// ellipse(60,100, 80);
-// ellipse(0,220, 120);
-// ellipse(120,320, 120);
-// ellipse(0, 420, 120);
+    // Obstacles and Walls
+    fill(0);
+    // water walls
+    fill (11, 139, 230)
+    rect(120,0, 100, 460);
+    rect(220,360, 260, 100);
+    rect(340,130, 260, 110);
+    rect(430,0, 100, 110);
+
+
+    // 
+    // ellipse(60,100, 80);
+    // ellipse(0,220, 120);
+    // ellipse(120,320, 120);
+    // ellipse(0, 420, 120);
 
 
 
