@@ -16,7 +16,7 @@ function preload() {
 }
 //Krab object  
 let Krab = {
-    x: 100,
+    x: 50,
     y: 250,
     headSizeK:70,
     eyes:{
@@ -44,6 +44,30 @@ let Krab = {
 
     
 
+};
+let waterMaze ={
+        Wall1:{
+            x:120,
+            y:0,
+            w:100,
+            h:460,
+
+        Wall2:{
+            x:220,
+            y:360,
+            w:260,
+            h:100,
+
+        },
+        Wall3:{
+            x:340,
+            y:130,
+            w:260,
+            h:110,
+        },
+
+    },
+   
 };
 let state = 'title';
 
@@ -83,7 +107,9 @@ if (state === 'title'){
     else if (state === 'Loss') {
      Loss();
     }
- 
+ else if (state === 'test'){
+    test();
+ }
 
 function title(){
     push();
@@ -111,13 +137,18 @@ function Loss(){
     text('Krab Soup For You :(', width/2,height/2);
     pop();
 }
+function test (){
+    fill(255, 255, 0);
+    ellipse(Krab.x,Krab.y,Krab.w,Krab.h)
+}
+
 function simulation(){
     checkOffscreen();
     checkOverlap();
     display();
     movements();
     controlUser();
-    krabOffscreen();
+    KrabOffscreen();
 
 }
 //Krab Movements 
@@ -157,7 +188,7 @@ noStroke();
    ellipse(Krab.x,Krab.y,60,40,Krab.headSizeK);
 // legs
     fill (194, 99, 31);
-    line(Krab.legs.x,Krab.legs.y,Krab.legs.size);
+    rect(Krab.legs.x,Krab.legs.y,Krab.legs.size);
 // claws
 
 //eyes
@@ -172,21 +203,26 @@ noStroke();
 // maze display
 
     // Obstacles and Walls
-    fill(0);
+  
     // water walls
-    fill (11, 139, 230)
-    rect(120,0, 100, 460);
-    rect(220,360, 260, 100);
-    rect(340,130, 260, 110);
-    rect(430,0, 100, 110);
+     fill (11, 139, 230);
+    // wall1
+     rect(waterMaze.Wall1.x,waterMaze.Wall1.y,waterMaze.Wall1.w,waterMaze.Wall1.h);
+    // Wall 2
+    //fill (11, 139, 230);
+    //rect(waterMaze.Wall2.x,waterMaze.Wall2.y,waterMaze.Wall2.w,waterMaze.Wall2.h);
+    // // Wall 3
+    // rect(waterMaze.Wall3.x,waterMaze.Wall3.y,waterMaze.Wall3.w,waterMaze.Wall3.h);
+    // // // Wall 4
+    // rect(waterMaze.Wall4.x,waterMaze.Wall4.y,waterMaze.Wall4.w,waterMaze.Wall4.h);
+    // // Wall 5
+    // rect(waterMaze.Wall5.x,waterMaze.Wall5.y,waterMaze.Wall5.w,waterMaze.Wall5.h);
+    // // Wall 6
+    // rect(waterMaze.Wall6.x,waterMaze.Wall6.y,waterMaze.Wall6.w,waterMaze.Wall6.h);
+    // // Wall 7
+    // rect(waterMaze.Wall7.x,waterMaze.Wall7.y,waterMaze.Wall7.w,waterMaze.Wall7.h);
 
-
-    // 
-    // ellipse(60,100, 80);
-    // ellipse(0,220, 120);
-    // ellipse(120,320, 120);
-    // ellipse(0, 420, 120);
-
+  
 
 
 }
@@ -194,7 +230,7 @@ noStroke();
     
 // check is crab touches borders
 function checkOffscreen(){
-    // check if the bears are long gone
+    // check if the Krab is long gone
     if (Krab.x < 0 || Krab.x > width || Krab.y < 0 || Krab.y > height){
         // loss ending 1
         state = 'Loss';
@@ -202,16 +238,31 @@ function checkOffscreen(){
         }
     }
     function checkOverlap(){
+         //rect(430,0, 100, 110);
+     if (Krab.y < waterMaze.Wall1.x -waterMaze.Wall1.h || Krab.x > waterMaze.Wall1.w || Krab.y < waterMaze.Wall1.y ){
+        //if (Krab.x > waterMaze.Wall1.x - waterMaze.Wall1.w && Krab.x < waterMaze.Wall1.x + waterMaze.Wall1.w && Krab.y > waterMaze.Wall1.y - waterMaze.Wall1.h && Krab.y <  waterMaze.Wall1.y + waterMaze.Wall1.h){
+         state = 'loss';
+      }
+        }
+   
 
 
-    }
+//   || Krab.y > waterMaze.Wall1.h  || Krab.x > waterMaze.Wall1.w 
+;
+    
 function movements(){
 
 }
-}
-function krabOffscreen(){
+
+function KrabOffscreen(){
     
 }
+
+
+
+};
+
+
 function mousePressed() {
     if (state === 'title'){
         state = 'simulation';
