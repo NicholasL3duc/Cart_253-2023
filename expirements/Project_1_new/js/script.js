@@ -24,13 +24,15 @@ let Krab = {
     eyes:{
         size: 15,
         xOffset: 25,
-        yOffset: 10
+        yOffset: 10,
     },
     legs:{
-        x:10,
-        y:10,
-    
-        size: 20
+        
+        size: 30,
+        xOffset:15,
+        yOffset:-20,
+        w:5,
+        h:15,
     },
     arms :{
         xOffset: 40,
@@ -96,26 +98,47 @@ let waterMaze ={
 let puddle = {
 
     Jump1:{
-        x:10,
-        y: 10,
+        x:1150,
+        y: 400,
     },
     Jump2:{
-
+        x:1100,
+        y: 600,
     },
     Jump3:{
-
+        x:1400,
+        y: 700,
     },
     Jump4:{
-
+        x:1300,
+        y: 500,
     },
     Jump5:{
-
+        x:1250,
+        y: 800,
+    },
+    Jump6:{
+        x:1400,
+        y: 300,
     }
 
 
 
 };
-   
+let Bird ={
+    B1:{
+        x:20,
+        y:20,
+
+        size:20,
+        vx:0,
+        vy:0,
+        speed:2,
+    },
+
+
+};
+
 
 let state = 'title';
 
@@ -126,6 +149,14 @@ function setup() {
 
 // background info
     createCanvas (windowWidth,windowHeight);
+
+    Bird.B1.y =random (0,height);
+    Bird.B1.vx = Bird.B1.speed;
+    
+    Bird.B1.y =random (0,height);
+    Bird.B1.vx = Bird.B1.speed;
+    
+
 
 }
 
@@ -218,6 +249,20 @@ function controlUser(){
 
 
 }
+// bird movements
+    //   set up for Bird 1
+      Bird.B1.x = width/3 ;
+      Bird.B1.vx = random(-Bird.B1.speed,Bird.B1.speed);
+      Bird.B1.vy = random(-Bird.B1.speed,Bird.B1.speed);
+      
+      Bird.B1.x =Bird.B1.x + Bird.B1.vx;
+      Bird.B1.y = Bird.B1.y + Bird.B1.vy;
+      
+      if (Bird.B1.x > width){
+          Bird.B1.x = 0;
+          Bird.B1.y =random (0,height);
+      }
+
 function display (){
 // Krab display
 noStroke();
@@ -227,7 +272,7 @@ noStroke();
    ellipse(Krab.x,Krab.y,60,40,Krab.headSizeK);
 // legs
     fill (194, 99, 31);
-    line(Krab.legs.x,Krab.legs.y,Krab.legs.size);
+    ellipse(Krab.x -Krab.legs.xOffset, Krab.y-Krab.legs.yOffset,Krab.legs.size,Krab.legs.w,Krab.legs.h);
 // claws
 
 //eyes
@@ -261,12 +306,36 @@ noStroke();
         // // Wall 7
         rect(waterMaze.Wall7.x,waterMaze.Wall7.y,waterMaze.Wall7.w,waterMaze.Wall7.h);
 
-    // Shark Run
+    // bird Run
+      fill(140, 154, 163)
+      Bird.B1.x = Bird.B1.x + Bird.B1.vx
+      Bird.B1.y = Bird.B1.y + Bird.B1.vy
+
+
+        ellipse(Bird.B1.x,Bird.B1.y,20,20)
+
+
+
+
+
+
 
 
     // Puddle Run
-    fill(11, 139, 230)
-    ellipse(puddle.Jump1.x,puddle.Jump1.y)
+        // puddle 1
+            fill(11, 139, 230)
+            ellipse(puddle.Jump1.x,puddle.Jump1.y,100,100)
+            // puddle 2
+            ellipse(puddle.Jump2.x,puddle.Jump2.y,150,150)
+            // puddle 3
+            ellipse(puddle.Jump3.x,puddle.Jump3.y,60,60)
+            // puddle 4
+            ellipse(puddle.Jump4.x,puddle.Jump4.y,70,70)
+            // puddle 5
+            ellipse(puddle.Jump5.x,puddle.Jump5.y,180,180)
+            // puddle 6
+             ellipse(puddle.Jump6.x,puddle.Jump6.y,100,100)
+
   
 
 
@@ -361,4 +430,5 @@ function mousePressed() {
     if (state === 'title'){
         state = 'simulation';
     }
-}
+};
+
