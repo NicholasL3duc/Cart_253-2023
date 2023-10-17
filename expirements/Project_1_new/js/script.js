@@ -127,12 +127,12 @@ let shark = {
     h: 60,
     size: 20,
     vx: 0,
-    vy: 3,
-    speed: 3,
+    vy: 4,
+    speed: 4,
     angle: 0,
     distance: 100,
   },
-  b2:{
+  b2: {
     x: 850,
     y: 100,
     w: 20,
@@ -144,44 +144,48 @@ let shark = {
     angle: 0,
     distance: 100,
   },
-  b3:{
+  b3: {
     x: 1000,
     y: 100,
     w: 20,
     h: 60,
     size: 20,
     vx: 0,
-    vy: 3,
-    speed: 3,
+    vy: 5,
+    speed: 5,
     angle: 0,
     distance: 100,
   },
+};
+let home = {
+  x: undefined,
+  y: 450,
+  size: 150,
+};
 
-  }
-let home ={
-    x: undefined,
-    y: 450,
-    size: 150,
-}
+let shell = {
+  x: undefined,
+  y: 0,
+  size: 150,
+  active: true,
+};
 
-let shell ={
-    x: undefined,
-    y:0,
-    size: 250,
-}
-  
-
+let octopus = {
+  x: undefined,
+  y: 100,
+  size: 250,
+  active: true,
+};
 
 let state = "title";
 let imgHouse;
-let imgShell
-
+let imgShell;
+let imgOctopus;
 function preload() {
-
-imgHouse = loadImage ('assets/images/House.jpg')
-imgShell = loadImage ('/assets/images/seaShell.jpg')
+  imgHouse = loadImage("assets/images/House.jpg");
+  imgShell = loadImage("/assets/images/seaShell.jpg");
+  imgOctopus = loadImage("/assets/images/octopus.png");
 }
-
 
 /**
  * Description of setup
@@ -190,17 +194,18 @@ function setup() {
   // background info
   createCanvas(windowWidth, windowHeight);
 
-    home.x = windowWidth/2 + home.size/2;
-    home.y = 450 + home.size/2;
+  home.x = windowWidth / 2 + home.size / 2;
+  home.y = 450 + home.size / 2;
 
-    shell.x = windowWidth/2 + shell.size/2;
-    shell.y = 0 + shell.size/2;
+  shell.x = windowWidth / 2 + shell.size / 2;
+  shell.y = 0 + shell.size / 2;
 
+  octopus.x = windowWidth / 2 + octopus.size / 2;
+  octopus.y = 0 + octopus.size / 2;
 }
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
-
 
 /**
  * Description of draw()
@@ -208,7 +213,6 @@ function windowResized() {
 function draw() {
   // background and function information
   background(11, 139, 230);
-
 
   if (state === "title") {
     title();
@@ -219,11 +223,6 @@ function draw() {
   } else if (state === "Loss") {
     Loss();
   }
-
-
- 
-
-
 }
 
 function title() {
@@ -252,16 +251,17 @@ function Loss() {
 }
 
 function simulation() {
-    image(imgHouse,windowWidth/2, 450, 150,150)
-    image(imgShell,350, 20, 200,100)
-    checkOffscreen();
-    checkOverlap();
-    display();
-    movement();
-    controlUser();
-    checkOverlapshark();
-    house();
+  image(imgHouse, windowWidth / 2, 450, 150, 150);
+  image(imgShell);//350, 20, 200, 100
+  image(imgOctopus);//, 900, 700, 100, 100
 
+  checkOffscreen();
+  checkOverlap();
+  display();
+  movement();
+  controlUser();
+  checkOverlapshark();
+  house();
 }
 //fish Movements
 function controlUser() {
@@ -293,9 +293,8 @@ function display() {
   // body
   fill(194, 99, 31);
   ellipse(fish.x, fish.y, 60, 40, fish.headSizeK);
+
   // tail
-  // fill (194, 99, 31);
-  // ellipse(fish.x -fish.tail.xOffset, fish.y-fish.tail.yOffset,fish.tail.size,fish.tail.w,fish.tail.h);
 
   push();
   let angle = 0;
@@ -328,7 +327,6 @@ function display() {
     fish.eyes.size
   );
 
-
   // water walls
   fill(194, 178, 128);
   // wall1
@@ -338,7 +336,7 @@ function display() {
     waterMaze.Wall1.w,
     waterMaze.Wall1.h
   );
-  // Wall 2 
+  // Wall 2
   fill(194, 178, 128);
   rect(
     waterMaze.Wall2.x,
@@ -384,7 +382,7 @@ function display() {
 
   // shark Run
 
-//   shark 1
+  //   shark 1
 
   fill(140, 154, 163);
   noStroke();
@@ -399,9 +397,9 @@ function display() {
   noStroke();
   ellipse(shark.b3.x, shark.b3.y, 40, 70);
 
-// sand bank display
+  // sand bank display
 
-  fill(194, 178, 128);
+  fill(74, 79, 82);
   ellipse(sand.bank1.x, sand.bank1.y, 100, 100);
   // sand 2
   ellipse(sand.bank2.x, sand.bank2.y, 150, 150);
@@ -424,6 +422,28 @@ function checkOffscreen() {
   }
 }
 function checkOverlap() {
+  // getting the shell
+  let k = dist(fish.x, fish.y, shell.x, shell.y);
+  if (k < fish.size / 2 + shell.size / 2) {
+    shell.active = false;
+    octopus.active = false;
+  }
+  // overlap for the octopus
+  if (fish.x > octopus.x && octopus.active) {
+    state = "Loss";
+  }
+  // getting the shell overlap
+
+  if (shell.active);
+  push();
+  image(imgShell,shell.x,shell.y,shell.size,shell.size,);
+pop();
+  if (octopus.active) {
+    push();
+  image(imgOctopus,octopus.x,octopus.y,octopus.size,octopus.size);
+    pop();
+  }
+
   //over lap check for wall 1
   if (
     fish.x + fish.w > waterMaze.Wall1.x &&
@@ -517,94 +537,62 @@ function checkOverlap() {
   if (d6 < fish.size / 2 + sand.bank6.size / 2) {
     state = "Loss";
   }
-//   over lap check for sharks
+  //over lap check for sharks
 
-// overlap shark 1
-let s1 = dist(fish.x, fish.y, shark.b1.x, shark.b1.y);
-  if (s1 < fish.size / 2 + shark.b1.size / 2) {
-    state = "Loss";
-  }
-// overlap shark 2
-
-// overlap shark 3
-
-
+    // overlap shark 1
+    let s1 = dist(fish.x, fish.y, shark.b1.x, shark.b1.y);
+    if (s1 < fish.size / 2 + shark.b1.size / 2) {
+        state = "Loss";
+    }
+    // overlap shark 2
+    let s2 = dist(fish.x, fish.y, shark.b2.x, shark.b2.y);
+    if (s2 < fish.size / 2 + shark.b2.size / 2) {
+        state = "Loss";
+    }
+    // overlap shark 3
+    let s3 = dist(fish.x, fish.y, shark.b3.x, shark.b3.y);
+    if (s3 < fish.size / 2 + shark.b3.size / 2) {
+        state = "Loss";
+    }
   // over lap check for seashell
 
-
-
-//  over lap check for cave
-
-
-
-
-
+  //  over lap check for cave
 }
-function movement(){
-    shark.b1.y = shark.b1.y + shark.b1.vy;
-    // shark.b1.vy = (-shark.b1.speed, shark.b1.speed);
-    shark.b2.y = shark.b2.y + shark.b2.vy;
-    shark.b3.y = shark.b3.y + shark.b3.vy
-}
+function movement() {
+  shark.b1.y = shark.b1.y + shark.b1.vy;
 
-
-function checkOverlapshark() {
-
-        // shark 1 bounce
-  let distanceshark = shark.b1.y - 360;
-  print("hello");
-//   console.log(`speed: ${shark.b1.vy}`)
-  if (distanceshark === 1) {
-    shark.b1.y = shark.b1.y - shark.b1.vy;
-    shark.b1.vy *= -1;
-    print("hooray!");
-
-  } else if ( shark.b1.y < 0){
-    shark.b1.vy *= -1;
-    print("test");
-    shark.b1.y = shark.b1.y + shark.b1.vy;
-   
-    
-  }
-
-// shark 2 bounce
-let distanceshark2 = shark.b2.y - 360;
-// print("hello");
-// console.log(`speed: ${shark.b2.vy}`)
-if (distanceshark2 === 1) {
-  shark.b2.y = shark.b2.y - shark.b2.vy;
-  shark.b2.vy *= -1;
-
-
-} else if ( shark.b2.y < 0){
-  shark.b2.vy *= -1;
   shark.b2.y = shark.b2.y + shark.b2.vy;
-}
-// shark 3 bounce
-let distanceshark3 = shark.b3.y - 360;
-print("hello");
-// console.log(`speed: ${shark.b2.vy}`)
-if (distanceshark3 === 1) {
-  shark.b3.y = shark.b3.y - shark.b3.vy;
-  shark.b3.vy *= -1;
-
-
-} else if ( shark.b3.y < 0){
-  shark.b3.vy *= -1;
   shark.b3.y = shark.b3.y + shark.b3.vy;
 }
 
+function checkOverlapshark() {
+  // shark 1 bounce
+
+  if (shark.b1.y < 0 || shark.b1.y > 360) {
+    shark.b1.vy *= -1;
+  }
+
+  // shark 2 bounce
+
+  if (shark.b2.y < 0 || shark.b2.y > 360) {
+    shark.b2.vy *= -1;
+  }
+
+  // shark 3 bounce
+
+  if (shark.b3.y < 0 || shark.b3.y > 360) {
+    shark.b3.vy *= -1;
+  }
 }
-function house(){
-let h1 = dist(fish.x,fish.y,home.x,home.y);
-console.log(`h1: ${h1}`)
-if (h1 <home.size/2 + fish.size/2){
-    state = 'win';
-}
+function house() {
+  let h1 = dist(fish.x, fish.y, home.x, home.y);
+  console.log(`h1: ${h1}`);
+  if (h1 < home.size / 2 + fish.size / 2) {
+    state = "win";
+  }
 }
 function mousePressed() {
   if (state === "title") {
     state = "simulation";
   }
 }
-
