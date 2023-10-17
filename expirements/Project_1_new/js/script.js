@@ -1,8 +1,8 @@
 /**
  * Title of Project
  * Nicholas Leduc
- * 
- * This is a template. You must fill in the title, author, 
+ *
+ * This is a template. You must fill in the title, author,
  * and this description to match your project!
  */
 
@@ -10,425 +10,579 @@
 
 /**
  * Description of preload
-*/
-function preload() {
+ */
+function preload() {}
+imgimHouse = loadImage ('assets\images\imHouse.jpg')
 
-}
-//Krab object  
-let Krab = {
-    x: 50,
-    y: 250,
-    w:20,
-    h:20,
-    headSizeK:70,
-    eyes:{
-        size: 15,
-        xOffset: 25,
-        yOffset: 10,
-    },
-    legs:{
-        
-        size: 30,
-        xOffset:15,
-        yOffset:-20,
-        w:5,
-        h:15,
-    },
-    arms :{
-        xOffset: 40,
-        yOffset: - 50,
-        w: 80,
-        h: 70,
-    },
-    
+
+//fish object
+let fish = {
+  x: 50,
+  y: 250,
+  w: 20,
+  h: 20,
+  headSizeK: 70,
+  eyes: {
+    size: 15,
+    xOffset: 25,
+    yOffset: 10,
+  },
+  tail: {
     size: 100,
+    xOffset: 0,
+    yOffset: -20,
+    w: 15,
+    h: 5,
+  },
+  arms: {
+    xOffset: 40,
+    yOffset: -50,
+    w: 80,
+    h: 70,
+  },
+
+  size: 100,
+  vx: 0,
+  vy: 0,
+  speed: 3,
+};
+let waterMaze = {
+  Wall1: {
+    x: 120,
+    y: 0,
+    w: 100,
+    h: 460,
+  },
+  Wall2: {
+    x: 220,
+    y: 360,
+    w: 260,
+    h: 100,
+  },
+  Wall3: {
+    x: 340,
+    y: 130,
+    w: 260,
+    h: 110,
+  },
+  Wall4: {
+    x: 500,
+    y: 0,
+    w: 100,
+    h: 200,
+  },
+  Wall5: {
+    x: 590,
+    y: 360,
+    w: 400,
+    h: 100,
+  },
+  Wall6: {
+    x: 590,
+    y: 360,
+    w: 110,
+    h: 500,
+  },
+  Wall7: {
+    x: 900,
+    y: 360,
+    w: 110,
+    h: 300,
+  },
+};
+let sand = {
+  bank1: {
+    x: 1150,
+    y: 400,
+    size: 35,
+  },
+  bank2: {
+    x: 1100,
+    y: 600,
+    size: 60,
+  },
+  bank3: {
+    x: 1400,
+    y: 700,
+    size: 20,
+  },
+  bank4: {
+    x: 1300,
+    y: 500,
+    size: 20,
+  },
+  bank5: {
+    x: 1250,
+    y: 800,
+    size: 20,
+  },
+  bank6: {
+    x: 1400,
+    y: 300,
+    size: 20,
+  },
+};
+let shark = {
+  b1: {
+    x: 700,
+    y: 100,
+    w: 20,
+    h: 60,
+    size: 20,
     vx: 0,
-    vy: 0,
-    speed: 3
+    vy: 3,
+    speed: 3,
+    angle: 0,
+    distance: 100,
+  },
+  b2:{
+    x: 850,
+    y: 100,
+    w: 20,
+    h: 60,
+    size: 20,
+    vx: 0,
+    vy: 3,
+    speed: 3,
+    angle: 0,
+    distance: 100,
+  },
+  b3:{
+    x: 1000,
+    y: 100,
+    w: 20,
+    h: 60,
+    size: 20,
+    vx: 0,
+    vy: 3,
+    speed: 3,
+    angle: 0,
+    distance: 100,
+  },
 
-    
-
-};
-let waterMaze ={
-        Wall1:{
-            x:120,
-            y:0,
-            w:100,
-            h:460,
-        },
-        Wall2:{
-            x:220,
-            y:360,
-            w:260,
-            h:100,
-
-        },
-        Wall3:{
-            x:340,
-            y:130,
-            w:260,
-            h:110,
-        },
-        Wall4:{
-            x:500,
-            y:0,
-            w:100,
-            h:200,
-        },
-        Wall5:{
-            x:590,
-            y:360,
-            w:400,
-            h:100,
-        },
-        Wall6:{
-            x:590,
-            y:360,
-            w:110,
-            h:500,
-        },
-        Wall7:{
-            x:900,
-            y:360,
-            w:110,
-            h:300,
-        }
-
-    };
-let puddle = {
-
-    Jump1:{
-        x:1150,
-        y: 400,
-    },
-    Jump2:{
-        x:1100,
-        y: 600,
-    },
-    Jump3:{
-        x:1400,
-        y: 700,
-    },
-    Jump4:{
-        x:1300,
-        y: 500,
-    },
-    Jump5:{
-        x:1250,
-        y: 800,
-    },
-    Jump6:{
-        x:1400,
-        y: 300,
-    }
+  }
+let home ={
+    x: undefined,
+    y: 0,
+    size: 250,
+}
 
 
-
-};
-let Bird ={
-    B1:{
-        x:20,
-        y:20,
-
-        size:20,
-        vx:0,
-        vy:0,
-        speed:2,
-    },
+  
 
 
-};
-
-
-let state = 'title';
-
+let state = "title";
+let imgimHouse;
 /**
  * Description of setup
-*/
+ */
 function setup() {
-
-// background info
-    createCanvas (windowWidth,windowHeight);
-
-    Bird.B1.y =random (0,height);
-    Bird.B1.vx = Bird.B1.speed;
-    
-    Bird.B1.y =random (0,height);
-    Bird.B1.vx = Bird.B1.speed;
-    
-
+  // background info
+  createCanvas(windowWidth, windowHeight);
 
 }
-
-
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
 /**
  * Description of draw()
-*/
+ */
 function draw() {
-// background and function information
-background (194, 178, 128)
-
-
-if (state === 'title'){
+  // background and function information
+  background(11, 139, 230);
+Image(imgimHouse,windowWidth/2, 0, 250,250)
+  if (state === "title") {
     title();
-
-}
-    else if (state === 'simulation'){
+  } else if (state === "simulation") {
     simulation();
-    }
-    else if (state === 'win') {
+  } else if (state === "win") {
     win();
-    }
-    else if (state === 'Loss') {
-     Loss();
-    }
+  } else if (state === "Loss") {
+    Loss();
+  }
+
+
  
 
-function title(){
-    push();
-    textSize(64);
-    fill(200,100,100);
-    textAlign(CENTER,CENTER);
-    text('Find the key and Escape!!!', width/2,height/2);
-    pop();
-
-}
-function win(){
-    push();
-    textSize(64);
-    fill(255,150,150);
-    textAlign(CENTER,CENTER);
-    text('You Won!!', width/2,height/2);
-    pop();
-
-}
-function Loss(){
-    push();
-    textSize(40);
-    fill(150,150,255);
-    textAlign(CENTER,CENTER);
-    text('Krab Soup For You :(', width/2,height/2);
-    pop();
-}
-
-
-function simulation(){
-    checkOffscreen();
-    checkOverlap();
-    display();
-    movements();
-    controlUser();
-    KrabOffscreen();
-
-}
-//Krab Movements 
-function controlUser(){
-    if (keyIsDown(87)) {    //moving using the W key
-        Krab.vy = -Krab.speed;
-    }
-    else if (keyIsDown(83)) {   //moving using the W key
-        Krab.vy = Krab.speed;
-    }
-    else {
-        Krab.vy =0;
-    }
-    
-    if (keyIsDown(68)) {
-        Krab.vx = Krab.speed;
-    }
-    else if (keyIsDown(65)) {
-        Krab.vx = -Krab.speed;
-    }
-    else{
-        Krab.vx = 0;
-    }
-    Krab.x += Krab.vx
-    Krab.y += Krab.vy
-
-
-
-
-}
-// bird movements
-    //   set up for Bird 1
-      Bird.B1.x = width/3 ;
-      Bird.B1.vx = random(-Bird.B1.speed,Bird.B1.speed);
-      Bird.B1.vy = random(-Bird.B1.speed,Bird.B1.speed);
-      
-      Bird.B1.x =Bird.B1.x + Bird.B1.vx;
-      Bird.B1.y = Bird.B1.y + Bird.B1.vy;
-      
-      if (Bird.B1.x > width){
-          Bird.B1.x = 0;
-          Bird.B1.y =random (0,height);
-      }
-
-function display (){
-// Krab display
-noStroke();
-    
-// body
-   fill(194, 99, 31);
-   ellipse(Krab.x,Krab.y,60,40,Krab.headSizeK);
-// legs
-    fill (194, 99, 31);
-    ellipse(Krab.x -Krab.legs.xOffset, Krab.y-Krab.legs.yOffset,Krab.legs.size,Krab.legs.w,Krab.legs.h);
-// claws
-
-//eyes
-    // left eye
-    Krab.eyes.xOffset = map(height, 0, width, 5, 20);
-    fill (0);
-    ellipse (Krab.x - Krab.eyes.xOffset, Krab.y - Krab.eyes.yOffset, Krab.eyes.size);
-    // right eye
-    fill(0);
-    ellipse(Krab.x + Krab.eyes.xOffset, Krab.y - Krab.eyes.yOffset, Krab.eyes.size);
-
-// maze display
-
-    // Obstacles and Walls
-  
-    // water walls
-     fill (11, 139, 230);
-        // wall1
-        rect(waterMaze.Wall1.x,waterMaze.Wall1.y,waterMaze.Wall1.w,waterMaze.Wall1.h);
-        // Wall 2
-        fill (11, 139, 230);
-        rect(waterMaze.Wall2.x,waterMaze.Wall2.y,waterMaze.Wall2.w,waterMaze.Wall2.h);
-        // // Wall 3
-        rect(waterMaze.Wall3.x,waterMaze.Wall3.y,waterMaze.Wall3.w,waterMaze.Wall3.h);
-        // // // Wall 4
-        rect(waterMaze.Wall4.x,waterMaze.Wall4.y,waterMaze.Wall4.w,waterMaze.Wall4.h);
-        // // Wall 5
-        rect(waterMaze.Wall5.x,waterMaze.Wall5.y,waterMaze.Wall5.w,waterMaze.Wall5.h);
-        // // Wall 6
-        rect(waterMaze.Wall6.x,waterMaze.Wall6.y,waterMaze.Wall6.w,waterMaze.Wall6.h);
-        // // Wall 7
-        rect(waterMaze.Wall7.x,waterMaze.Wall7.y,waterMaze.Wall7.w,waterMaze.Wall7.h);
-
-    // bird Run
-      fill(140, 154, 163)
-      Bird.B1.x = Bird.B1.x + Bird.B1.vx
-      Bird.B1.y = Bird.B1.y + Bird.B1.vy
-
-
-        ellipse(Bird.B1.x,Bird.B1.y,20,20)
-
-
-
-
-
-
-
-
-    // Puddle Run
-        // puddle 1
-            fill(11, 139, 230)
-            ellipse(puddle.Jump1.x,puddle.Jump1.y,100,100)
-            // puddle 2
-            ellipse(puddle.Jump2.x,puddle.Jump2.y,150,150)
-            // puddle 3
-            ellipse(puddle.Jump3.x,puddle.Jump3.y,60,60)
-            // puddle 4
-            ellipse(puddle.Jump4.x,puddle.Jump4.y,70,70)
-            // puddle 5
-            ellipse(puddle.Jump5.x,puddle.Jump5.y,180,180)
-            // puddle 6
-             ellipse(puddle.Jump6.x,puddle.Jump6.y,100,100)
-
-  
-
 
 }
 
-    
+function title() {
+  push();
+  textSize(64);
+  fill(200, 100, 100);
+  textAlign(CENTER, CENTER);
+  text("Find the SeaShell and Go!!!", width / 2, height / 2);
+  pop();
+}
+function win() {
+  push();
+  textSize(64);
+  fill(255, 150, 150);
+  textAlign(CENTER, CENTER);
+  text("You Won!!", width / 2, height / 2);
+  pop();
+}
+function Loss() {
+  push();
+  textSize(40);
+  fill(150, 150, 255);
+  textAlign(CENTER, CENTER);
+  text("fish Soup For You :(", width / 2, height / 2);
+  pop();
+}
+
+function simulation() {
+  checkOffscreen();
+  checkOverlap();
+  display();
+  movement();
+  controlUser();
+  checkOverlapshark();
+  house();
+
+}
+//fish Movements
+function controlUser() {
+  if (keyIsDown(87)) {
+    //moving using the W key
+    fish.vy = -fish.speed;
+  } else if (keyIsDown(83)) {
+    //moving using the W key
+    fish.vy = fish.speed;
+  } else {
+    fish.vy = 0;
+  }
+
+  if (keyIsDown(68)) {
+    fish.vx = fish.speed;
+  } else if (keyIsDown(65)) {
+    fish.vx = -fish.speed;
+  } else {
+    fish.vx = 0;
+  }
+  fish.x += fish.vx;
+  fish.y += fish.vy;
+}
+
+function display() {
+  // fish display
+  noStroke();
+
+  // body
+  fill(194, 99, 31);
+  ellipse(fish.x, fish.y, 60, 40, fish.headSizeK);
+  // tail
+  // fill (194, 99, 31);
+  // ellipse(fish.x -fish.tail.xOffset, fish.y-fish.tail.yOffset,fish.tail.size,fish.tail.w,fish.tail.h);
+
+  push();
+  let angle = 0;
+  translate(fish.tail.x, fish.tail.y);
+  rotate(angle);
+  fill(194, 99, 31);
+  ellipse(
+    fish.x - fish.tail.xOffset,
+    fish.y - fish.tail.yOffset,
+    fish.tail.size,
+    fish.tail.w,
+    fish.tail.h
+  );
+  pop();
+
+  //eyes
+  // left eye
+  fish.eyes.xOffset = map(height, 0, width, 5, 20);
+  fill(0);
+  ellipse(
+    fish.x - fish.eyes.xOffset,
+    fish.y - fish.eyes.yOffset,
+    fish.eyes.size
+  );
+  // right eye
+  fill(0);
+  ellipse(
+    fish.x + fish.eyes.xOffset,
+    fish.y - fish.eyes.yOffset,
+    fish.eyes.size
+  );
+
+
+  // water walls
+  fill(194, 178, 128);
+  // wall1
+  rect(
+    waterMaze.Wall1.x,
+    waterMaze.Wall1.y,
+    waterMaze.Wall1.w,
+    waterMaze.Wall1.h
+  );
+  // Wall 2 
+  fill(194, 178, 128);
+  rect(
+    waterMaze.Wall2.x,
+    waterMaze.Wall2.y,
+    waterMaze.Wall2.w,
+    waterMaze.Wall2.h
+  );
+  // // Wall 3
+  rect(
+    waterMaze.Wall3.x,
+    waterMaze.Wall3.y,
+    waterMaze.Wall3.w,
+    waterMaze.Wall3.h
+  );
+  // // // Wall 4
+  rect(
+    waterMaze.Wall4.x,
+    waterMaze.Wall4.y,
+    waterMaze.Wall4.w,
+    waterMaze.Wall4.h
+  );
+  // // Wall 5
+  rect(
+    waterMaze.Wall5.x,
+    waterMaze.Wall5.y,
+    waterMaze.Wall5.w,
+    waterMaze.Wall5.h
+  );
+  // // Wall 6
+  rect(
+    waterMaze.Wall6.x,
+    waterMaze.Wall6.y,
+    waterMaze.Wall6.w,
+    waterMaze.Wall6.h
+  );
+  // // Wall 7
+  rect(
+    waterMaze.Wall7.x,
+    waterMaze.Wall7.y,
+    waterMaze.Wall7.w,
+    waterMaze.Wall7.h
+  );
+
+  // shark Run
+
+//   shark 1
+
+  fill(140, 154, 163);
+  noStroke();
+  ellipse(shark.b1.x, shark.b1.y, 40, 70);
+
+  // shark 2
+  fill(140, 154, 163);
+  noStroke();
+  ellipse(shark.b2.x, shark.b2.y, 40, 70);
+  // shark 3
+  fill(140, 154, 163);
+  noStroke();
+  ellipse(shark.b3.x, shark.b3.y, 40, 70);
+
+// sand bank display
+
+  fill(194, 178, 128);
+  ellipse(sand.bank1.x, sand.bank1.y, 100, 100);
+  // sand 2
+  ellipse(sand.bank2.x, sand.bank2.y, 150, 150);
+  // sand 3
+  ellipse(sand.bank3.x, sand.bank3.y, 60, 60);
+  // sand 4
+  ellipse(sand.bank4.x, sand.bank4.y, 70, 70);
+  // sand 5
+  ellipse(sand.bank5.x, sand.bank5.y, 180, 180);
+  // sand 6
+  ellipse(sand.bank6.x, sand.bank6.y, 100, 100);
+}
+
 // check is crab touches borders
-function checkOffscreen(){
-    // check if the Krab is long gone
-    if (Krab.x < 0 || Krab.x > width || Krab.y < 0 || Krab.y > height){
-        // loss ending 1
-        state = 'Loss';
-        
-        }
-    }
-    function checkOverlap(){
-            //over lap check for wall 1
-            if (Krab.x + Krab.w > waterMaze.Wall1.x &&
-                Krab.x < waterMaze.Wall1.x + waterMaze.Wall1.w &&
-                Krab.y + Krab.h > waterMaze.Wall1.y &&
-                Krab.y < waterMaze.Wall1.y + waterMaze.Wall1.h){
-         state = 'Loss';
-      }
-        //over lap check for wall 2
-        if (Krab.x + Krab.w > waterMaze.Wall2.x &&
-            Krab.x < waterMaze.Wall2.x + waterMaze.Wall2.w &&
-            Krab.y + Krab.h > waterMaze.Wall2.y &&
-            Krab.y < waterMaze.Wall2.y + waterMaze.Wall2.h){
-     state = 'Loss';
+function checkOffscreen() {
+  // check if the fish is long gone
+  if (fish.x < 0 || fish.x > width || fish.y < 0 || fish.y > height) {
+    // loss ending 1
+    state = "Loss";
   }
-        //over lap check for wall 3
-        if (Krab.x + Krab.w > waterMaze.Wall3.x &&
-            Krab.x < waterMaze.Wall3.x + waterMaze.Wall3.w &&
-            Krab.y + Krab.h > waterMaze.Wall3.y &&
-            Krab.y < waterMaze.Wall3.y + waterMaze.Wall3.h){
-     state = 'Loss';
+}
+function checkOverlap() {
+  //over lap check for wall 1
+  if (
+    fish.x + fish.w > waterMaze.Wall1.x &&
+    fish.x < waterMaze.Wall1.x + waterMaze.Wall1.w &&
+    fish.y + fish.h > waterMaze.Wall1.y &&
+    fish.y < waterMaze.Wall1.y + waterMaze.Wall1.h
+  ) {
+    state = "Loss";
   }
-        //over lap check for wall 4
-        if (Krab.x + Krab.w > waterMaze.Wall4.x &&
-            Krab.x < waterMaze.Wall4.x + waterMaze.Wall4.w &&
-            Krab.y + Krab.h > waterMaze.Wall4.y &&
-            Krab.y < waterMaze.Wall4.y + waterMaze.Wall4.h){
-     state = 'Loss';
+  //over lap check for wall 2
+  if (
+    fish.x + fish.w > waterMaze.Wall2.x &&
+    fish.x < waterMaze.Wall2.x + waterMaze.Wall2.w &&
+    fish.y + fish.h > waterMaze.Wall2.y &&
+    fish.y < waterMaze.Wall2.y + waterMaze.Wall2.h
+  ) {
+    state = "Loss";
   }
-        //over lap check for wall 5
-        if (Krab.x + Krab.w > waterMaze.Wall5.x &&
-            Krab.x < waterMaze.Wall5.x + waterMaze.Wall5.w &&
-            Krab.y + Krab.h > waterMaze.Wall5.y &&
-            Krab.y < waterMaze.Wall5.y + waterMaze.Wall5.h){
-     state = 'Loss';
+  //over lap check for wall 3
+  if (
+    fish.x + fish.w > waterMaze.Wall3.x &&
+    fish.x < waterMaze.Wall3.x + waterMaze.Wall3.w &&
+    fish.y + fish.h > waterMaze.Wall3.y &&
+    fish.y < waterMaze.Wall3.y + waterMaze.Wall3.h
+  ) {
+    state = "Loss";
   }
-        //over lap check for wall 6
-        if (Krab.x + Krab.w > waterMaze.Wall6.x &&
-            Krab.x < waterMaze.Wall6.x + waterMaze.Wall6.w &&
-            Krab.y + Krab.h > waterMaze.Wall6.y &&
-            Krab.y < waterMaze.Wall6.y + waterMaze.Wall6.h){
-     state = 'Loss';
+  //over lap check for wall 4
+  if (
+    fish.x + fish.w > waterMaze.Wall4.x &&
+    fish.x < waterMaze.Wall4.x + waterMaze.Wall4.w &&
+    fish.y + fish.h > waterMaze.Wall4.y &&
+    fish.y < waterMaze.Wall4.y + waterMaze.Wall4.h
+  ) {
+    state = "Loss";
   }
-        //over lap check for wall 7
-        if (Krab.x + Krab.w > waterMaze.Wall7.x &&
-            Krab.x < waterMaze.Wall7.x + waterMaze.Wall7.w &&
-            Krab.y + Krab.h > waterMaze.Wall7.y &&
-            Krab.y < waterMaze.Wall7.y + waterMaze.Wall7.h){
-     state = 'Loss';
+  //over lap check for wall 5
+  if (
+    fish.x + fish.w > waterMaze.Wall5.x &&
+    fish.x < waterMaze.Wall5.x + waterMaze.Wall5.w &&
+    fish.y + fish.h > waterMaze.Wall5.y &&
+    fish.y < waterMaze.Wall5.y + waterMaze.Wall5.h
+  ) {
+    state = "Loss";
   }
+  //over lap check for wall 6
+  if (
+    fish.x + fish.w > waterMaze.Wall6.x &&
+    fish.x < waterMaze.Wall6.x + waterMaze.Wall6.w &&
+    fish.y + fish.h > waterMaze.Wall6.y &&
+    fish.y < waterMaze.Wall6.y + waterMaze.Wall6.h
+  ) {
+    state = "Loss";
+  }
+  //over lap check for wall 7
+  if (
+    fish.x + fish.w > waterMaze.Wall7.x &&
+    fish.x < waterMaze.Wall7.x + waterMaze.Wall7.w &&
+    fish.y + fish.h > waterMaze.Wall7.y &&
+    fish.y < waterMaze.Wall7.y + waterMaze.Wall7.h
+  ) {
+    state = "Loss";
+  }
+  // over lap check for sand 1
+  let d1 = dist(fish.x, fish.y, sand.bank1.x, sand.bank1.y);
+  if (d1 < fish.size / 2 + sand.bank1.size / 2) {
+    state = "Loss";
+  }
+  // over lap check for sand 2
+  let d2 = dist(fish.x, fish.y, sand.bank2.x, sand.bank2.y);
+  if (d2 < fish.size / 2 + sand.bank2.size / 2) {
+    state = "Loss";
+  }
+  // over lap check for sand 3
+  let d3 = dist(fish.x, fish.y, sand.bank3.x, sand.bank3.y);
+  if (d3 < fish.size / 2 + sand.bank3.size / 2) {
+    state = "Loss";
+  }
+  // over lap check for sand 4
+  let d4 = dist(fish.x, fish.y, sand.bank4.x, sand.bank4.y);
+  if (d4 < fish.size / 2 + sand.bank4.size / 2) {
+    state = "Loss";
+  }
+  // over lap check for sand 5
+  let d5 = dist(fish.x, fish.y, sand.bank5.x, sand.bank5.y);
+  if (d5 < fish.size / 2 + sand.bank5.size / 2) {
+    state = "Loss";
+  }
+  // over lap check for sand 6
+  let d6 = dist(fish.x, fish.y, sand.bank6.x, sand.bank6.y);
+  if (d6 < fish.size / 2 + sand.bank6.size / 2) {
+    state = "Loss";
+  }
+//   over lap check for sharks
+
+// overlap shark 1
+let s1 = dist(fish.x, fish.y, shark.b1.x, shark.b1.y);
+  if (d6 < fish.size / 2 + shark.b1.size / 2) {
+    state = "Loss";
+  }
+// overlap shark 2
+
+// overlap shark 3
+
+
+  // over lap check for seashell
+
+
+
+//  over lap check for cave
 
 
 
 
 
+}
+function movement(){
+    shark.b1.y = shark.b1.y + shark.b1.vy;
+    // shark.b1.vy = (-shark.b1.speed, shark.b1.speed);
+    shark.b2.y = shark.b2.y + shark.b2.vy;
+    shark.b3.y = shark.b3.y + shark.b3.vy
+}
 
-        }
+
+function checkOverlapshark() {
+
+        // shark 1 bounce
+  let distanceshark = shark.b1.y - 360;
+  print("hello");
+//   console.log(`speed: ${shark.b1.vy}`)
+  if (distanceshark === 1) {
+    shark.b1.y = shark.b1.y - shark.b1.vy;
+    shark.b1.vy *= -1;
+    print("hooray!");
+
+  } else if ( shark.b1.y < 0){
+    shark.b1.vy *= -1;
+    print("test");
+    shark.b1.y = shark.b1.y + shark.b1.vy;
    
-
-
-
     
-function movements(){
+  }
 
+// shark 2 bounce
+let distanceshark2 = shark.b2.y - 360;
+print("hello");
+console.log(`speed: ${shark.b2.vy}`)
+if (distanceshark2 === 1) {
+  shark.b2.y = shark.b2.y - shark.b2.vy;
+  shark.b2.vy *= -1;
+
+
+} else if ( shark.b2.y < 0){
+  shark.b2.vy *= -1;
+  shark.b2.y = shark.b2.y + shark.b2.vy;
+}
+// shark 3 bounce
+let distanceshark3 = shark.b3.y - 360;
+print("hello");
+console.log(`speed: ${shark.b2.vy}`)
+if (distanceshark3 === 1) {
+  shark.b3.y = shark.b3.y - shark.b3.vy;
+  shark.b3.vy *= -1;
+
+
+} else if ( shark.b3.y < 0){
+  shark.b3.vy *= -1;
+  shark.b3.y = shark.b3.y + shark.b3.vy;
 }
 
-function KrabOffscreen(){
-    
 }
-
-
-
-};
-
-
+function house(){
+let h1 = dist(fish.x,fish.y,home.x,home.y);
+if (h1 <home.size/2 + fish.size/2){
+    state = 'win';
+}
+}
 function mousePressed() {
-    if (state === 'title'){
-        state = 'simulation';
-    }
-};
+  if (state === "title") {
+    state = "simulation";
+  }
+}
 
