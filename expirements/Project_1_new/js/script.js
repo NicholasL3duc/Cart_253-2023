@@ -11,9 +11,6 @@
 /**
  * Description of preload
  */
-function preload() {}
-imgimHouse = loadImage ('assets\images\imHouse.jpg')
-
 
 //fish object
 let fish = {
@@ -163,16 +160,29 @@ let shark = {
   }
 let home ={
     x: undefined,
-    y: 0,
-    size: 250,
+    y: 450,
+    size: 150,
 }
 
-
+let shell ={
+    x: undefined,
+    y:0,
+    size: 250,
+}
   
 
 
 let state = "title";
-let imgimHouse;
+let imgHouse;
+let imgShell
+
+function preload() {
+
+imgHouse = loadImage ('assets/images/House.jpg')
+imgShell = loadImage ('/assets/images/seaShell.jpg')
+}
+
+
 /**
  * Description of setup
  */
@@ -180,17 +190,26 @@ function setup() {
   // background info
   createCanvas(windowWidth, windowHeight);
 
+    home.x = windowWidth/2 + home.size/2;
+    home.y = 450 + home.size/2;
+
+    shell.x = windowWidth/2 + shell.size/2;
+    shell.y = 0 + shell.size/2;
+
 }
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
+
+
 /**
  * Description of draw()
  */
 function draw() {
   // background and function information
   background(11, 139, 230);
-Image(imgimHouse,windowWidth/2, 0, 250,250)
+
+
   if (state === "title") {
     title();
   } else if (state === "simulation") {
@@ -233,13 +252,15 @@ function Loss() {
 }
 
 function simulation() {
-  checkOffscreen();
-  checkOverlap();
-  display();
-  movement();
-  controlUser();
-  checkOverlapshark();
-  house();
+    image(imgHouse,windowWidth/2, 450, 150,150)
+    image(imgShell,350, 20, 200,100)
+    checkOffscreen();
+    checkOverlap();
+    display();
+    movement();
+    controlUser();
+    checkOverlapshark();
+    house();
 
 }
 //fish Movements
@@ -500,7 +521,7 @@ function checkOverlap() {
 
 // overlap shark 1
 let s1 = dist(fish.x, fish.y, shark.b1.x, shark.b1.y);
-  if (d6 < fish.size / 2 + shark.b1.size / 2) {
+  if (s1 < fish.size / 2 + shark.b1.size / 2) {
     state = "Loss";
   }
 // overlap shark 2
@@ -548,8 +569,8 @@ function checkOverlapshark() {
 
 // shark 2 bounce
 let distanceshark2 = shark.b2.y - 360;
-print("hello");
-console.log(`speed: ${shark.b2.vy}`)
+// print("hello");
+// console.log(`speed: ${shark.b2.vy}`)
 if (distanceshark2 === 1) {
   shark.b2.y = shark.b2.y - shark.b2.vy;
   shark.b2.vy *= -1;
@@ -562,7 +583,7 @@ if (distanceshark2 === 1) {
 // shark 3 bounce
 let distanceshark3 = shark.b3.y - 360;
 print("hello");
-console.log(`speed: ${shark.b2.vy}`)
+// console.log(`speed: ${shark.b2.vy}`)
 if (distanceshark3 === 1) {
   shark.b3.y = shark.b3.y - shark.b3.vy;
   shark.b3.vy *= -1;
@@ -576,6 +597,7 @@ if (distanceshark3 === 1) {
 }
 function house(){
 let h1 = dist(fish.x,fish.y,home.x,home.y);
+console.log(`h1: ${h1}`)
 if (h1 <home.size/2 + fish.size/2){
     state = 'win';
 }
