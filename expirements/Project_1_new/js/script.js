@@ -219,7 +219,7 @@ function setup() {
 }
 
 function windowResized() {
-  resizeCanvas(1000, 1000);
+//   resizeCanvas(windowWidth, windowHeight);
 }
 
 /**
