@@ -235,8 +235,8 @@ function draw() {
     simulation();
   } else if (state === "win") {
     win();
-  } else if (state === "Loss") {
-    Loss();
+  } else if (state === "loss") {
+    loss();
   }
 }
 //all functions used
@@ -263,7 +263,7 @@ function win() {
   image(imgHouse, 600, 500, 250, 250);
   pop();
 }
-function Loss() {
+function loss() {
   push();
   textSize(40);
   fill(189, 38, 21);
@@ -444,7 +444,7 @@ function checkOffscreen() {
   // check if the fish is long gone
   if (fish.x < 0 || fish.x > width || fish.y < 0 || fish.y > height) {
     // loss ending 1
-    state = "Loss";
+    state = "loss";
   }
 }
 function checkOverlap() {
@@ -461,7 +461,7 @@ function checkOverlap() {
     fish.y > octopus.y &&
     octopus.active
   ) {
-    state = "Loss";
+    state = "loss";
   }
 
   // getting the shell overlap
@@ -483,7 +483,7 @@ function checkOverlap() {
     fish.y + fish.h > waterMaze.Wall1.y &&
     fish.y < waterMaze.Wall1.y + waterMaze.Wall1.h
   ) {
-    state = "Loss";
+    state = "loss";
   }
   //over lap check for wall 2
   if (
@@ -492,7 +492,7 @@ function checkOverlap() {
     fish.y + fish.h > waterMaze.Wall2.y &&
     fish.y < waterMaze.Wall2.y + waterMaze.Wall2.h
   ) {
-    state = "Loss";
+    state = "loss";
   }
   //over lap check for wall 3
   if (
@@ -501,7 +501,7 @@ function checkOverlap() {
     fish.y + fish.h > waterMaze.Wall3.y &&
     fish.y < waterMaze.Wall3.y + waterMaze.Wall3.h
   ) {
-    state = "Loss";
+    state = "loss";
   }
   //over lap check for wall 4
   if (
@@ -510,7 +510,7 @@ function checkOverlap() {
     fish.y + fish.h > waterMaze.Wall4.y &&
     fish.y < waterMaze.Wall4.y + waterMaze.Wall4.h
   ) {
-    state = "Loss";
+    state = "loss";
   }
   //over lap check for wall 5
   if (
@@ -519,7 +519,7 @@ function checkOverlap() {
     fish.y + fish.h > waterMaze.Wall5.y &&
     fish.y < waterMaze.Wall5.y + waterMaze.Wall5.h
   ) {
-    state = "Loss";
+    state = "loss";
   }
   //over lap check for wall 6
   if (
@@ -528,7 +528,7 @@ function checkOverlap() {
     fish.y + fish.h > waterMaze.Wall6.y &&
     fish.y < waterMaze.Wall6.y + waterMaze.Wall6.h
   ) {
-    state = "Loss";
+    state = "loss";
   }
   //over lap check for wall 7
   if (
@@ -537,54 +537,54 @@ function checkOverlap() {
     fish.y + fish.h > waterMaze.Wall7.y &&
     fish.y < waterMaze.Wall7.y + waterMaze.Wall7.h
   ) {
-    state = "Loss";
+    state = "loss";
   }
   // over lap check for sand 1
   let d1 = dist(fish.x, fish.y, sand.bank1.x, sand.bank1.y);
   if (d1 < fish.size / 2 + sand.bank1.size / 2) {
-    state = "Loss";
+    state = "loss";
   }
   // over lap check for sand 2
   let d2 = dist(fish.x, fish.y, sand.bank2.x, sand.bank2.y);
   if (d2 < fish.size / 2 + sand.bank2.size / 2) {
-    state = "Loss";
+    state = "loss";
   }
   // over lap check for sand 3
   let d3 = dist(fish.x, fish.y, sand.bank3.x, sand.bank3.y);
   if (d3 < fish.size / 2 + sand.bank3.size / 2) {
-    state = "Loss";
+    state = "loss";
   }
   // over lap check for sand 4
   let d4 = dist(fish.x, fish.y, sand.bank4.x, sand.bank4.y);
   if (d4 < fish.size / 2 + sand.bank4.size / 2) {
-    state = "Loss";
+    state = "loss";
   }
   // over lap check for sand 5
   let d5 = dist(fish.x, fish.y, sand.bank5.x, sand.bank5.y);
   if (d5 < fish.size / 2 + sand.bank5.size / 2) {
-    state = "Loss";
+    state = "loss";
   }
   // over lap check for sand 6
   let d6 = dist(fish.x, fish.y, sand.bank6.x, sand.bank6.y);
   if (d6 < fish.size / 2 + sand.bank6.size / 2) {
-    state = "Loss";
+    state = "loss";
   }
   //over lap check for sharks
 
   // overlap shark 1
   let s1 = dist(fish.x, fish.y, shark.b1.x, shark.b1.y);
   if (s1 < fish.size / 2 + shark.b1.size / 2) {
-    state = "Loss";
+    state = "loss";
   }
   // overlap shark 2
   let s2 = dist(fish.x, fish.y, shark.b2.x, shark.b2.y);
   if (s2 < fish.size / 2 + shark.b2.size / 2) {
-    state = "Loss";
+    state = "loss";
   }
   // overlap shark 3
   let s3 = dist(fish.x, fish.y, shark.b3.x, shark.b3.y);
   if (s3 < fish.size / 2 + shark.b3.size / 2) {
-    state = "Loss";
+    state = "loss";
   }
 }
 // movements for the sharks
