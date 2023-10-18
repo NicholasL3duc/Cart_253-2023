@@ -177,18 +177,15 @@ let octopus = {
   active: true,
 };
 
-let mine ={
-    x: undefined,
-    y: 0,
-    size: 150,
-
-
-}
-
-
-
+let mine = {
+  x: undefined,
+  y: 0,
+  size: 150,
+};
 
 let state = "title";
+
+// the images used
 let imgHouse;
 let imgseaShell;
 let imgOctopus;
@@ -210,7 +207,7 @@ function preload() {
 function setup() {
   // background info
   createCanvas(windowWidth, windowHeight);
-
+// the positions of my images
   home.x = windowWidth / 2 + home.size / 2;
   home.y = 450 + home.size / 2;
 
@@ -219,14 +216,10 @@ function setup() {
 
   octopus.x = windowWidth / 2 + octopus.size / 2 + 100;
   octopus.y = 600 + octopus.size / 3;
-
-
-
 }
 
-
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  resizeCanvas(1000, 1000);
 }
 
 /**
@@ -246,15 +239,19 @@ function draw() {
     Loss();
   }
 }
-
+// 
 function title() {
   push();
   textSize(45);
   fill(33, 16, 97);
   textAlign(CENTER, CENTER);
-  text("Touch the Magical SeaShell To Make The Evil Octopus Dissapear!!!", width / 2, height / 2);
-  image(imgseaShell,600,100,250,250);
-  image(imgOctopus,600,500,250,250)
+  text(
+    "Touch the Magical SeaShell To Make The Evil Octopus Dissapear!!!",
+    width / 2,
+    height / 2
+  );
+  image(imgseaShell, 600, 100, 250, 250);
+  image(imgOctopus, 600, 500, 250, 250);
   pop();
 }
 function win() {
@@ -263,7 +260,7 @@ function win() {
   fill(255, 150, 150);
   textAlign(CENTER, CENTER);
   text("You Won And Got Home Safe!!", width / 2, height / 2);
-  image(imgHouse,600,500,250,250)
+  image(imgHouse, 600, 500, 250, 250);
   pop();
 }
 function Loss() {
@@ -272,7 +269,7 @@ function Loss() {
   fill(189, 38, 21);
   textAlign(CENTER, CENTER);
   text("Fish Soup For You :(", width / 2, height / 2);
-  image(imgsoup, 250,250,250,250)
+  image(imgsoup, 250, 250, 250, 250);
   pop();
 }
 
@@ -280,10 +277,10 @@ function simulation() {
   image(imgHouse, windowWidth / 2, 450, 150, 150);
   image(imgseaShell, imgseaShell.x, imgseaShell.y, 250, 250);
   image(imgOctopus);
-  image(imgCoral,0,400,500,500);
-  image(imgBubbles,1100,50,300,300);
-  image(imgsoup)
- 
+  image(imgCoral, 0, 400, 500, 500);
+  image(imgBubbles, 1100, 50, 300, 300);
+  image(imgsoup);
+
   checkOffscreen();
   checkOverlap();
   display();
@@ -466,7 +463,6 @@ function checkOverlap() {
   ) {
     state = "Loss";
   }
-
 
   // getting the shell overlap
 
