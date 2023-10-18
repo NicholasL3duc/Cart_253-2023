@@ -179,15 +179,15 @@ let octopus = {
 
 let state = "title";
 let imgHouse;
-let imgShell;
+let imgseaShell;
 let imgOctopus;
 let imgCoral;
 let imgBubbles;
 let imgMine;
 function preload() {
   imgHouse = loadImage("assets/images/House.jpg");
-  imgShell = loadImage("/assets/images/seaShell.jpg");
-  imgOctopus = loadImage("/assets/images/octopus.png");
+  imgseaShell = loadImage("assets/images/seaShell.jpg");
+  imgOctopus = loadImage("assets/images/octopus.png");
   imgCoral = loadImage("assets/images/coral.png");
   imgBubbles = loadImage("assets/images/bubbles.png");
   imgMine = loadImage("assets/images/mine.png");
@@ -259,7 +259,7 @@ function Loss() {
 
 function simulation() {
   image(imgHouse, windowWidth / 2, 450, 150, 150);
-  image(imgShell, imgShell.x, imgShell.y, 250, 250);
+  image(imgseaShell, imgseaShell.x, imgseaShell.y, 250, 250);
   image(imgOctopus);
   image(imgCoral);
   image(imgBubbles);
@@ -460,7 +460,7 @@ function checkOverlap() {
 
   if (shell.active);
   push();
-  image(imgShell, shell.x, shell.y, shell.size, shell.size);
+  image(imgseaShell, shell.x, shell.y, shell.size, shell.size);
   pop();
   if (octopus.active) {
     push();
