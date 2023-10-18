@@ -172,8 +172,8 @@ let shell = {
 
 let octopus = {
   x: undefined,
-  y: 100,
-  size: 250,
+  y: 0,
+  size: 150,
   active: true,
 };
 
@@ -181,10 +181,16 @@ let state = "title";
 let imgHouse;
 let imgShell;
 let imgOctopus;
+let imgCoral;
+let imgBubbles;
+let imgMine;
 function preload() {
   imgHouse = loadImage("assets/images/House.jpg");
   imgShell = loadImage("/assets/images/seaShell.jpg");
   imgOctopus = loadImage("/assets/images/octopus.png");
+  imgCoral = loadImage("assets/images/coral.png");
+  imgBubbles = loadImage("assets/images/bubbles.png");
+  imgMine = loadImage("assets/images/mine.png");
 }
 
 /**
@@ -197,12 +203,13 @@ function setup() {
   home.x = windowWidth / 2 + home.size / 2;
   home.y = 450 + home.size / 2;
 
-  shell.x = windowWidth / 2 + shell.size / 2;
-  shell.y = 0 + shell.size / 2;
+  shell.x = windowWidth / 3 + shell.size / 2 - 200;
+  shell.y = 200 + shell.size / 2 - 290;
 
-  octopus.x = windowWidth / 2 + octopus.size / 2;
-  octopus.y = 0 + octopus.size / 2;
+  octopus.x = windowWidth / 2 + octopus.size / 2 + 100;
+  octopus.y = 600 + octopus.size / 3;
 }
+
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
@@ -252,8 +259,11 @@ function Loss() {
 
 function simulation() {
   image(imgHouse, windowWidth / 2, 450, 150, 150);
-  image(imgShell);//350, 20, 200, 100
-  image(imgOctopus);//, 900, 700, 100, 100
+  image(imgShell, imgShell.x, imgShell.y, 250, 250);
+  image(imgOctopus);
+  image(imgCoral);
+  image(imgBubbles);
+  image(imgMine);
 
   checkOffscreen();
   checkOverlap();
@@ -424,23 +434,37 @@ function checkOffscreen() {
 function checkOverlap() {
   // getting the shell
   let k = dist(fish.x, fish.y, shell.x, shell.y);
-  if (k < fish.size / 2 + shell.size / 2) {
+  if (k < fish.size / 3 + shell.size / 3) {
     shell.active = false;
     octopus.active = false;
   }
   // overlap for the octopus
-  if (fish.x > octopus.x && octopus.active) {
+  if (
+    fish.x > octopus.x &&
+    octopus.active &&
+    fish.y > octopus.y &&
+    octopus.active
+  ) {
     state = "Loss";
   }
+
+  //   if (fish.x  > octopus.x && octopus.active){
+  //     state = "Loss";
+  //   }
+
+  //     let o1 = dist(fish.x, fish.y, octopus.x, octopus.y);
+  //     if (o1 < fish.size / 3 + octopus.size / 3) {
+  //     state = "Loss";
+  //   }
   // getting the shell overlap
 
   if (shell.active);
   push();
-  image(imgShell,shell.x,shell.y,shell.size,shell.size,);
-pop();
+  image(imgShell, shell.x, shell.y, shell.size, shell.size);
+  pop();
   if (octopus.active) {
     push();
-  image(imgOctopus,octopus.x,octopus.y,octopus.size,octopus.size);
+    image(imgOctopus, octopus.x, octopus.y, octopus.size, octopus.size);
     pop();
   }
 
@@ -539,21 +563,21 @@ pop();
   }
   //over lap check for sharks
 
-    // overlap shark 1
-    let s1 = dist(fish.x, fish.y, shark.b1.x, shark.b1.y);
-    if (s1 < fish.size / 2 + shark.b1.size / 2) {
-        state = "Loss";
-    }
-    // overlap shark 2
-    let s2 = dist(fish.x, fish.y, shark.b2.x, shark.b2.y);
-    if (s2 < fish.size / 2 + shark.b2.size / 2) {
-        state = "Loss";
-    }
-    // overlap shark 3
-    let s3 = dist(fish.x, fish.y, shark.b3.x, shark.b3.y);
-    if (s3 < fish.size / 2 + shark.b3.size / 2) {
-        state = "Loss";
-    }
+  // overlap shark 1
+  let s1 = dist(fish.x, fish.y, shark.b1.x, shark.b1.y);
+  if (s1 < fish.size / 2 + shark.b1.size / 2) {
+    state = "Loss";
+  }
+  // overlap shark 2
+  let s2 = dist(fish.x, fish.y, shark.b2.x, shark.b2.y);
+  if (s2 < fish.size / 2 + shark.b2.size / 2) {
+    state = "Loss";
+  }
+  // overlap shark 3
+  let s3 = dist(fish.x, fish.y, shark.b3.x, shark.b3.y);
+  if (s3 < fish.size / 2 + shark.b3.size / 2) {
+    state = "Loss";
+  }
   // over lap check for seashell
 
   //  over lap check for cave
