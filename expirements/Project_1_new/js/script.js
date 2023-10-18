@@ -199,7 +199,7 @@ function preload() {
   imgCoral = loadImage("assets/images/coral.png");
   imgBubbles = loadImage("assets/images/bubbles.png");
   imgsoup = loadImage("assets/images/soup.png");
-}
+};
 
 /**
  * Description of setup
@@ -207,7 +207,7 @@ function preload() {
 function setup() {
   // background info
   createCanvas(1400, 850);
-// the positions of my images
+  // the positions of my images
   home.x = 1450 / 2 + home.size / 2;
   home.y = 450 + home.size / 2;
 
@@ -216,11 +216,11 @@ function setup() {
 
   octopus.x = 1450 / 2 + octopus.size / 2 + 100;
   octopus.y = 600 + octopus.size / 3;
-}
+};
 
 function windowResized() {
   resizeCanvas(1400, 900);
-}
+};
 
 /**
  * Description of draw()
@@ -237,9 +237,9 @@ function draw() {
     win();
   } else if (state === "Loss") {
     Loss();
-  }
-}
-// 
+  };
+};
+//all functions used 
 function title() {
   push();
   textSize(45);
@@ -253,7 +253,7 @@ function title() {
   image(imgseaShell, 600, 100, 250, 250);
   image(imgOctopus, 600, 500, 250, 250);
   pop();
-}
+};
 function win() {
   push();
   textSize(64);
@@ -262,7 +262,7 @@ function win() {
   text("You Won And Got Home Safe!!", width / 2, height / 2);
   image(imgHouse, 600, 500, 250, 250);
   pop();
-}
+};
 function Loss() {
   push();
   textSize(40);
@@ -271,8 +271,8 @@ function Loss() {
   text("Fish Soup For You :(", width / 2, height / 2);
   image(imgsoup, 250, 250, 250, 250);
   pop();
-}
-
+};
+// functions used during simulator
 function simulation() {
   image(imgHouse, 1450 / 2, 450, 150, 150);
   image(imgseaShell, imgseaShell.x, imgseaShell.y, 250, 250);
@@ -288,7 +288,7 @@ function simulation() {
   controlUser();
   checkOverlapshark();
   house();
-}
+};
 //fish Movements
 function controlUser() {
   if (keyIsDown(87)) {
@@ -299,7 +299,7 @@ function controlUser() {
     fish.vy = fish.speed;
   } else {
     fish.vy = 0;
-  }
+  };
 
   if (keyIsDown(68)) {
     fish.vx = fish.speed;
@@ -307,10 +307,10 @@ function controlUser() {
     fish.vx = -fish.speed;
   } else {
     fish.vx = 0;
-  }
+  };
   fish.x += fish.vx;
   fish.y += fish.vy;
-}
+};
 
 function display() {
   // fish display
@@ -437,7 +437,7 @@ function display() {
   ellipse(sand.bank5.x, sand.bank5.y, 180, 180);
   // sand 6
   ellipse(sand.bank6.x, sand.bank6.y, 100, 100);
-}
+};
 
 // check is crab touches borders
 function checkOffscreen() {
@@ -445,15 +445,15 @@ function checkOffscreen() {
   if (fish.x < 0 || fish.x > width || fish.y < 0 || fish.y > height) {
     // loss ending 1
     state = "Loss";
-  }
-}
+  };
+};
 function checkOverlap() {
   // getting the shell
   let k = dist(fish.x, fish.y, shell.x, shell.y);
   if (k < fish.size / 3 + shell.size / 3) {
     shell.active = false;
     octopus.active = false;
-  }
+  };
   // overlap for the octopus
   if (
     fish.x > octopus.x &&
@@ -462,7 +462,7 @@ function checkOverlap() {
     octopus.active
   ) {
     state = "Loss";
-  }
+  };
 
   // getting the shell overlap
 
@@ -474,7 +474,7 @@ function checkOverlap() {
     push();
     image(imgOctopus, octopus.x, octopus.y, octopus.size, octopus.size);
     pop();
-  }
+  };
 
   //over lap check for wall 1
   if (
@@ -484,7 +484,7 @@ function checkOverlap() {
     fish.y < waterMaze.Wall1.y + waterMaze.Wall1.h
   ) {
     state = "Loss";
-  }
+  };
   //over lap check for wall 2
   if (
     fish.x + fish.w > waterMaze.Wall2.x &&
@@ -493,7 +493,7 @@ function checkOverlap() {
     fish.y < waterMaze.Wall2.y + waterMaze.Wall2.h
   ) {
     state = "Loss";
-  }
+  };
   //over lap check for wall 3
   if (
     fish.x + fish.w > waterMaze.Wall3.x &&
@@ -502,7 +502,7 @@ function checkOverlap() {
     fish.y < waterMaze.Wall3.y + waterMaze.Wall3.h
   ) {
     state = "Loss";
-  }
+  };
   //over lap check for wall 4
   if (
     fish.x + fish.w > waterMaze.Wall4.x &&
@@ -511,7 +511,7 @@ function checkOverlap() {
     fish.y < waterMaze.Wall4.y + waterMaze.Wall4.h
   ) {
     state = "Loss";
-  }
+  };
   //over lap check for wall 5
   if (
     fish.x + fish.w > waterMaze.Wall5.x &&
@@ -520,7 +520,7 @@ function checkOverlap() {
     fish.y < waterMaze.Wall5.y + waterMaze.Wall5.h
   ) {
     state = "Loss";
-  }
+  };
   //over lap check for wall 6
   if (
     fish.x + fish.w > waterMaze.Wall6.x &&
@@ -529,7 +529,7 @@ function checkOverlap() {
     fish.y < waterMaze.Wall6.y + waterMaze.Wall6.h
   ) {
     state = "Loss";
-  }
+  };
   //over lap check for wall 7
   if (
     fish.x + fish.w > waterMaze.Wall7.x &&
@@ -538,93 +538,94 @@ function checkOverlap() {
     fish.y < waterMaze.Wall7.y + waterMaze.Wall7.h
   ) {
     state = "Loss";
-  }
+  };
   // over lap check for sand 1
   let d1 = dist(fish.x, fish.y, sand.bank1.x, sand.bank1.y);
   if (d1 < fish.size / 2 + sand.bank1.size / 2) {
     state = "Loss";
-  }
+  };
   // over lap check for sand 2
   let d2 = dist(fish.x, fish.y, sand.bank2.x, sand.bank2.y);
   if (d2 < fish.size / 2 + sand.bank2.size / 2) {
     state = "Loss";
-  }
+  };
   // over lap check for sand 3
   let d3 = dist(fish.x, fish.y, sand.bank3.x, sand.bank3.y);
   if (d3 < fish.size / 2 + sand.bank3.size / 2) {
     state = "Loss";
-  }
+  };
   // over lap check for sand 4
   let d4 = dist(fish.x, fish.y, sand.bank4.x, sand.bank4.y);
   if (d4 < fish.size / 2 + sand.bank4.size / 2) {
     state = "Loss";
-  }
+  };
   // over lap check for sand 5
   let d5 = dist(fish.x, fish.y, sand.bank5.x, sand.bank5.y);
   if (d5 < fish.size / 2 + sand.bank5.size / 2) {
     state = "Loss";
-  }
+  };
   // over lap check for sand 6
   let d6 = dist(fish.x, fish.y, sand.bank6.x, sand.bank6.y);
   if (d6 < fish.size / 2 + sand.bank6.size / 2) {
     state = "Loss";
-  }
+  };
   //over lap check for sharks
 
   // overlap shark 1
   let s1 = dist(fish.x, fish.y, shark.b1.x, shark.b1.y);
   if (s1 < fish.size / 2 + shark.b1.size / 2) {
     state = "Loss";
-  }
+  };
   // overlap shark 2
   let s2 = dist(fish.x, fish.y, shark.b2.x, shark.b2.y);
   if (s2 < fish.size / 2 + shark.b2.size / 2) {
     state = "Loss";
-  }
+  };
   // overlap shark 3
   let s3 = dist(fish.x, fish.y, shark.b3.x, shark.b3.y);
   if (s3 < fish.size / 2 + shark.b3.size / 2) {
     state = "Loss";
-  }
-  // over lap check for seashell
+  };
 
-  //  over lap check for cave
-}
+ 
+};
+// movements for the sharks 
 function movement() {
   shark.b1.y = shark.b1.y + shark.b1.vy;
 
   shark.b2.y = shark.b2.y + shark.b2.vy;
   shark.b3.y = shark.b3.y + shark.b3.vy;
-}
+};
 
 function checkOverlapshark() {
   // shark 1 bounce
 
   if (shark.b1.y < 0 || shark.b1.y > 360) {
     shark.b1.vy *= -1;
-  }
+  };
 
   // shark 2 bounce
 
   if (shark.b2.y < 0 || shark.b2.y > 360) {
     shark.b2.vy *= -1;
-  }
+  };
 
   // shark 3 bounce
 
   if (shark.b3.y < 0 || shark.b3.y > 360) {
     shark.b3.vy *= -1;
-  }
-}
+  };
+};
+// the ending goal of the cave
 function house() {
   let h1 = dist(fish.x, fish.y, home.x, home.y);
   console.log(`h1: ${h1}`);
   if (h1 < home.size / 2 + fish.size / 2) {
     state = "win";
-  }
-}
+  };
+};
 function mousePressed() {
   if (state === "title") {
     state = "simulation";
-  }
-}
+  };
+};
