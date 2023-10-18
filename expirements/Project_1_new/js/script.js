@@ -206,20 +206,20 @@ function preload() {
  */
 function setup() {
   // background info
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(1400, 850);
 // the positions of my images
-  home.x = windowWidth / 2 + home.size / 2;
+  home.x = 1450 / 2 + home.size / 2;
   home.y = 450 + home.size / 2;
 
-  shell.x = windowWidth / 3 + shell.size / 2 - 200;
+  shell.x = 1450 / 3 + shell.size / 2 - 200;
   shell.y = 200 + shell.size / 2 - 290;
 
-  octopus.x = windowWidth / 2 + octopus.size / 2 + 100;
+  octopus.x = 1450 / 2 + octopus.size / 2 + 100;
   octopus.y = 600 + octopus.size / 3;
 }
 
 function windowResized() {
-//   resizeCanvas(windowWidth, windowHeight);
+  resizeCanvas(1400, 900);
 }
 
 /**
@@ -274,7 +274,7 @@ function Loss() {
 }
 
 function simulation() {
-  image(imgHouse, windowWidth / 2, 450, 150, 150);
+  image(imgHouse, 1450 / 2, 450, 150, 150);
   image(imgseaShell, imgseaShell.x, imgseaShell.y, 250, 250);
   image(imgOctopus);
   image(imgCoral, 0, 400, 500, 500);
