@@ -239,6 +239,7 @@ function draw() {
     loss();
   }
 }
+
 //all functions used
 function title() {
   push();
