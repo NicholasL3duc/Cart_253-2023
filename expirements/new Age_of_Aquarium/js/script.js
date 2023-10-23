@@ -19,9 +19,11 @@ let whale = {
   },
 
   tail: {
-    x: 140,
-    y: 260,
     size: 100,
+    xOffset: 140,
+    yOffset: 260,
+    w: 15,
+    h: 5,
     fill: {
       r: 70,
       g: 100,
@@ -29,8 +31,8 @@ let whale = {
     },
   },
   end: {
-    x: 80,
-    y: 260,
+    xOffset: 80,
+    yOffset: 260,
     size: 40,
     fill: {
       r: 70,
@@ -39,8 +41,8 @@ let whale = {
     },
   },
   belly: {
-    x: 250,
-    y: 280,
+    xOffset: 250,
+    yOffset: 280,
     size: 40,
     fill: {
       r: 255,
@@ -49,8 +51,8 @@ let whale = {
     },
   },
   arm: {
-    x: 170,
-    y: 110,
+    xOffset: 170,
+    yOffset: 110,
     size: 10,
     fill: {
       r: 70,
@@ -59,8 +61,8 @@ let whale = {
     },
   },
   eye: {
-    x: 310,
-    y: 250,
+    xOffset: 310,
+    yOffset: 250,
     size: 40,
     fill: 255,
   },
@@ -69,34 +71,12 @@ let whale = {
   vy: 0,
   speed: 3,
 };
+let school = [];
+
+
 
 // this is the fishes
-let fishes = {
-  x: 0,
-  y: 250,
-  size: 20,
-  vx: 0,
-  vy: 0,
-  speed: 2,
-  fill: {
-    r: 20,
-    g: 70,
-    b: 240,
-  },
-  tail: {
-    x: 0,
-    y: 250,
-    size: 20,
-    vx: 0,
-    vy: 0,
-    speed: 2,
-    fill: {
-      r: 20,
-      g: 70,
-      b: 240,
-    },
-  },
-};
+
 
 let state = "title";
 
@@ -110,8 +90,30 @@ function preload() {}
  */
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
+  // creating the fishes
+
+
+  school[0] = createFish(random(0, width), random(0, height));
+  school[1] = createFish(random(0, width), random(0, height));
+  school[2] = createFish(random(0, width), random(0, height));
+  school[3] = createFish(random(0, width), random(0, height));
+  school[4] = createFish(random(0, width), random(0, height));
+  school[5] = createFish(random(0, width), random(0, height));
 }
 
+// create a new fish function and returns it
+function createFish(x, y) {
+  let fish = {
+    x: x,
+    y: y,
+    size: 50,
+    vx: 0,
+    vy: 0,
+    speed: 2,
+  };
+  return fish;
+}
 /**
  * Description of draw()
  */
@@ -128,12 +130,26 @@ function draw() {
   } else if (state === "loss") {
     loss();
   }
+
+  moveFish(school[0]);
+  moveFish(school[1]);
+  moveFish(school[2]);
+  moveFish(school[3]);
+  moveFish(school[4]);
+  moveFish(school[5]);
+
+  displayFish(school[0]);
+  displayFish(school[1]);
+  displayFish(school[2]);
+  displayFish(school[3]);
+  displayFish(school[4]);
+  displayFish(school[5]);
 }
 //all functions used
 function title() {
   push();
   textSize(45);
-  fill(150,50,70);
+  fill(150, 50, 70);
   textAlign(CENTER, CENTER);
   text(
     "Eat the Blue Fishes to WIN but Avoid the Red Fishes",
@@ -165,8 +181,9 @@ function loss() {
 function simulation() {
   checkOffscreen();
   checkOverlapFish();
-  display();
-  movement();
+  displayWhale();
+  displayFish();
+  moveFish();
   controlUser();
   checkOverlapRedFish();
 }
@@ -175,14 +192,15 @@ function checkOffscreen() {}
 
 function checkOverlapFish() {}
 
-function display() {
-  fill(fishes.fill.r, fishes.fill.g, fishes.fill.b);
-  ellipse(fishes.x, fishes.y, 20, 10);
+function displayFish(fish) {
+  push();
+  fill(70, 50, 200);
+  noStroke();
+  ellipse(fish.x, fish.y, fish.size);
+  pop();
+}
 
-  //fish .tail
-  fill(fishes.tail.fill.r, fishes.tail.fill.g, fishes.tail.fill.b);
-  ellipse(fishes.tail.x, fishes.tail.y, 2, 7);
-
+function displayWhale() {
   // display for whale
   fill(whale.fill.r, whale.fill.g, whale.fill.b);
   ellipse(whale.x, whale.y, 180, 100);
@@ -221,7 +239,21 @@ function display() {
   ellipse(whale.eye.x, whale.eye.y, 10, 10);
 }
 
-function movement() {}
+function moveFish(fish) {
+  // direction change for the fishes
+  let change = random(0, 1);
+  if (change < 0.05) {
+    fish.vx = random(-fish.speed, fish.speed);
+    fish.vy = random(-fish.speed, fish.speed);
+  }
+  // movements for the fishes
+  fish.x = fish.x + fish.vx;
+  fish.y = fish.y + fish.vy;
+
+  // contraisnt to keep the fishes in the aquarium
+  fish.x = constrain(fish.x, 0, width);
+  fish.y = constrain(fish.y, 0, height);
+}
 
 function controlUser() {
   if (keyIsDown(87)) {
