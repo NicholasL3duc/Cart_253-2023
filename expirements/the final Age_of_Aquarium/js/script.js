@@ -11,53 +11,65 @@
 let whale = {
   x: 250,
   y: 250,
-  size: 100,
+  size: 150,
   vx: 0,
   vy: 0,
-  speed: 1,
+  speed: 3.5,
 };
 
 let state = "title";
-let imgWhale;
 
+let imgWhale;
+let imgTrash;
+let imgFish;
+let imgDead;
+let imghappy;
 
 let school = [];
 let garbage = [];
 function preload() {
   imgWhale = loadImage(`assets/images/whale.png`);
-
+  imgTrash = loadImage(`assets/images/trash.png`);
+  imgFish = loadImage(`assets/images/fish.webp`);
+  imgDead = loadImage(`assets/images/deadWhale.webp`);
+  imghappy = loadImage(`assets/images/happy.webp`)
 }
 function title() {
-    push();
-    textSize(45);
-    fill(33, 16, 97);
-    textAlign(CENTER, CENTER);
-    text(
-      "Touch the Magical SeaShell To Make The Evil Octopus Dissapear!!!",
-      width / 2,
-      height / 2
-    );
-  
-    pop();
-  }
-  function win() {
-    push();
-    textSize(64);
-    fill(255, 150, 150);
-    textAlign(CENTER, CENTER);
-    text("Yummy!", width / 2, height / 2);
-  
-    pop();
-  }
-  function loss() {
-    push();
-    textSize(40);
-    fill(189, 38, 21);
-    textAlign(CENTER, CENTER);
-    text("Yuck!! :(", width / 2, height / 2);
-  
-    pop();
-  }
+  push();
+  textSize(45);
+  fill(140,50,100);
+  textAlign(CENTER, CENTER);
+  text(
+    "Eat All The Fish And Avoid The Trash!!!",
+    
+    width / 2,
+    height / 2
+  );
+
+  pop();
+}
+function win() {
+  push();
+  textSize(64);
+  fill(255, 150, 150);
+  textAlign(CENTER, CENTER);
+  text("Yummy!", width / 2, height / 2);
+  text("You Won, Congrats", width/2, height/1.5 )
+image(imghappy,600,50,200,200 )
+  pop();
+}
+function loss() {
+  push();
+  textSize(40);
+  fill(189, 38, 21);
+  textAlign(CENTER, CENTER);
+  text("Yucky!! :(", width / 2, height / 2);
+  fill(190,50,50)
+  text("you lose try again", width/2, height/1.5 )
+  image(imgDead,600, 100,300,300)
+ 
+  pop();
+}
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -76,7 +88,6 @@ function setup() {
 
   whale.x = 50;
   whale.y = windowHeight / 2;
-
 }
 
 // createFish(x,y)
@@ -118,8 +129,8 @@ function createUser() {
     imgWhale,
     user.x - user.size / 2,
     user.y - user.size / 2,
-    user.size * 1.5,
-    user.size * 1.5
+    user.size * 1,
+    user.size * 1
   );
   pop();
 }
@@ -129,7 +140,7 @@ function draw() {
 
   if (state === "title") {
     title();
-} else if (state === "simulation") {
+  } else if (state === "simulation") {
     simulation();
   } else if (state === "win") {
     win();
@@ -139,16 +150,13 @@ function draw() {
 
   whale.x = constrain(whale.x, 0, windowWidth);
   whale.y = constrain(whale.y, 0, windowHeight);
-
-
-  simulation();
 }
 function simulation() {
   //   createFish();
   //   createUser();
+  moveWhale(whale);
   for (let fish of school) {
     moveFish(fish);
-    moveWhale(whale);
     displayFish(fish);
     overlapCheckFish();
     displayWhale();
@@ -156,8 +164,9 @@ function simulation() {
   for (let trash of garbage) {
     moveTrash(trash);
     displayTrash(trash);
+    overlapCheckTrash();
   }
-  overlapCheckTrash();
+
   pointSystem();
 }
 function moveFish(fish) {
@@ -226,17 +235,19 @@ function displayWhale() {
 
 function displayFish(fish) {
   push();
-  fill(50, 70, 190);
-  noStroke();
-  ellipse(fish.x, fish.y, fish.size, 30, 40);
+//   fill(50, 70, 190);
+//   noStroke();
+//   ellipse(fish.x, fish.y, fish.size, 30, 40);
+image(imgFish,fish.x,fish.y,fish.size,fish.size)
   pop();
 }
 
 function displayTrash(trash) {
   push();
-  fill(190, 50, 30);
-  noStroke();
-  ellipse(trash.x, trash.y, trash.size, 50, 30);
+//   fill(190, 50, 30);
+//   noStroke();
+image(imgTrash,trash.x,trash.y,trash.size,trash.size)
+//   ellipse(trash.x, trash.y, trash.size, 50, 30);
   pop();
 }
 
@@ -244,8 +255,17 @@ function overlapCheckFish() {
   for (let fish of school) {
     let s1 = dist(whale.x, whale.y, fish.x, fish.y);
     if (s1 < whale.size / 2 + fish.size / 2) {
-      state = "win";
+      for (let f = 0; f < school.length; f++) {
+        let fish = school[f];
+        let d = dist(whale.x, whale.y, fish.x, fish.y);
+        if (d < fish.size / 2 + whale.size / 2) {
+          school.splice(f, 1);
+        }
+      }
     }
+  }
+  if (school.length === 0){
+    state = `win`;
   }
 }
 
@@ -259,10 +279,8 @@ function overlapCheckTrash() {
 }
 function pointSystem() {}
 
-
 function mousePressed() {
-    if (state === "title") {
-      state = "simulation";
-    };
-  };
-  
+  if (state === "title") {
+    state = "simulation";
+  }
+}
