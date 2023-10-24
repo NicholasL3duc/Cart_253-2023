@@ -7,7 +7,7 @@
  */
 
 "use strict";
-
+// the whale let
 let whale = {
   x: 250,
   y: 250,
@@ -19,29 +19,32 @@ let whale = {
 
 let state = "title";
 
+// the images into let
 let imgWhale;
 let imgTrash;
 let imgFish;
 let imgDead;
 let imghappy;
 
+// the arrays used
 let school = [];
 let garbage = [];
 function preload() {
+  // all of the images used
   imgWhale = loadImage(`assets/images/whale.png`);
   imgTrash = loadImage(`assets/images/trash.png`);
   imgFish = loadImage(`assets/images/fish.webp`);
   imgDead = loadImage(`assets/images/deadWhale.webp`);
-  imghappy = loadImage(`assets/images/happy.webp`)
+  imghappy = loadImage(`assets/images/happy.webp`);
 }
 function title() {
   push();
   textSize(45);
-  fill(140,50,100);
+  fill(140, 50, 100);
   textAlign(CENTER, CENTER);
   text(
     "Eat All The Fish And Avoid The Trash!!!",
-    
+
     width / 2,
     height / 2
   );
@@ -54,8 +57,8 @@ function win() {
   fill(255, 150, 150);
   textAlign(CENTER, CENTER);
   text("Yummy!", width / 2, height / 2);
-  text("You Won, Congrats", width/2, height/1.5 )
-image(imghappy,600,50,200,200 )
+  text("You Won, Congrats", width / 2, height / 1.5);
+  image(imghappy, 600, 50, 200, 200);
   pop();
 }
 function loss() {
@@ -64,10 +67,10 @@ function loss() {
   fill(189, 38, 21);
   textAlign(CENTER, CENTER);
   text("Yucky!! :(", width / 2, height / 2);
-  fill(190,50,50)
-  text("you lose try again", width/2, height/1.5 )
-  image(imgDead,600, 100,300,300)
- 
+  fill(190, 50, 50);
+  text("you lose try again", width / 2, height / 1.5);
+  image(imgDead, 600, 100, 300, 300);
+
   pop();
 }
 function setup() {
@@ -83,15 +86,11 @@ function setup() {
     garbage[g] = createFish(random(0, width), random(0, height));
   }
 
-  //   user.x = 50;
-  //   user.y = windowHeight/2;
-
   whale.x = 50;
   whale.y = windowHeight / 2;
 }
 
-// createFish(x,y)
-// Creates a new JavaScript Object describing a fish and returns it
+// Creation of the fish and trash
 function createFish(x, y) {
   let fish = {
     x: x,
@@ -137,7 +136,7 @@ function createUser() {
 
 function draw() {
   background(0, 0, 139);
-
+  // all the states
   if (state === "title") {
     title();
   } else if (state === "simulation") {
@@ -147,13 +146,11 @@ function draw() {
   } else if (state === "loss") {
     loss();
   }
-
+  // constraint the whale/user to the canvas
   whale.x = constrain(whale.x, 0, windowWidth);
   whale.y = constrain(whale.y, 0, windowHeight);
 }
 function simulation() {
-  //   createFish();
-  //   createUser();
   moveWhale(whale);
   for (let fish of school) {
     moveFish(fish);
@@ -166,8 +163,6 @@ function simulation() {
     displayTrash(trash);
     overlapCheckTrash();
   }
-
-  pointSystem();
 }
 function moveFish(fish) {
   // Choose whether to change direction
@@ -203,22 +198,21 @@ function moveTrash(trash) {
   trash.y = constrain(trash.y, 0, height);
 }
 function moveWhale(whale) {
-  // user.x = mouseX
-  // user.y = mouseY
-
   if (keyIsDown(87)) {
     //moving using the W key
     whale.vy = -whale.speed;
   } else if (keyIsDown(83)) {
-    //moving using the W key
+    //moving using the A key
     whale.vy = whale.speed;
   } else {
     whale.vy = 0;
   }
 
   if (keyIsDown(68)) {
+    // moving using the S key
     whale.vx = whale.speed;
   } else if (keyIsDown(65)) {
+    // moving using the D key
     whale.vx = -whale.speed;
   } else {
     whale.vx = 0;
@@ -235,23 +229,20 @@ function displayWhale() {
 
 function displayFish(fish) {
   push();
-//   fill(50, 70, 190);
-//   noStroke();
-//   ellipse(fish.x, fish.y, fish.size, 30, 40);
-image(imgFish,fish.x,fish.y,fish.size,fish.size)
+  // display for the fish
+  image(imgFish, fish.x, fish.y, fish.size, fish.size);
   pop();
 }
 
 function displayTrash(trash) {
+  // displaying the trash
   push();
-//   fill(190, 50, 30);
-//   noStroke();
-image(imgTrash,trash.x,trash.y,trash.size,trash.size)
-//   ellipse(trash.x, trash.y, trash.size, 50, 30);
+  image(imgTrash, trash.x, trash.y, trash.size, trash.size);
   pop();
 }
 
 function overlapCheckFish() {
+  // over lap for the fishes from the whale
   for (let fish of school) {
     let s1 = dist(whale.x, whale.y, fish.x, fish.y);
     if (s1 < whale.size / 2 + fish.size / 2) {
@@ -264,12 +255,13 @@ function overlapCheckFish() {
       }
     }
   }
-  if (school.length === 0){
+  if (school.length === 0) {
     state = `win`;
   }
 }
 
 function overlapCheckTrash() {
+  // overlap for the trash on the whale
   for (let trash of garbage) {
     let g1 = dist(whale.x, whale.y, trash.x, trash.y);
     if (g1 < whale.size / 2 + trash.size / 2) {
@@ -277,8 +269,8 @@ function overlapCheckTrash() {
     }
   }
 }
-function pointSystem() {}
 
+// transition from title to sim
 function mousePressed() {
   if (state === "title") {
     state = "simulation";
