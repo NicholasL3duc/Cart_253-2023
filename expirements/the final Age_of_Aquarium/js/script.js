@@ -1,8 +1,8 @@
 /**
  * Title of Project
  * Author Name
- * 
- * This is a template. You must fill in the title, author, 
+ *
+ * This is a template. You must fill in the title, author,
  * and this description to match your project!
  */
 
@@ -13,14 +13,54 @@ let fish2;
 let fish3;
 let fish4;
 
+let whale = {
+  x: 250,
+  y: 250,
+  size: 100,
+  vx: 0,
+  vy: 0,
+  speed: 4,
+};
+
+let clown = {
+  x: 250,
+  y: 250,
+  size: 100,
+  vx: 0,
+  vy: 0,
+  speed: 4,
+};
+let user = {
+  x: 250,
+  y: 250,
+  size: 100,
+  vx: 0,
+  vy: 0,
+  speed: 4,
+};
+
+let imgWhale;
+let imgClown;
+
+function preload() {
+  imgWhale = loadImage(`assets/images/whale.png`);
+  imgClown = loadImage(`assets/images/clown.png`);
+}
+
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(windowWidth, windowHeight);
 
   // Create four fish, positioned randomly
   fish1 = createFish(random(0, width), random(0, height));
   fish2 = createFish(random(0, width), random(0, height));
   fish3 = createFish(random(0, width), random(0, height));
   fish4 = createFish(random(0, width), random(0, height));
+
+  whale.x = 50;
+  whale.y = windowHeight / 2;
+
+  clown.x = 50;
+  clown.y = windowHeight / 2;
 }
 
 // createFish(x,y)
@@ -32,15 +72,16 @@ function createFish(x, y) {
     size: 50,
     vx: 0,
     vy: 0,
-    speed: 2
+    speed: 2,
   };
   return fish;
 }
 
 // draw()
 // Moves and displays our fish
+
 function draw() {
-  background(0);
+  background(0, 0, 139);
 
   moveFish(fish1);
   moveFish(fish2);
@@ -51,10 +92,32 @@ function draw() {
   displayFish(fish2);
   displayFish(fish3);
   displayFish(fish4);
-}
 
-// moveFish(fish)
-// Chooses whether the provided fish changes direction and moves it
+  whale.x = constrain(whale.x, 0, windowWidth);
+  whale.y = constrain(whale.y, 0, windowHeight);
+
+  user.x = mouseX
+  user.y = mouseY
+
+  push();
+  image(imgWhale, whale.x, whale.y, whale.size, whale.size);
+  pop();
+
+
+  fill(100, 200, 100);
+  ellipse(user.x, user.y, user.size);
+}
+function simulation() {
+  createFish();
+  moveFish();
+  moveWhale();
+  moveTrash();
+  displayTrash();
+  displayWhale();
+  displayFish();
+  overlapCheckFish();
+  overlapCheckTrash();
+}
 function moveFish(fish) {
   // Choose whether to change direction
   let change = random(0, 1);
@@ -68,16 +131,38 @@ function moveFish(fish) {
   fish.y = fish.y + fish.vy;
 
   // Constrain the fish to the canvas
+
   fish.x = constrain(fish.x, 0, width);
   fish.y = constrain(fish.y, 0, height);
 }
+function moveWhale() {
 
-// displayFish(fish)
-// Displays the provided fish on the canvas
+ 
+}
+function displayWhale() {
+  // display for whale
+
+  push();
+  image(imgWhale, whale.x, whale.y, whale.size, whale.size);
+  pop();
+
+  // displayFish(fish)
+  // Displays the provided fish on the canvas
+}
+
 function displayFish(fish) {
   push();
-  fill(200, 100, 100);
+  fill(50, 70, 190);
   noStroke();
-  ellipse(fish.x, fish.y, fish.size);
+  ellipse(fish.x, fish.y, fish.size, 30, 40);
   pop();
 }
+function overlapCheckFish(){
+    let s1 = dist(user.x, user.y, fish.x, fish.y);
+    if (s1 < user.size / 2 + fish.size / 2) {
+      
+    };
+
+}
+
+function overlapCheckTrash(){}

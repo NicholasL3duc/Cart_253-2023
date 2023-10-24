@@ -20,8 +20,8 @@ let whale = {
 
   tail: {
     size: 100,
-    xOffset: 140,
-    yOffset: 260,
+    x: 140,
+    y: 260,
     w: 15,
     h: 5,
     fill: {
@@ -31,8 +31,8 @@ let whale = {
     },
   },
   end: {
-    xOffset: 80,
-    yOffset: 260,
+    x: 80,
+    y: 260,
     size: 40,
     fill: {
       r: 70,
@@ -41,8 +41,8 @@ let whale = {
     },
   },
   belly: {
-    xOffset: 250,
-    yOffset: 280,
+    x: 250,
+    y: 280,
     size: 40,
     fill: {
       r: 255,
@@ -51,8 +51,8 @@ let whale = {
     },
   },
   arm: {
-    xOffset: 170,
-    yOffset: 110,
+    x: 170,
+    y: 110,
     size: 10,
     fill: {
       r: 70,
@@ -61,8 +61,8 @@ let whale = {
     },
   },
   eye: {
-    xOffset: 310,
-    yOffset: 250,
+    x: 310,
+    y: 250,
     size: 40,
     fill: 255,
   },
@@ -71,12 +71,10 @@ let whale = {
   vy: 0,
   speed: 3,
 };
+
 let school = [];
 
-
-
 // this is the fishes
-
 
 let state = "title";
 
@@ -84,6 +82,18 @@ let state = "title";
  * Description of preload
  */
 function preload() {}
+
+function createFish(x, y) {
+    let fish = {
+      x: x,
+      y: y,
+      size: 50,
+      vx: 0,
+      vy: 0,
+      speed: 2,
+    };
+    return fish;
+  }
 
 /**
  * Description of setup
@@ -93,7 +103,6 @@ function setup() {
 
   // creating the fishes
 
-
   school[0] = createFish(random(0, width), random(0, height));
   school[1] = createFish(random(0, width), random(0, height));
   school[2] = createFish(random(0, width), random(0, height));
@@ -102,18 +111,34 @@ function setup() {
   school[5] = createFish(random(0, width), random(0, height));
 }
 
-// create a new fish function and returns it
-function createFish(x, y) {
-  let fish = {
-    x: x,
-    y: y,
-    size: 50,
-    vx: 0,
-    vy: 0,
-    speed: 2,
-  };
-  return fish;
+//create a new fish function and returns it
+// function createFish(x, y) {
+//   let fish = {
+//     x: x,
+//     y: y,
+//     size: 50,
+//     vx: 0,
+//     vy: 0,
+//     speed: 2,
+//   };
+//   return fish;
+// }
+function setupCircle() {
+  moveFish(school[0]);
+  moveFish(school[1]);
+  moveFish(school[2]);
+  moveFish(school[3]);
+  moveFish(school[4]);
+  moveFish(school[5]);
+
+  displayFish(school[0]);
+  displayFish(school[1]);
+  displayFish(school[2]);
+  displayFish(school[3]);
+  displayFish(school[4]);
+  displayFish(school[5]);
 }
+
 /**
  * Description of draw()
  */
@@ -131,19 +156,19 @@ function draw() {
     loss();
   }
 
-  moveFish(school[0]);
-  moveFish(school[1]);
-  moveFish(school[2]);
-  moveFish(school[3]);
-  moveFish(school[4]);
-  moveFish(school[5]);
+  //   moveFish(school[0]);
+  //   moveFish(school[1]);
+  //   moveFish(school[2]);
+  //   moveFish(school[3]);
+  //   moveFish(school[4]);
+  //   moveFish(school[5]);
 
-  displayFish(school[0]);
-  displayFish(school[1]);
-  displayFish(school[2]);
-  displayFish(school[3]);
-  displayFish(school[4]);
-  displayFish(school[5]);
+  //   displayFish(school[0]);
+  //   displayFish(school[1]);
+  //   displayFish(school[2]);
+  //   displayFish(school[3]);
+  //   displayFish(school[4]);
+  //   displayFish(school[5]);
 }
 //all functions used
 function title() {
@@ -182,6 +207,7 @@ function simulation() {
   checkOffscreen();
   checkOverlapFish();
   displayWhale();
+  setupCircle();
   displayFish();
   moveFish();
   controlUser();
@@ -207,6 +233,7 @@ function displayWhale() {
 
   //whale belly
   fill(whale.belly.fill.r, whale.belly.fill.g, whale.belly.fill.b);
+  noStroke();
   ellipse(whale.belly.x, whale.belly.y, 120, 40);
 
   //whale .tail
