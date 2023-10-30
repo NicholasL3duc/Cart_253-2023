@@ -8,25 +8,13 @@
 
 "use strict";
 
-/**
- * Description of preload
-*/
-function preload() {
-
-}
-
-
-/**
- * Description of setup
-*/
-function setup() {
-
-}
-
-
-/**
- * Description of draw()
-*/
-function draw() {
-
-}
+  // setup() creates the canvas and the flowers in the garden
+  function setup() {
+    createCanvas(600, 600);
+  }
+  
+  // draw()
+  // Displays our flowers
+  function draw() {
+  
+  }
