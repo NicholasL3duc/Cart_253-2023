@@ -29,40 +29,15 @@ function setup() {
   // the creation of the flowers by counting up the number of flowers
   for (let i = 0; i < garden.numflowers; i++) {
     // create a new flower
-    let flower = createFlower();
+    let flower = new Flower();
     // add the flower into the array of flowers
     garden.flowers.push(flower);
   }
+  garden.flowers.sort(sortByY);
+
 }
-// creates a new object (the flower) and returns it to the canvas
-function createFlower() {
-  // the flower object
-  let flower = {
-    // the flower postion and size information
-    x: random(0, width),
-    y: random(0, height),
-    size: 50,
-    stemLength: 75,
-    stemTickness: 10,
-    petalThickness: 10,
-    // the flower's color information
-    stemColor: {
-      r: 65,
-      g: 112,
-      b: 80,
-    },
-    petalColor: {
-      r: 122,
-      g: 53,
-      b: 70,
-    },
-    centerColor: {
-      r: 50,
-      g: 0,
-      b: 0,
-    },
-  };
-  return flower;
+function sortByY(flower1,flower2){
+  return flower1.y -flower2.y;
 }
 
 // draw()
@@ -74,7 +49,7 @@ function draw() {
   // loops through all of the flowers in the array and displays them
   for (let i = 0; i < garden.flowers.length; i++) {
     let flower = garden.flowers[i];
-    displayFlower(flower);
+  flower.display();
   }
 }
 // displays the flowers onto the canvas
