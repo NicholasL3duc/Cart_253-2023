@@ -16,9 +16,9 @@ let garden = {
   numflowers: 21,
   // the color of the polutted grass
   grassColor: {
-    r: 48,
-    g: 102,
-    b: 56,
+    r: 49,
+    g: 74,
+    b: 41,
   },
 };
 
@@ -47,9 +47,9 @@ function createFlower() {
     petalThickness: 10,
     // the flower's color information
     stemColor: {
-      r: 22,
-      g: 46,
-      b: 26,
+      r: 65,
+      g: 112,
+      b: 80,
     },
     petalColor: {
       r: 122,
@@ -64,20 +64,7 @@ function createFlower() {
   };
   return flower;
 }
-// displays the flowers onto the canvas
-function displayFlower(flower) {
-  push();
-  // line for the stem
-  strokeWeight(flower.stemThickness);
-  stroke(flower.stemColor.r, flower.stemColor.g, flower.stemColor.b);
-  line(flower.x, flower.y, flower.x, flower.y + flower.stemLength);
-  // the heavy outline for the flower
-  strokeWeight(flower.petalThickness);
-  fill(flower.centerColor.r, flower.centerColor.g, flower.centerColor.b);
-  stroke(flower.petalColor.r, flower.petalColor.g, flower.petalColor.b);
-  ellipse(flower.x, flower.y, flower.size);
-  pop();
-}
+
 // draw()
 // Displays our flowers
 function draw() {
@@ -90,3 +77,22 @@ function draw() {
     displayFlower(flower);
   }
 }
+// displays the flowers onto the canvas
+function displayFlower(flower) {
+    push();
+    // line for the stem
+    // strokeWeight(flower.stemThickness);
+    // stroke(flower.stemColor.r, flower.stemColor.g, flower.stemColor.b);
+    // line(flower.x, flower.y, flower.x, flower.y + flower.stemLength);
+    strokeWeight(flower.stemThickness);
+    stroke(flower.stemColor.r, flower.stemColor.g, flower.stemColor.b);
+    line(flower.x, flower.y, flower.x, flower.y + flower.stemLength);
+    // the heavy outline for the flower
+    strokeWeight(flower.petalThickness);
+    fill(flower.centerColor.r, flower.centerColor.g, flower.centerColor.b);
+    stroke(flower.petalColor.r, flower.petalColor.g, flower.petalColor.b);
+    ellipse(flower.x, flower.y, flower.size);
+    pop();
+  }
+
+  
