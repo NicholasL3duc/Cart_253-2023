@@ -64,6 +64,22 @@ function createFlower() {
   };
   return flower;
 }
+// displays the flowers onto the canvas
+function displayFlower(flower){
+push();
+// line for the stem
+strokeWeight(flower.stemThickness);
+stroke(flower.stemColor.r,flower.stemColor.g,flower.stemColor.b);
+line(flower.x, flower.y, flower.x,flower.y + flower.stemLength);
+// the heavy outline for the flower
+strokeWeight(flower.petalThickness);
+fill(flower.centerColor.r,flower.centerColor.g,flower.centerColor.b);
+stroke(flower.petalColor.r,flower.petalColor.g,flower.petalColor.b);
+ellipse(flower.x,flower.y,flower.size);
+pop();
+
+
+}
 // draw()
 // Displays our flowers
 function draw() {}
