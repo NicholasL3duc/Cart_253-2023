@@ -65,21 +65,28 @@ function createFlower() {
   return flower;
 }
 // displays the flowers onto the canvas
-function displayFlower(flower){
-push();
-// line for the stem
-strokeWeight(flower.stemThickness);
-stroke(flower.stemColor.r,flower.stemColor.g,flower.stemColor.b);
-line(flower.x, flower.y, flower.x,flower.y + flower.stemLength);
-// the heavy outline for the flower
-strokeWeight(flower.petalThickness);
-fill(flower.centerColor.r,flower.centerColor.g,flower.centerColor.b);
-stroke(flower.petalColor.r,flower.petalColor.g,flower.petalColor.b);
-ellipse(flower.x,flower.y,flower.size);
-pop();
-
-
+function displayFlower(flower) {
+  push();
+  // line for the stem
+  strokeWeight(flower.stemThickness);
+  stroke(flower.stemColor.r, flower.stemColor.g, flower.stemColor.b);
+  line(flower.x, flower.y, flower.x, flower.y + flower.stemLength);
+  // the heavy outline for the flower
+  strokeWeight(flower.petalThickness);
+  fill(flower.centerColor.r, flower.centerColor.g, flower.centerColor.b);
+  stroke(flower.petalColor.r, flower.petalColor.g, flower.petalColor.b);
+  ellipse(flower.x, flower.y, flower.size);
+  pop();
 }
 // draw()
 // Displays our flowers
-function draw() {}
+function draw() {
+  // displaying the grass
+  background(garden.grassColor.r, garden.grassColor.g, garden.grassColor.b);
+
+  // loops through all of the flowers in the array and displays them
+  for (let i = 0; i < garden.flowers.length; i++) {
+    let flower = garden.flowers[i];
+    displayFlower(flower);
+  }
+}
