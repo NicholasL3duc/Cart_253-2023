@@ -7,6 +7,7 @@ class Bee {
     this.size = 40;
     // If the bee reaches this min, then it dies
     this.minSize = 10;
+    this.maxSize = 40;
     this.vx = 0;
     this.vy = 0;
     this.speed = 5;
@@ -38,7 +39,7 @@ class Bee {
     if (d < this.size / 2 + flower.size / 2) {
       // this allows the bee to grow
       this.grow();
-      flower.polinate();
+      flower.pollinate();
     }
   }
   // this segment gets the bee size up to a maximum

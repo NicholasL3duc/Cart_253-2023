@@ -25,6 +25,7 @@ let garden = {
     b: 41,
   },
 };
+let imgSmoke;
 
 // setup() creates the canvas and the flowers in the garden
 function setup() {
@@ -91,7 +92,7 @@ function draw() {
       bee.shrink();
       bee.move();
 
-      for (let j = 0; j < garden.flowers.length; i++){
+      for (let j = 0; j < garden.flowers.length; j++){
         let flower = garden.flowers[j];
         bee.tryToPollinate(flower)
       }
