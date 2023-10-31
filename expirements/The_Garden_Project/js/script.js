@@ -17,7 +17,7 @@ let garden = {
   // the array for the bees
   bees: [],
   // the number of bees in my garden
-  numBees: 5,
+  numBees: 7,
   // the color of the polutted grass
   grassColor: {
     r: 49,
@@ -30,6 +30,9 @@ let imgSmoke;
 // setup() creates the canvas and the flowers in the garden
 function setup() {
   createCanvas(600, 600);
+
+   // all of the images used
+   imgSmoke = loadImage('assets/images/smoke.png');
 
   // the creation of the flowers by counting up the number of flowers
   for (let i = 0; i < garden.numflowers; i++) {
@@ -99,6 +102,7 @@ function draw() {
       bee.display();
     }
   }
+  displaySmoke();
 }
 // displays the flowers onto the canvas
 function displayFlower(flower) {
@@ -113,3 +117,9 @@ function displayFlower(flower) {
   ellipse(flower.x, flower.y, flower.size);
   pop();
 }
+function displaySmoke(){
+
+image(imgSmoke,0,0,width,height);
+
+}
+
