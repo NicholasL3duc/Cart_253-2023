@@ -27,6 +27,29 @@ let garden = {
 };
 let imgSmoke;
 
+
+function win() {
+  push();
+  textSize(64);
+  fill(255, 150, 150);
+  textAlign(CENTER, CENTER);
+  text("Yummy!", width / 2, height / 2);
+  text("You Won, Congrats", width / 2, height / 1.5);
+  image(imghappy, 600, 50, 200, 200);
+  pop();
+}
+function loss() {
+  push();
+  textSize(40);
+  fill(189, 38, 21);
+  textAlign(CENTER, CENTER);
+  text("Yucky!! :(", width / 2, height / 2);
+  fill(190, 50, 50);
+  text("you lose try again", width / 2, height / 1.5);
+  image(imgDead, 600, 100, 300, 300);
+
+  pop();
+}
 // setup() creates the canvas and the flowers in the garden
 function setup() {
   createCanvas(600, 600);
@@ -73,6 +96,9 @@ function setup() {
 // draw()
 // Displays our flowers
 function draw() {
+
+
+
   // displaying the grass
   background(garden.grassColor.r, garden.grassColor.g, garden.grassColor.b);
 
@@ -120,6 +146,12 @@ function displayFlower(flower) {
 function displaySmoke(){
 
 image(imgSmoke,0,0,width,height);
+  
+}
+// check if bees are gone
+
+if (garden.numBees === 0){
+
+ state = 'loss';
 
 }
-
