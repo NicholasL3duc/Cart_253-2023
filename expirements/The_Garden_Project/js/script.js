@@ -25,37 +25,64 @@ let garden = {
     b: 41,
   },
 };
+
+// images used in project
 let imgSmoke;
+let imgTitle;
+let imgWin;
+let imglose;
 
+// timer settings
+let gameOverTimer = 1;
+let gameLength = 60 * 10;
 
+// the current state
+let state = "title";
+
+function title() {
+  push();
+  image(imgTitle, 0, 0, width, height);
+  textSize(30);
+  fill(255, 200, 220);
+  textAlign(CENTER, CENTER);
+ textFont();
+  text("Save The Bees!!", width / 2, height / 6);
+  text("Click to interact as a human", width / 2, height / 1.2);
+  pop();
+}
 function win() {
   push();
+  image(imgWin, 0, 0, width, height);
   textSize(64);
   fill(255, 150, 150);
   textAlign(CENTER, CENTER);
-  text("Yummy!", width / 2, height / 2);
-  text("You Won, Congrats", width / 2, height / 1.5);
-  image(imghappy, 600, 50, 200, 200);
+  text("You saved them!", width / 2, height / 6);
+  textSize(30);
+  text("You let the earth heal, Thank you :)", width / 2, height / 1.1);
   pop();
 }
-function loss() {
+function lose() {
   push();
-  textSize(40);
-  fill(189, 38, 21);
+  image(imglose, 0, 0, width, height);
+  textSize(30);
+  fill(0);
   textAlign(CENTER, CENTER);
-  text("Yucky!! :(", width / 2, height / 2);
-  fill(190, 50, 50);
-  text("you lose try again", width / 2, height / 1.5);
-  image(imgDead, 600, 100, 300, 300);
-
+  text("Dont mess with Nature :(", width / 2, height / 2);
+  fill(0);
+  text("Learn more about how to help the bees ;)", width / 2, height / 1.5);
+  fill (0);
+  text("https://thebeeconservancy.org/")
   pop();
 }
 // setup() creates the canvas and the flowers in the garden
 function setup() {
   createCanvas(600, 600);
 
-   // all of the images used
-   imgSmoke = loadImage('assets/images/smoke.png');
+  // all of the images used
+  imgSmoke = loadImage("assets/images/smoke.png");
+  imgTitle = loadImage("assets/images/TitleImage.jpg");
+  imglose = loadImage("assets/images/lossImage.jpg");
+  imgWin = loadImage("assets/images/WinImage.jpg")
 
   // the creation of the flowers by counting up the number of flowers
   for (let i = 0; i < garden.numflowers; i++) {
@@ -98,38 +125,57 @@ function setup() {
 function draw() {
 
 
-
-  // displaying the grass
-  background(garden.grassColor.r, garden.grassColor.g, garden.grassColor.b);
-
-  // loops through all of the flowers in the array and displays them
-  for (let i = 0; i < garden.flowers.length; i++) {
-    let flower = garden.flowers[i];
-    // this checks if the flower is alive before updating it
-    if (flower.alive) {
-      // the flower is shrinking and displaying it
-      flower.shrink();
-      flower.display();
-    }
+  if (state === `title`) {
+    title();
+  } else if (state === `game`) {
+    game();
+  } else if (state === `win`) {
+    win();
+  } else if (state === `lose`) {
+    lose();
   }
-  // loops all of the bees in the Array and displays them
-  for (let i = 0; i < garden.bees.length; i++) {
-    let bee = garden.bees[i];
-
-    // check if the bee is alive
-    if (bee.alive) {
-      bee.shrink();
-      bee.move();
-
-      for (let j = 0; j < garden.flowers.length; j++){
-        let flower = garden.flowers[j];
-        bee.tryToPollinate(flower)
-      }
-      bee.display();
-    }
-  }
-  displaySmoke();
 }
+
+
+function game() {
+   // NEW! Increase the timer's count by one frame
+   gameOverTimer++;
+   // NEW! Check if we have reached the end of our timer
+   if (gameOverTimer >= gameLength) {
+     // The game is over! So we should check the win/lose state
+     gameOver();
+   }
+// displaying the grass
+background(garden.grassColor.r, garden.grassColor.g, garden.grassColor.b);
+
+// loops through all of the flowers in the array and displays them
+for (let i = 0; i < garden.flowers.length; i++) {
+  let flower = garden.flowers[i];
+  // this checks if the flower is alive before updating it
+  if (flower.alive) {
+    // the flower is shrinking and displaying it
+    flower.shrink();
+    flower.display();
+  }
+}
+// loops all of the bees in the Array and displays them
+for (let i = 0; i < garden.bees.length; i++) {
+  let bee = garden.bees[i];
+
+  // check if the bee is alive
+  if (bee.alive) {
+    bee.shrink();
+    bee.move();
+
+    for (let j = 0; j < garden.flowers.length; j++) {
+      let flower = garden.flowers[j];
+      bee.tryToPollinate(flower);
+    }
+    bee.display();
+  }
+}
+displaySmoke();
+
 // displays the flowers onto the canvas
 function displayFlower(flower) {
   push();
@@ -143,15 +189,25 @@ function displayFlower(flower) {
   ellipse(flower.x, flower.y, flower.size);
   pop();
 }
-function displaySmoke(){
-
-image(imgSmoke,0,0,width,height);
-  
+function displaySmoke() {
+  image(imgSmoke, 0, 0, width, height);
 }
 // check if bees are gone
 
-if (garden.numBees === 0){
+// if (garden.numBees === 0) {
+//   state = "lose";
+// }
+}
+// game over function but the good ending
+function gameOver(){
+  if (gameOverTimer >= gameLength){
+    state = 'win';
+  }
 
- state = 'loss';
-
+}
+// transition from title to sim
+function mousePressed() {
+  if (state === "title") {
+    state = "game";
+  }
 }
