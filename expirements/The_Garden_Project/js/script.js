@@ -25,7 +25,11 @@ let garden = {
     b: 41,
   },
 };
-
+let trash = {
+  x: 250,
+  y: 250,
+  size: 150,
+};
 // images used in project
 let imgSmoke;
 let imgTitle;
@@ -33,9 +37,14 @@ let imgWin;
 let imglose;
 let imgTrash;
 
+imgTrash === trash;
+
 // timer settings
 let gameOverTimer = 1;
 let gameLength = 60 * 10;
+// second timer
+let timer = 1;
+let timerLength = 60 * 10;
 
 // the current state
 let state = "title";
@@ -48,7 +57,7 @@ function title() {
   textAlign(CENTER, CENTER);
   textFont();
   text("Save The Bees!!", width / 2, height / 6);
-  text("Click to interact ", width / 2, height / 1.2);
+  text("Click SPACE to start ", width / 2, height / 1.2);
   pop();
 }
 function win() {
@@ -121,10 +130,10 @@ function setup() {
     garden.bees.push(bee);
   }
 }
-
 // draw()
 // Displays our flowers
 function draw() {
+  
   if (state === `title`) {
     title();
   } else if (state === `game`) {
@@ -137,6 +146,11 @@ function draw() {
 }
 
 function game() {
+  imgTrash === trash;
+  function trashDropped() {}
+  // if (trashDropped) {
+  //   image(imgTrash, trash.x, trash.y, trash.size, trash.size);
+  // }
   // this Increases the timer's count
   gameOverTimer++;
   // checks if the timer is done
@@ -144,6 +158,14 @@ function game() {
     // The game is over!
     gameOver();
   }
+  // this Increases the timer's count
+  timer++;
+  // checks if the timer is done
+  if (timer >= timerLength) {
+    // The game is over!
+    gameLose();
+  }
+
   // displaying the grass
   background(garden.grassColor.r, garden.grassColor.g, garden.grassColor.b);
 
@@ -173,6 +195,7 @@ function game() {
       bee.display();
     }
   }
+
   displaySmoke();
 
   // displays the flowers onto the canvas
@@ -192,15 +215,22 @@ function game() {
     image(imgSmoke, 0, 0, width, height);
   }
 
-  function addTrash() {}
 
 }
-function GameLose() {
-  if (numBees <= 0) {
+
+
+function displayTrash(){
+
+  image(imgTrash, trash.x, trash.y, trash.size, trash.size);
+}
+
+
+function gameLose() {
+  if ((trashDropped = true)) {
+    startTimer()
     state = "lose";
   }
 }
-
 // game over function but the good ending
 function gameOver() {
   if (gameOverTimer >= gameLength) {
@@ -208,8 +238,45 @@ function gameOver() {
   }
 }
 // transition from title to sim
-function mousePressed() {
-  if (state === "title") {
+function keyPressed() {
+  if (keyCode === 32) {
+    state === "title";
+    {
+      state = "game";
+    }
+  }
+}
+
+// Display the trash if dropped
+function trashDropped() {
+  if (trashDropped) {
+    image(imgTrash, trash.x, trash.y, trash.size, trash.size);
+  }
+}
+function startTimer() {
+  clearInterval(gameOverTimer);
+  timer = setInterval(lose, 5000); // Change state every 5 seconds
+}
+
+function changeState() {
+  if (state === "game") {
+    state = "lose";
+  } else {
     state = "game";
   }
 }
+
+function mouseClicked() {
+  // if (trashDropped) {
+  image(imgTrash, trash.x, trash.y, trash.size, trash.size);
+  trash.x = mouseX;
+  trash.y = mouseY;
+  trashDropped = true;
+  startTimer();
+  // }
+}
+
+// if (trashDropped) {
+//   image(imgTrash, trash.x, trash.y, trash.size, trash.size);
+// }
+// imgTrash === trash;
