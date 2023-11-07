@@ -28,7 +28,7 @@ let garden = {
 let trash = {
   x: 250,
   y: 250,
-  size: 150,
+  size: 100,
 };
 // images used in project
 let imgSmoke;
@@ -43,7 +43,7 @@ imgTrash === trash;
 let gameOverTimer = 1;
 let gameLength = 60 * 10;
 // second timer
-let timer = 1;
+let timer = 2;
 let timerLength = 60 * 10;
 
 // the current state
@@ -77,11 +77,11 @@ function lose() {
   textSize(30);
   fill(0);
   textAlign(CENTER, CENTER);
-  text("Dont mess with Nature :(", width / 2, height / 2);
+  text("Dont mess with Nature :(", width / 2, height / 5.5);
   fill(0);
-  text("Learn more about how to help the bees ;)", width / 2, height / 1.5);
+  text("Learn more about how to help the bees ;)", width / 2, height / 1.3);
   fill(0);
-  text("https://thebeeconservancy.org/");
+  text("https://thebeeconservancy.org/", width / 2, height / 1.2);
   pop();
 }
 // setup() creates the canvas and the flowers in the garden
@@ -130,41 +130,45 @@ function setup() {
     garden.bees.push(bee);
   }
 }
+
 // draw()
 // Displays our flowers
 function draw() {
-  
   if (state === `title`) {
     title();
   } else if (state === `game`) {
     game();
+    // } else if (state === `gameLose`) {
+    //   gameLose();
   } else if (state === `win`) {
     win();
   } else if (state === `lose`) {
     lose();
   }
 }
-
+// transition from title to sim
+function keyPressed() {
+  if (keyCode === 32) {
+    state === "title";
+    {
+      state = "game";
+    }
+  }
+}
+function time() {
+  if ((state = "game")) {
+    // this Increases the timer's count
+    gameOverTimer++;
+    // checks if the timer is done
+    if (gameOverTimer >= gameLength) {
+      // The game is over!
+      gameOver();
+    }
+  } else state = "";
+}
 function game() {
   imgTrash === trash;
-  function trashDropped() {}
-  // if (trashDropped) {
-  //   image(imgTrash, trash.x, trash.y, trash.size, trash.size);
-  // }
-  // this Increases the timer's count
-  gameOverTimer++;
-  // checks if the timer is done
-  if (gameOverTimer >= gameLength) {
-    // The game is over!
-    gameOver();
-  }
-  // this Increases the timer's count
-  timer++;
-  // checks if the timer is done
-  if (timer >= timerLength) {
-    // The game is over!
-    gameLose();
-  }
+  
 
   // displaying the grass
   background(garden.grassColor.r, garden.grassColor.g, garden.grassColor.b);
@@ -197,38 +201,43 @@ function game() {
   }
 
   displaySmoke();
+  checkTrash();
 
   // displays the flowers onto the canvas
-  function displayFlower(flower) {
-    push();
-    strokeWeight(flower.stemThickness);
-    stroke(flower.stemColor.r, flower.stemColor.g, flower.stemColor.b);
-    line(flower.x, flower.y, flower.x, flower.y + flower.stemLength);
-    // the heavy outline for the flower
-    strokeWeight(flower.petalThickness);
-    fill(flower.centerColor.r, flower.centerColor.g, flower.centerColor.b);
-    stroke(flower.petalColor.r, flower.petalColor.g, flower.petalColor.b);
-    ellipse(flower.x, flower.y, flower.size);
-    pop();
-  }
   function displaySmoke() {
     image(imgSmoke, 0, 0, width, height);
   }
+  function checkTrash() {
+    if ((trashDropped = true));
+    {
+      // startTimer(timer);
+    }
+  }
 
-
+  mouseClicked();
 }
 
+function gameLose() {
+  // console.log(message)
 
-function displayTrash(){
+  trashDropped = true;
+  startTimer();
+  if (timer >= timerLength) {
+    state = "lose";
+  }
+}
 
+function trashDropped() {
   image(imgTrash, trash.x, trash.y, trash.size, trash.size);
 }
 
-
-function gameLose() {
-  if ((trashDropped = true)) {
-    startTimer()
-    state = "lose";
+function startTimer() {
+  // this Increases the timer's count
+  timer++;
+  // checks if the timer is done
+  if (timer >= timerLength) {
+    // The game is over!
+    gameLose();
   }
 }
 // game over function but the good ending
@@ -237,46 +246,15 @@ function gameOver() {
     state = "win";
   }
 }
-// transition from title to sim
-function keyPressed() {
-  if (keyCode === 32) {
-    state === "title";
-    {
-      state = "game";
-    }
-  }
-}
-
-// Display the trash if dropped
-function trashDropped() {
-  if (trashDropped) {
-    image(imgTrash, trash.x, trash.y, trash.size, trash.size);
-  }
-}
-function startTimer() {
-  clearInterval(gameOverTimer);
-  timer = setInterval(lose, 5000); // Change state every 5 seconds
-}
-
-function changeState() {
-  if (state === "game") {
-    state = "lose";
-  } else {
-    state = "game";
-  }
-}
 
 function mouseClicked() {
-  // if (trashDropped) {
-  image(imgTrash, trash.x, trash.y, trash.size, trash.size);
-  trash.x = mouseX;
-  trash.y = mouseY;
-  trashDropped = true;
-  startTimer();
-  // }
+  rect(mouseX, mouseY, 33, 33);
+  image(imgTrash, mouseX, mouseY, trash.size, trash.size);
+  // mouseX = trash.x;
+  // mouseY = trash.y;
 }
+// function movement(){
+//   mouseX = trash.x
+//     mouseY = trash.y
 
-// if (trashDropped) {
-//   image(imgTrash, trash.x, trash.y, trash.size, trash.size);
 // }
-// imgTrash === trash;
