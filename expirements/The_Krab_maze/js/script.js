@@ -641,7 +641,7 @@ function house() {
 }
 function mousePressed() {
   if (state === "title") {
-    state = "stage2";
+    state = "simulation";
   }
 }
 
