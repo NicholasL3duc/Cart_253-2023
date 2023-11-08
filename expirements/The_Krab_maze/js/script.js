@@ -219,8 +219,7 @@ let startWall = {
     y: 150,
     w: 700,
     h: 50,
-
-  }
+  },
 };
 let state = "title";
 
@@ -661,8 +660,8 @@ function checkOverlap2() {
   ) {
     state = "loss";
   }
-//   ending wall
-if (
+  //   ending wall
+  if (
     Krab.x + Krab.w > startWall.wall2.x &&
     Krab.x < startWall.wall2.x + startWall.wall2.w &&
     Krab.y + Krab.h > startWall.wall2.y &&
@@ -700,13 +699,23 @@ function display2() {
   push();
   noStroke();
   fill(224, 222, 159);
-  rect(startWall.wall1.x, startWall.wall1.y, startWall.wall1.h, startWall.wall1.w);
+  rect(
+    startWall.wall1.x,
+    startWall.wall1.y,
+    startWall.wall1.h,
+    startWall.wall1.w
+  );
   pop();
   // ending wall
   push();
   noStroke();
   fill(224, 222, 159);
-  rect(startWall.wall2.x, startWall.wall2.y, startWall.wall2.h, startWall.wall2.w);
+  rect(
+    startWall.wall2.x,
+    startWall.wall2.y,
+    startWall.wall2.h,
+    startWall.wall2.w
+  );
   pop();
   // wall 1 display
   push();
