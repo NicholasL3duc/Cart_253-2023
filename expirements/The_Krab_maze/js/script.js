@@ -207,6 +207,21 @@ let colorWall = {
     h: 90,
   },
 };
+let startWall = {
+  wall1: {
+    x: 200,
+    y: 0,
+    w: 700,
+    h: 50,
+  },
+  wall2: {
+    x: 1150,
+    y: 150,
+    w: 700,
+    h: 50,
+
+  }
+};
 let state = "title";
 
 // the images used
@@ -525,14 +540,14 @@ function checkOverlap() {
     state = "loss";
   }
   //over lap check for wall 6
-//   if (
-//     Krab.x + Krab.w > waterMaze.wall6.x &&
-//     Krab.x < waterMaze.wall6.x + waterMaze.wall6.w &&
-//     Krab.y + Krab.h > waterMaze.wall6.y &&
-//     Krab.y < waterMaze.wall6.y + waterMaze.wall6.h
-//   ) {
-//     state = "loss";
-//   }
+  //   if (
+  //     Krab.x + Krab.w > waterMaze.wall6.x &&
+  //     Krab.x < waterMaze.wall6.x + waterMaze.wall6.w &&
+  //     Krab.y + Krab.h > waterMaze.wall6.y &&
+  //     Krab.y < waterMaze.wall6.y + waterMaze.wall6.h
+  //   ) {
+  //     state = "loss";
+  //   }
   //over lap check for wall 7
   if (
     Krab.x + Krab.w > waterMaze.wall7.x &&
@@ -626,38 +641,73 @@ function house() {
 }
 function mousePressed() {
   if (state === "title") {
-    state = "simulation";
+    state = "stage2";
   }
 }
 
 function stage2() {
   // checkOffscreen2();
-   checkOverlap2();
+  checkOverlap2();
   display2();
   controlUser();
 }
 function checkOverlap2() {
-    if (
-        Krab.x + Krab.w > colorWall.Wall1.x &&
-        Krab.x < colorWall.Wall1.x + colorWall.Wall1.w &&
-        Krab.y + Krab.h > colorWall.Wall1.y &&
-        Krab.y < colorWall.Wall1.y + colorWall.Wall1.h
-      ) {
-        state = "loss";
-      }
-
-
-
+  // starting wall
+  if (
+    Krab.x + Krab.w > startWall.wall1.x &&
+    Krab.x < startWall.wall1.x + startWall.wall1.w &&
+    Krab.y + Krab.h > startWall.wall1.y &&
+    Krab.y < startWall.wall1.y + startWall.wall1.h
+  ) {
+    state = "loss";
+  }
+//   ending wall
+if (
+    Krab.x + Krab.w > startWall.wall2.x &&
+    Krab.x < startWall.wall2.x + startWall.wall2.w &&
+    Krab.y + Krab.h > startWall.wall2.y &&
+    Krab.y < startWall.wall2.y + startWall.wall2.h
+  ) {
+    state = "loss";
+  }
+  // wall 1 overlap
+  if (
+    Krab.x + Krab.w > colorWall.Wall1.x &&
+    Krab.x < colorWall.Wall1.x + colorWall.Wall1.w &&
+    Krab.y + Krab.h > colorWall.Wall1.y &&
+    Krab.y < colorWall.Wall1.y + colorWall.Wall1.h
+  ) {
+    state = "loss";
+  }
+  // wall 2 overlap
+  if (
+    Krab.x + Krab.w > colorWall.Wall2.x &&
+    Krab.x < colorWall.Wall2.x + colorWall.Wall2.w &&
+    Krab.y + Krab.h > colorWall.Wall2.y &&
+    Krab.y < colorWall.Wall2.y + colorWall.Wall2.h
+  ) {
+    state = "loss";
+  }
 }
-
 
 function display2() {
   // krab display
   image(imgKrab, Krab.x, Krab.y, Krab.size, Krab.size);
   // construction image
-  image(imgConstruct, 250, 250, 900, 500);
+  image(imgConstruct, 250, 200, 900, 500);
 
-
+  // starting wall
+  push();
+  noStroke();
+  fill(224, 222, 159);
+  rect(startWall.wall1.x, startWall.wall1.y, startWall.wall1.h, startWall.wall1.w);
+  pop();
+  // ending wall
+  push();
+  noStroke();
+  fill(224, 222, 159);
+  rect(startWall.wall2.x, startWall.wall2.y, startWall.wall2.h, startWall.wall2.w);
+  pop();
   // wall 1 display
   push();
   noStroke();
@@ -727,6 +777,4 @@ function display2() {
     colorWall.Wall6.h
   );
   pop();
-
 }
-
