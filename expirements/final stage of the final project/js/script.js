@@ -8,18 +8,18 @@
 
 "use strict";
 
-/**
- * Description of preload
-*/
-function preload() {
-
-}
+let notes = [ 60,62,64,65,67,69,71];
+let osc
 
 
 /**
  * Description of setup
 */
 function setup() {
+createCanvas(1400, 850)
+osc = new p5.triOcs();
+osc.start();
+osc.amp(0)
 
 }
 
