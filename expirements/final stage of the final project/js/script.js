@@ -33,4 +33,19 @@ function playNote(note, duration) {
 /**
  * Description of draw()
  */
-function draw() {}
+function draw() {
+  let w = width / notes.length;
+  for (let i = 0; i < notes.length; i++) {
+    let x = i * w;
+    if (mouseX > x && mouseX < x + w && mouseY < height) {
+      if (mouseIsPressed) {
+        fill(113, 166, 222);
+      } else {
+        fill(49, 46, 148);
+      }
+    } else {
+      fill(200);
+    }
+    rect(x, 0, w - 1, height - 1);
+  }
+}
