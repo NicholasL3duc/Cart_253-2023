@@ -12,13 +12,13 @@
  * Description of preload
  */
 
-//Krab object
-let Krab = {
+//krab object
+let krab = {
   x: 20,
   y: 20,
   w: 30,
   h: 10,
-  size: 100,
+  size: 80,
   vx: 0,
   vy: 0,
   speed: 3.5,
@@ -230,8 +230,8 @@ let imgOctopus;
 let imgCoral;
 let imgBubbles;
 let imgsoup;
-let imgKrab;
-let imgBabyKrab;
+let imgkrab;
+let imgBabykrab;
 let imgConstruct;
 function preload() {
   imgHouse = loadImage("assets/images/House.jpg");
@@ -240,7 +240,7 @@ function preload() {
   imgCoral = loadImage("assets/images/coral.png");
   imgBubbles = loadImage("assets/images/bubbles.png");
   imgsoup = loadImage("assets/images/soup.png");
-  imgKrab = loadImage("assets/images/Krab.webp");
+  imgkrab = loadImage("assets/images/krab.webp");
   imgConstruct = loadImage("assets/images/constuct.png");
 }
 
@@ -316,7 +316,7 @@ function loss() {
   textSize(40);
   fill(189, 38, 21);
   textAlign(CENTER, CENTER);
-  text("Krab Soup For You :(", width / 2, height / 2);
+  text("krab Soup For You :(", width / 2, height / 2);
   image(imgsoup, 250, 250, 250, 250);
   pop();
 }
@@ -337,35 +337,35 @@ function simulation() {
   checkOverlapshark();
   house();
 }
-//Krab Movements
+//krab Movements
 function controlUser() {
   if (keyIsDown(87)) {
     //moving using the W key
-    Krab.vy = -Krab.speed;
+    krab.vy = -krab.speed;
   } else if (keyIsDown(83)) {
     //moving using the W key
-    Krab.vy = Krab.speed;
+    krab.vy = krab.speed;
   } else {
-    Krab.vy = 0;
+    krab.vy = 0;
   }
 
   if (keyIsDown(68)) {
-    Krab.vx = Krab.speed;
+    krab.vx = krab.speed;
   } else if (keyIsDown(65)) {
-    Krab.vx = -Krab.speed;
+    krab.vx = -krab.speed;
   } else {
-    Krab.vx = 0;
+    krab.vx = 0;
   }
-  Krab.x += Krab.vx;
-  Krab.y += Krab.vy;
+  krab.x += krab.vx;
+  krab.y += krab.vy;
 }
 
 function display() {
-  //   // Krab display
+  //   // krab display
 
-  // display for Krab
+  // display for krab
   push();
-  image(imgKrab, Krab.x, Krab.y, Krab.size, Krab.size);
+  image(imgkrab, krab.x, krab.y, krab.size, krab.size);
   pop();
 
   // water walls
@@ -458,24 +458,24 @@ function display() {
 
 // check is crab touches borders
 function checkOffscreen() {
-  // check if the Krab is long gone
-  if (Krab.x < 0 || Krab.x > width || Krab.y < 0 || Krab.y > height) {
+  // check if the krab is long gone
+  if (krab.x < 0 || krab.x > width || krab.y < 0 || krab.y > height) {
     // loss ending 1
     state = "loss";
   }
 }
 function checkOverlap() {
   // getting the shell
-  let k = dist(Krab.x, Krab.y, shell.x, shell.y);
-  if (k < Krab.size / 4 + shell.size / 4) {
+  let k = dist(krab.x, krab.y, shell.x, shell.y);
+  if (k < krab.size / 4 + shell.size / 4) {
     shell.active = false;
     octopus.active = false;
   }
   // overlap for the octopus
   if (
-    Krab.x > octopus.x &&
+    krab.x > octopus.x &&
     octopus.active &&
-    Krab.y > octopus.y &&
+    krab.y > octopus.y &&
     octopus.active
   ) {
     state = "loss";
@@ -495,112 +495,112 @@ function checkOverlap() {
 
   //over lap check for wall 1
   if (
-    Krab.x + Krab.w > waterMaze.wall1.x &&
-    Krab.x < waterMaze.wall1.x + waterMaze.wall1.w &&
-    Krab.y + Krab.h > waterMaze.wall1.y &&
-    Krab.y < waterMaze.wall1.y + waterMaze.wall1.h
+    krab.x + krab.w > waterMaze.wall1.x  &&
+    krab.x < waterMaze.wall1.x + waterMaze.wall1.w &&
+    krab.y + krab.h > waterMaze.wall1.y &&
+    krab.y < waterMaze.wall1.y + waterMaze.wall1.h
   ) {
     state = "loss";
   }
   //over lap check for wall 2
   if (
-    Krab.x + Krab.w > waterMaze.wall2.x &&
-    Krab.x < waterMaze.wall2.x + waterMaze.wall2.w &&
-    Krab.y + Krab.h > waterMaze.wall2.y &&
-    Krab.y < waterMaze.wall2.y + waterMaze.wall2.h
+    krab.x + krab.w > waterMaze.wall2.x &&
+    krab.x < waterMaze.wall2.x + waterMaze.wall2.w &&
+    krab.y + krab.h > waterMaze.wall2.y &&
+    krab.y < waterMaze.wall2.y + waterMaze.wall2.h
   ) {
     state = "loss";
   }
   //over lap check for wall 3
   if (
-    Krab.x + Krab.w > waterMaze.wall3.x &&
-    Krab.x < waterMaze.wall3.x + waterMaze.wall3.w &&
-    Krab.y + Krab.h > waterMaze.wall3.y &&
-    Krab.y < waterMaze.wall3.y + waterMaze.wall3.h
+    krab.x + krab.w > waterMaze.wall3.x &&
+    krab.x < waterMaze.wall3.x + waterMaze.wall3.w &&
+    krab.y + krab.h > waterMaze.wall3.y &&
+    krab.y < waterMaze.wall3.y + waterMaze.wall3.h
   ) {
     state = "loss";
   }
   //over lap check for wall 4
   if (
-    Krab.x + Krab.w > waterMaze.wall4.x &&
-    Krab.x < waterMaze.wall4.x + waterMaze.wall4.w &&
-    Krab.y + Krab.h > waterMaze.wall4.y &&
-    Krab.y < waterMaze.wall4.y + waterMaze.wall4.h
+    krab.x + krab.w > waterMaze.wall4.x &&
+    krab.x < waterMaze.wall4.x + waterMaze.wall4.w &&
+    krab.y + krab.h > waterMaze.wall4.y &&
+    krab.y < waterMaze.wall4.y + waterMaze.wall4.h
   ) {
     state = "loss";
   }
   //over lap check for wall 5
   if (
-    Krab.x + Krab.w > waterMaze.wall5.x &&
-    Krab.x < waterMaze.wall5.x + waterMaze.wall5.w &&
-    Krab.y + Krab.h > waterMaze.wall5.y &&
-    Krab.y < waterMaze.wall5.y + waterMaze.wall5.h
+    krab.x + krab.w > waterMaze.wall5.x &&
+    krab.x < waterMaze.wall5.x + waterMaze.wall5.w &&
+    krab.y + krab.h > waterMaze.wall5.y &&
+    krab.y < waterMaze.wall5.y + waterMaze.wall5.h
   ) {
     state = "loss";
   }
   //over lap check for wall 6
   //   if (
-  //     Krab.x + Krab.w > waterMaze.wall6.x &&
-  //     Krab.x < waterMaze.wall6.x + waterMaze.wall6.w &&
-  //     Krab.y + Krab.h > waterMaze.wall6.y &&
-  //     Krab.y < waterMaze.wall6.y + waterMaze.wall6.h
+  //     krab.x + krab.w > waterMaze.wall6.x &&
+  //     krab.x < waterMaze.wall6.x + waterMaze.wall6.w &&
+  //     krab.y + krab.h > waterMaze.wall6.y &&
+  //     krab.y < waterMaze.wall6.y + waterMaze.wall6.h
   //   ) {
   //     state = "loss";
   //   }
   //over lap check for wall 7
   if (
-    Krab.x + Krab.w > waterMaze.wall7.x &&
-    Krab.x < waterMaze.wall7.x + waterMaze.wall7.w &&
-    Krab.y + Krab.h > waterMaze.wall7.y &&
-    Krab.y < waterMaze.wall7.y + waterMaze.wall7.h
+    krab.x + krab.w > waterMaze.wall7.x &&
+    krab.x < waterMaze.wall7.x + waterMaze.wall7.w &&
+    krab.y + krab.h > waterMaze.wall7.y &&
+    krab.y < waterMaze.wall7.y + waterMaze.wall7.h
   ) {
     state = "loss";
   }
   // over lap check for sand 1
-  let d1 = dist(Krab.x, Krab.y, sand.bank1.x, sand.bank1.y);
-  if (d1 < Krab.size / 2 + sand.bank1.size / 2) {
+  let d1 = dist(krab.x, krab.y, sand.bank1.x, sand.bank1.y);
+  if (d1 < krab.size / 2 + sand.bank1.size / 2) {
     state = "loss";
   }
   // over lap check for sand 2
-  let d2 = dist(Krab.x, Krab.y, sand.bank2.x, sand.bank2.y);
-  if (d2 < Krab.size / 2 + sand.bank2.size / 2) {
+  let d2 = dist(krab.x, krab.y, sand.bank2.x, sand.bank2.y);
+  if (d2 < krab.size / 2 + sand.bank2.size / 2) {
     state = "loss";
   }
   // over lap check for sand 3
-  let d3 = dist(Krab.x, Krab.y, sand.bank3.x, sand.bank3.y);
-  if (d3 < Krab.size / 2 + sand.bank3.size / 2) {
+  let d3 = dist(krab.x, krab.y, sand.bank3.x, sand.bank3.y);
+  if (d3 < krab.size / 2 + sand.bank3.size / 2) {
     state = "loss";
   }
   // over lap check for sand 4
-  let d4 = dist(Krab.x, Krab.y, sand.bank4.x, sand.bank4.y);
-  if (d4 < Krab.size / 2 + sand.bank4.size / 2) {
+  let d4 = dist(krab.x, krab.y, sand.bank4.x, sand.bank4.y);
+  if (d4 < krab.size / 2 + sand.bank4.size / 2) {
     state = "loss";
   }
   // over lap check for sand 5
-  let d5 = dist(Krab.x, Krab.y, sand.bank5.x, sand.bank5.y);
-  if (d5 < Krab.size / 2 + sand.bank5.size / 2) {
+  let d5 = dist(krab.x, krab.y, sand.bank5.x, sand.bank5.y);
+  if (d5 < krab.size / 2 + sand.bank5.size / 2) {
     state = "loss";
   }
   // over lap check for sand 6
-  let d6 = dist(Krab.x, Krab.y, sand.bank6.x, sand.bank6.y);
-  if (d6 < Krab.size / 2 + sand.bank6.size / 2) {
+  let d6 = dist(krab.x, krab.y, sand.bank6.x, sand.bank6.y);
+  if (d6 < krab.size / 2 + sand.bank6.size / 2) {
     state = "loss";
   }
   //over lap check for sharks
 
   // overlap shark 1
-  let s1 = dist(Krab.x, Krab.y, shark.b1.x, shark.b1.y);
-  if (s1 < Krab.size / 2 + shark.b1.size / 2) {
+  let s1 = dist(krab.x, krab.y, shark.b1.x, shark.b1.y);
+  if (s1 < krab.size / 2 + shark.b1.size / 2) {
     state = "loss";
   }
   // overlap shark 2
-  let s2 = dist(Krab.x, Krab.y, shark.b2.x, shark.b2.y);
-  if (s2 < Krab.size / 2 + shark.b2.size / 2) {
+  let s2 = dist(krab.x, krab.y, shark.b2.x, shark.b2.y);
+  if (s2 < krab.size / 2 + shark.b2.size / 2) {
     state = "loss";
   }
   // overlap shark 3
-  let s3 = dist(Krab.x, Krab.y, shark.b3.x, shark.b3.y);
-  if (s3 < Krab.size / 2 + shark.b3.size / 2) {
+  let s3 = dist(krab.x, krab.y, shark.b3.x, shark.b3.y);
+  if (s3 < krab.size / 2 + shark.b3.size / 2) {
     state = "loss";
   }
 }
@@ -633,8 +633,8 @@ function checkOverlapshark() {
 }
 // the ending goal of the cave
 function house() {
-  let h1 = dist(Krab.x, Krab.y, home.x, home.y);
-  if (h1 < home.size / 2 + Krab.size / 2) {
+  let h1 = dist(krab.x, krab.y, home.x, home.y);
+  if (h1 < home.size / 2 + krab.size / 2) {
     state = "stage2";
   }
 }
@@ -653,37 +653,37 @@ function stage2() {
 function checkOverlap2() {
   // starting wall
   if (
-    Krab.x + Krab.w > startWall.wall1.x &&
-    Krab.x < startWall.wall1.x + startWall.wall1.w &&
-    Krab.y + Krab.h > startWall.wall1.y &&
-    Krab.y < startWall.wall1.y + startWall.wall1.h
+    krab.x + krab.w > startWall.wall1.x &&
+    krab.x < startWall.wall1.x + startWall.wall1.w &&
+    krab.y + krab.h > startWall.wall1.y &&
+    krab.y < startWall.wall1.y + startWall.wall1.h
   ) {
     state = "loss";
   }
   //   ending wall
   if (
-    Krab.x + Krab.w > startWall.wall2.x &&
-    Krab.x < startWall.wall2.x + startWall.wall2.w &&
-    Krab.y + Krab.h > startWall.wall2.y &&
-    Krab.y < startWall.wall2.y + startWall.wall2.h
+    krab.x + krab.w > startWall.wall2.x &&
+    krab.x < startWall.wall2.x + startWall.wall2.w &&
+    krab.y + krab.h > startWall.wall2.y &&
+    krab.y < startWall.wall2.y + startWall.wall2.h
   ) {
     state = "loss";
   }
   // wall 1 overlap
   if (
-    Krab.x + Krab.w > colorWall.Wall1.x &&
-    Krab.x < colorWall.Wall1.x + colorWall.Wall1.w &&
-    Krab.y + Krab.h > colorWall.Wall1.y &&
-    Krab.y < colorWall.Wall1.y + colorWall.Wall1.h
+    krab.x + krab.w > colorWall.Wall1.x &&
+    krab.x < colorWall.Wall1.x + colorWall.Wall1.w &&
+    krab.y + krab.h > colorWall.Wall1.y &&
+    krab.y < colorWall.Wall1.y + colorWall.Wall1.h
   ) {
     state = "loss";
   }
   // wall 2 overlap
   if (
-    Krab.x + Krab.w > colorWall.Wall2.x &&
-    Krab.x < colorWall.Wall2.x + colorWall.Wall2.w &&
-    Krab.y + Krab.h > colorWall.Wall2.y &&
-    Krab.y < colorWall.Wall2.y + colorWall.Wall2.h
+    krab.x + krab.w > colorWall.Wall2.x &&
+    krab.x < colorWall.Wall2.x + colorWall.Wall2.w &&
+    krab.y + krab.h > colorWall.Wall2.y &&
+    krab.y < colorWall.Wall2.y + colorWall.Wall2.h
   ) {
     state = "loss";
   }
@@ -691,10 +691,8 @@ function checkOverlap2() {
 
 function display2() {
   // krab display
-  image(imgKrab, Krab.x, Krab.y, Krab.size, Krab.size);
-  // construction image
-  image(imgConstruct, 250, 200, 900, 500);
-
+  image(imgkrab, krab.x, krab.y, krab.size, krab.size);
+ 
   // starting wall
   push();
   noStroke();
