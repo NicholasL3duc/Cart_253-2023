@@ -16,12 +16,12 @@ let osc;
  */
 function setup() {
   createCanvas(1400, 850);
-  osc = new p5.triOcs();
+  osc = new p5.TriOsc();
   osc.start();
   osc.amp(0);
 }
 function playNote(note, duration) {
-  osc.freq(miditofreq(note));
+  osc.freq(midiToFreq(note));
   osc.fade(0.5, 0.2);
   if (duration) {
     setTimeout(function () {
@@ -48,4 +48,11 @@ function draw() {
     }
     rect(x, 0, w - 1, height - 1);
   }
+}
+function mousePressed() {
+  let key = floor(map(mouseX, 0, width, 0, notes.length));
+  playNote(notes[key]);
+}
+function mouseReleased() {
+  osc.fade(0, 0.5);
 }
