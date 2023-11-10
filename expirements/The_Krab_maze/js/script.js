@@ -164,47 +164,54 @@ let octopus = {
   active: true,
 };
 
+let babyKrab2 = {
+  x: undefined,
+  y: 0,
+  size: 150,
+  active: true,
+};
+
 let mine = {
   x: undefined,
   y: 0,
   size: 150,
 };
 let colorWall = {
-  Wall1: {
+  wall1: {
     x: 550,
     y: 200,
     w: 300,
-    h: 90,
+    h: 20,
   },
-  Wall2: {
+  wall2: {
     x: 250,
     y: 200,
     w: 300,
-    h: 90,
+    h: 20,
   },
-  Wall3: {
+  wall3: {
     x: 850,
     y: 200,
     w: 300,
-    h: 90,
+    h: 20,
   },
-  Wall4: {
+  wall4: {
     x: 550,
     y: 500,
     w: 300,
-    h: 90,
+    h: 20,
   },
-  Wall5: {
+  wall5: {
     x: 250,
     y: 500,
     w: 300,
-    h: 90,
+    h: 20,
   },
-  Wall6: {
+  wall6: {
     x: 850,
     y: 500,
     w: 300,
-    h: 90,
+    h: 20,
   },
 };
 let startWall = {
@@ -242,6 +249,7 @@ function preload() {
   imgsoup = loadImage("assets/images/soup.png");
   imgkrab = loadImage("assets/images/krab.webp");
   imgConstruct = loadImage("assets/images/constuct.png");
+  imgBabykrab = loadImage("assets/images/dancing baby krab.gif")
 }
 
 /**
@@ -640,58 +648,20 @@ function house() {
 }
 function mousePressed() {
   if (state === "title") {
-    state = "simulation";
+    state = "ending";
   }
 }
 
 function stage2() {
   // checkOffscreen2();
-  checkOverlap2();
   display2();
+  checkOverlap2();
   controlUser();
-}
-function checkOverlap2() {
-  // starting wall
-  if (
-    krab.x + krab.w > startWall.wall1.x &&
-    krab.x < startWall.wall1.x + startWall.wall1.w &&
-    krab.y + krab.h > startWall.wall1.y &&
-    krab.y < startWall.wall1.y + startWall.wall1.h
-  ) {
-    state = "loss";
-  }
-  //   ending wall
-  if (
-    krab.x + krab.w > startWall.wall2.x &&
-    krab.x < startWall.wall2.x + startWall.wall2.w &&
-    krab.y + krab.h > startWall.wall2.y &&
-    krab.y < startWall.wall2.y + startWall.wall2.h
-  ) {
-    state = "loss";
-  }
-  // wall 1 overlap
-  if (
-    krab.x + krab.w > colorWall.Wall1.x &&
-    krab.x < colorWall.Wall1.x + colorWall.Wall1.w &&
-    krab.y + krab.h > colorWall.Wall1.y &&
-    krab.y < colorWall.Wall1.y + colorWall.Wall1.h
-  ) {
-    state = "loss";
-  }
-  // wall 2 overlap
-  if (
-    krab.x + krab.w > colorWall.Wall2.x &&
-    krab.x < colorWall.Wall2.x + colorWall.Wall2.w &&
-    krab.y + krab.h > colorWall.Wall2.y &&
-    krab.y < colorWall.Wall2.y + colorWall.Wall2.h
-  ) {
-    state = "loss";
-  }
+  babyKrab();
 }
 
 function display2() {
-  // krab display
-  image(imgkrab, krab.x, krab.y, krab.size, krab.size);
+
  
   // starting wall
   push();
@@ -720,10 +690,10 @@ function display2() {
   noStroke();
   fill(159, 222, 100);
   rect(
-    colorWall.Wall1.x,
-    colorWall.Wall1.y,
-    colorWall.Wall1.w,
-    colorWall.Wall1.h
+    colorWall.wall1.x,
+    colorWall.wall1.y,
+    colorWall.wall1.w,
+    colorWall.wall1.h
   );
   pop();
   // wall 2 display
@@ -731,10 +701,10 @@ function display2() {
   noStroke();
   fill(237, 92, 228);
   rect(
-    colorWall.Wall2.x,
-    colorWall.Wall2.y,
-    colorWall.Wall2.w,
-    colorWall.Wall2.h
+    colorWall.wall2.x,
+    colorWall.wall2.y,
+    colorWall.wall2.w,
+    colorWall.wall2.h
   );
   pop();
   // wall 3 display
@@ -742,10 +712,10 @@ function display2() {
   noStroke();
   fill(95, 81, 240);
   rect(
-    colorWall.Wall3.x,
-    colorWall.Wall3.y,
-    colorWall.Wall3.w,
-    colorWall.Wall3.h
+    colorWall.wall3.x,
+    colorWall.wall3.y,
+    colorWall.wall3.w,
+    colorWall.wall3.h
   );
   pop();
 
@@ -754,10 +724,10 @@ function display2() {
   noStroke();
   fill(95, 81, 240);
   rect(
-    colorWall.Wall4.x,
-    colorWall.Wall4.y,
-    colorWall.Wall4.w,
-    colorWall.Wall4.h
+    colorWall.wall4.x,
+    colorWall.wall4.y,
+    colorWall.wall4.w,
+    colorWall.wall4.h
   );
   pop();
 
@@ -766,10 +736,10 @@ function display2() {
   noStroke();
   fill(159, 222, 100);
   rect(
-    colorWall.Wall5.x,
-    colorWall.Wall5.y,
-    colorWall.Wall5.w,
-    colorWall.Wall5.h
+    colorWall.wall5.x,
+    colorWall.wall5.y,
+    colorWall.wall5.w,
+    colorWall.wall5.h
   );
   pop();
 
@@ -778,10 +748,86 @@ function display2() {
   noStroke();
   fill(237, 92, 228);
   rect(
-    colorWall.Wall6.x,
-    colorWall.Wall6.y,
-    colorWall.Wall6.w,
-    colorWall.Wall6.h
+    colorWall.wall6.x,
+    colorWall.wall6.y,
+    colorWall.wall6.w,
+    colorWall.wall6.h
   );
   pop();
+    // krab display
+    image(imgkrab, krab.x, krab.y, krab.size, krab.size);
+}
+function checkOverlap2() {
+  // start and end wall
+  // starting wall
+  if (
+    krab.x + krab.w > startWall.wall1.x  &&
+    krab.x < startWall.wall1.x + startWall.wall1.h &&
+    krab.y + krab.h > startWall.wall1.y &&
+    krab.y < startWall.wall1.y + startWall.wall1.w
+  ) {
+    state = "loss";
+  }
+// ending wall
+if(
+krab.x + krab.w > startWall.wall2.x  &&
+krab.x < startWall.wall2.x + startWall.wall2.h &&
+krab.y + krab.h > startWall.wall2.y &&
+krab.y < startWall.wall2.y + startWall.wall2.w
+) {
+state = "loss";
+}
+
+// the lose colours
+
+// overlap for 1st green and pink
+// green
+if (
+  krab.x + krab.w >colorWall.wall5.x  &&
+  krab.x <colorWall.wall5.x +colorWall.wall5.w &&
+  krab.y + krab.h >colorWall.wall5.y &&
+  krab.y <colorWall.wall5.y +colorWall.wall5.h
+) {
+  state = "loss";
+}
+// pink
+if (
+  krab.x + krab.w >colorWall.wall6.x  &&
+  krab.x <colorWall.wall6.x +colorWall.wall6.w &&
+  krab.y + krab.h >colorWall.wall6.y &&
+  krab.y <colorWall.wall6.y +colorWall.wall6.h
+) {
+  state = "loss";
+}
+
+
+// over lap for the 2nd green and purple
+
+// purple 
+if (
+  krab.x + krab.w >colorWall.wall3.x  &&
+  krab.x <colorWall.wall3.x +colorWall.wall3.w &&
+  krab.y + krab.h >colorWall.wall3.y &&
+  krab.y <colorWall.wall3.y +colorWall.wall3.h
+) {
+  state = "loss";
+}
+// green
+if (
+  krab.x + krab.w >colorWall.wall1.x  &&
+  krab.x <colorWall.wall1.x +colorWall.wall1.w &&
+  krab.y + krab.h >colorWall.wall1.y &&
+  krab.y <colorWall.wall1.y +colorWall.wall1.h
+) {
+  state = "loss";
+}
+
+}
+function babyKrab(){
+  let b2 = dist(krab.x, krab.y, babyKrab2.x, babyKrab2.y);
+  if (b2 < babyKrab2.size / 2 + krab.size / 2) {
+    state = "Ending";
+  }
+
+
 }
