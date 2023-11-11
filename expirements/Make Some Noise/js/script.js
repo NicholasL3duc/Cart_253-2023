@@ -228,6 +228,14 @@ let startWall = {
     h: 50,
   },
 };
+// voice comands
+let mySpeechRec = new p5.SpeechRec();
+mySpeechRec.intermResults = true;
+mySpeechRec.onResults = parseResult;
+mySpeechRec.start();
+mySpeechRec.onEnd = restartRec;
+
+
 let state = "title";
 
 // the images used
@@ -347,25 +355,36 @@ function simulation() {
 }
 //krab Movements
 function controlUser() {
-  if (keyIsDown(87)) {
-    //moving using the W key
-    krab.vy = -krab.speed;
-  } else if (keyIsDown(83)) {
-    //moving using the W key
-    krab.vy = krab.speed;
-  } else {
-    krab.vy = 0;
-  }
+//   if (keyIsDown(87)) {
+//     //moving using the W key
+//     krab.vy = -krab.speed;
+//   } else if (keyIsDown(83)) {
+//     //moving using the W key
+//     krab.vy = krab.speed;
+//   } else {
+//     krab.vy = 0;
+//   }
 
-  if (keyIsDown(68)) {
-    krab.vx = krab.speed;
-  } else if (keyIsDown(65)) {
-    krab.vx = -krab.speed;
-  } else {
-    krab.vx = 0;
-  }
-  krab.x += krab.vx;
-  krab.y += krab.vy;
+//   if (keyIsDown(68)) {
+//     krab.vx = krab.speed;
+//   } else if (keyIsDown(65)) {
+//     krab.vx = -krab.speed;
+//   } else {
+//     krab.vx = 0;
+//   }
+//   krab.x += krab.vx;
+//   krab.y += krab.vy;
+
+
+
+
+
+
+
+
+
+
+
 }
 
 function display() {
