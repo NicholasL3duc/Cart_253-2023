@@ -3,7 +3,7 @@
 // put that code in here.
 // Right now they're all empty because we have no DEFAULT behaviour
 // for a generic state in this program.
-class State {
+ class State {
 
     constructor() {
   
