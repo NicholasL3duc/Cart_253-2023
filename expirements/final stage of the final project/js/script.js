@@ -10,6 +10,13 @@
 
 let notes = [60, 62, 64, 65, 67, 69, 71];
 let osc;
+let piano = {
+    x: 120,
+    y: 200,
+    w: 200,
+    h: 100,
+
+}
 
 /**
  * Description of setup
@@ -34,6 +41,14 @@ function playNote(note, duration) {
  * Description of draw()
  */
 function draw() {
+// the piano
+rect(
+    piano.x,
+    piano.y,
+    piano.w,
+    piano.h
+    )
+
   let w = width / notes.length;
   for (let i = 0; i < notes.length; i++) {
     let x = i * w;
@@ -48,7 +63,14 @@ function draw() {
     }
     rect(x, 0, w - 1, height - 1);
   }
-}
+
+// rect(
+//     piano.x,
+//     piano.y,
+//     piano.w,
+//     piano.h
+//     )
+
 function mousePressed() {
   let key = floor(map(mouseX, 0, width, 0, notes.length));
   playNote(notes[key]);

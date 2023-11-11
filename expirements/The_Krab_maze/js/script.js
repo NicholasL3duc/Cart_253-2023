@@ -256,6 +256,10 @@ function preload() {
  * Description of setup
  */
 function setup() {
+// mic movements for Krab
+mic = new p5.AudioIn();
+mic.start();
+
   // background info
   createCanvas(1400, 850);
   // the positions of my images
@@ -277,6 +281,21 @@ function windowResized() {
  * Description of draw()
  */
 function draw() {
+// mic volume and settings
+xloc += xspeed;
+yloc +=yspeed;
+// the krabs postion when called
+let krabInfo = {
+x: xloc,
+y: yloc,
+};
+krabAry.push(krabInfo); //push the info into the array
+//krab circles based on info stored in the info array
+for (let i = 0; i < krabAry.length; i++) {
+  fill(krabAry[i].col);
+  circle(krabAry[i].x, krabAry[i].y, 20);
+}
+
   // background and function information
   background(11, 139, 230);
 
@@ -347,23 +366,30 @@ function simulation() {
 }
 //krab Movements
 function controlUser() {
-  if (keyIsDown(87)) {
-    //moving using the W key
-    krab.vy = -krab.speed;
-  } else if (keyIsDown(83)) {
-    //moving using the W key
-    krab.vy = krab.speed;
-  } else {
-    krab.vy = 0;
-  }
+  // if (keyIsDown(87)) {
+  //   //moving using the W key
+  //   krab.vy = -krab.speed;
+  // } else if (keyIsDown(83)) {
+  //   //moving using the W key
+  //   krab.vy = krab.speed;
+  // } else {
+  //   krab.vy = 0;
+  // }
 
-  if (keyIsDown(68)) {
-    krab.vx = krab.speed;
-  } else if (keyIsDown(65)) {
-    krab.vx = -krab.speed;
-  } else {
-    krab.vx = 0;
-  }
+  // if (keyIsDown(68)) {
+  //   krab.vx = krab.speed;
+  // } else if (keyIsDown(65)) {
+  //   krab.vx = -krab.speed;
+  // } else {
+  //   krab.vx = 0;
+  // }
+
+
+
+
+
+
+
   krab.x += krab.vx;
   krab.y += krab.vy;
 }
@@ -648,7 +674,7 @@ function house() {
 }
 function mousePressed() {
   if (state === "title") {
-    state = "ending";
+    state = "simulation";
   }
 }
 
