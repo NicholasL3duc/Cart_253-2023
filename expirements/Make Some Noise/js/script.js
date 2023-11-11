@@ -231,10 +231,18 @@ let startWall = {
 // voice comands
 let mySpeechRec = new p5.SpeechRec();
 mySpeechRec.intermResults = true;
-mySpeechRec.onResults = parseResult;
+mySpeechRec.onResults = controlUser;
 mySpeechRec.start();
 mySpeechRec.onEnd = restartRec;
 
+//computer voice
+let computerVoice = new p5.Speech();
+
+//location & speed of the krab with the control in direction
+let krabXloc = 0,
+  krabYloc = 0,
+  krabXspeed = 0,
+  krabYspeed = 0;
 
 let state = "title";
 
@@ -266,6 +274,8 @@ function preload() {
 function setup() {
   // background info
   createCanvas(1400, 850);
+
+
   // the positions of my images
   home.x = 1450 / 2 + home.size / 2;
   home.y = 450 + home.size / 2;
@@ -301,7 +311,13 @@ function draw() {
   } else if (state === "loss") {
     loss();
   }
+
+// updating the x and y of the Krab
+krabXloc += krabXspeed
+krabYloc += krabYspeed
 }
+
+
 
 //all functions used
 function title() {
@@ -375,8 +391,26 @@ function controlUser() {
 //   krab.x += krab.vx;
 //   krab.y += krab.vy;
 
+if (mostRecentWord == "stop"){
 
 
+}
+if (mostRecentWord == "up") {
+    krabXspeed = 0;
+    krabYspeed = -0.2;
+  }
+  if (mostRecentWord == "down") {
+    krabXspeed = 0;
+    krabYspeed = 0.2;
+  }
+  if (mostRecentWord == "left") {
+    krabXspeed = -0.2;
+    krabYspeed = 0;
+  }
+  if (mostRecentWord == "right") {
+    krabXspeed = 0.2;
+    krabYspeed = 0;
+  }
 
 
 
