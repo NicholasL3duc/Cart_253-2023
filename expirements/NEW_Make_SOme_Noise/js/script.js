@@ -256,7 +256,7 @@ function preload() {
   imgCoral = loadImage("assets/images/coral.png");
   imgBubbles = loadImage("assets/images/bubbles.png");
   imgsoup = loadImage("assets/images/soup.png");
-  imgkrab = loadImage("assets/images/krab.png");
+  imgkrab = loadImage("assets/images/Krab.png");
   imgConstruct = loadImage("assets/images/constuct.png");
   imgBabykrab = loadImage("assets/images/dancing baby krab.gif");
   imgCrackS1 = loadImage("assets/images/Crack S1.png");
