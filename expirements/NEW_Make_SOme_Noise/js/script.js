@@ -228,21 +228,46 @@ let krab = {
       h: 50,
     },
   };
+  // curent state
 let state = "simulation";
 
+// speech settings
 let mySpeechRec = new p5.SpeechRec(); // speech recognition object (will prompt for mic access)
 mySpeechRec.onResult = showResult; // bind callback function to trcwhen speech is recognized
 mySpeechRec.continuous = true
 mySpeechRec.interimResults = true
 mySpeechRec.start(); // start listening
 
+// the images used
+let imgDoor;
+let imgseaShell;
+let imgOctopus;
+let imgCoral;
+let imgBubbles;
+let imgsoup;
+let imgkrab;
+let imgBabykrab;
+let imgConstruct;
+let imgCrackS1;
+function preload() {
+  imgDoor = loadImage("assets/images/Door S1.png");
+  imgseaShell = loadImage("assets/images/seaShell.jpg");
+  imgOctopus = loadImage("assets/images/evil octo smirk.webp");
+  imgCoral = loadImage("assets/images/coral.png");
+  imgBubbles = loadImage("assets/images/bubbles.png");
+  imgsoup = loadImage("assets/images/soup.png");
+  imgkrab = loadImage("assets/images/krab.webp");
+  imgConstruct = loadImage("assets/images/constuct.png");
+  imgBabykrab = loadImage("assets/images/dancing baby krab.gif");
+  imgCrackS1 = loadImage("assets/images/Crack S1.png");
+}
 
 function setup() {
   createCanvas(1400, 850);
 
 
 }
-
+// consol showing what i say
 function showResult(){
   console.log(mySpeechRec.resultString); // log the result
 }
@@ -281,8 +306,8 @@ function title() {
       width / 2,
       height / 2
     );
-    // image(imgseaShell, 600, 100, 250, 250);
-    // image(imgOctopus, 450, 450, 500, 400);
+    image(imgseaShell, 600, 100, 250, 250);
+    image(imgOctopus, 450, 450, 500, 400);
     pop();
   }
   function win() {
@@ -291,7 +316,7 @@ function title() {
     fill(255, 150, 150);
     textAlign(CENTER, CENTER);
     text("You Won And Got Home Safe!!", width / 2, height / 2);
-    // image(imgHouse, 600, 500, 250, 250);
+    image(imgDoor, 600, 500, 250, 250);
     pop();
   }
   function loss() {
@@ -300,17 +325,17 @@ function title() {
     fill(189, 38, 21);
     textAlign(CENTER, CENTER);
     text("krab Soup For You :(", width / 2, height / 2);
-    // image(imgsoup, 250, 250, 250, 250);
+    image(imgsoup, 250, 250, 250, 250);
     pop();
   }
   // functions used during simulator
   function simulation() {
-    // image(imgHouse, 1450 / 2, 450, 150, 150);
-    // image(imgseaShell, imgseaShell.x, imgseaShell.y, 250, 250);
-    // image(imgOctopus);
-    // image(imgCoral, 0, 400, 500, 500);
-    // image(imgBubbles, 1100, 50, 300, 300);
-    // image(imgsoup);
+    image(imgDoor, 1450 / 2, 450, 150, 150);
+    image(imgseaShell, imgseaShell.x, imgseaShell.y, 250, 250);
+    image(imgOctopus);
+    image(imgCoral, 0, 400, 500, 500);
+    image(imgBubbles, 1100, 50, 300, 300);
+    image(imgsoup);
   
     checkOffscreen();
     checkOverlap();
@@ -362,8 +387,8 @@ function title() {
   
     // display for krab
     push();
-    // image(imgkrab, krab.x, krab.y, krab.size, krab.size);
     rect(krab.x, krab.y, krab.size, krab.size)
+    image(imgkrab, krab.x, krab.y, krab.size, krab.size);
     pop();
   
     // water walls
