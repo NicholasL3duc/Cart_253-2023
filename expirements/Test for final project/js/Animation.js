@@ -1,5 +1,5 @@
 // Animation
-// Handles the actual animation sequence of the program. A krab
+// Handles the actual animation sequence of the program. A this.krab
 // moves from left to right across the screen. When it reaches the right
 // side the program will switch to the Ending state.
 
@@ -13,7 +13,7 @@
 class Animation extends State {
 
     // Acts as the setup() of the state, called when the
-    // state is created. Creates a krab object and sets its
+    // state is created. Creates a this.krab object and sets its
     // velocity.
     constructor() {
       // We should always call the superclass constructor
@@ -21,7 +21,7 @@ class Animation extends State {
       // later!
       super();
   
-      let krab = {
+    this.krab = {
         x: 20,
         y: 20,
         w: 30,
@@ -62,30 +62,30 @@ class Animation extends State {
       this.krab.y = this.krab.y + this.krab.vy;
       if (keyIsDown(87)) {
         //moving using the W key
-        Krab.vy = -Krab.speed;
+        this.krab.vy = -this.krab.speed;
       } else if (keyIsDown(83)) {
         //moving using the W key
-        Krab.vy = Krab.speed;
+        this.krab.vy = this.krab.speed;
       } else {
-        Krab.vy = 0;
+        this.krab.vy = 0;
       }
     
       if (keyIsDown(68)) {
-        Krab.vx = Krab.speed;
+        this.krab.vx = this.krab.speed;
       } else if (keyIsDown(65)) {
-        Krab.vx = -Krab.speed;
+        this.krab.vx = -this.krab.speed;
       } else {
-        Krab.vx = 0;
+        this.krab.vx = 0;
       }
-      Krab.x += Krab.vx;
-      Krab.y += Krab.vy;
+      this.krab.x += this.krab.vx;
+      this.krab.y += this.krab.vy;
     }
   
     // display()
-    // Displays the krab as an ellipse on the canvas
+    // Displays the this.krab as an ellipse on the canvas
     display() {
       push();
-      ellipse(this.krab.x, this.krab.y, this.krab.size,this.krab.size);
+      ellipse(this.this.krab.x, this.this.krab.y, this.this.krab.size,this.this.krab.size);
       pop();
     }
   

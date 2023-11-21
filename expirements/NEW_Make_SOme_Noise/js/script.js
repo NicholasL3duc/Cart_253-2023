@@ -518,9 +518,9 @@ function title() {
   
     //over lap check for wall 1
     if (
-      krab.x + krab.w > waterMaze.wall1.x &&
+      krab.x + krab.size > waterMaze.wall1.x &&
       krab.x < waterMaze.wall1.x + waterMaze.wall1.w &&
-      krab.y + krab.h > waterMaze.wall1.y &&
+      krab.y + krab.size > waterMaze.wall1.y &&
       krab.y < waterMaze.wall1.y + waterMaze.wall1.h
     ) {
       state = "loss";

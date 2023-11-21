@@ -246,19 +246,25 @@ let imgBubbles;
 let imgsoup;
 let imgkrab;
 let imgBabykrab;
+let imgBabyHat
 let imgConstruct;
 let imgCrackS1;
+let imgScaredKrab;
+let imgBeach;
 function preload() {
   imgHouse = loadImage("assets/images/Door S1.png");
   imgseaShell = loadImage("assets/images/seaShell.jpg");
-  imgOctopus = loadImage("assets/images/evil octo smirk.webp");
+  imgOctopus = loadImage("assets/images/evil+octpus.png");
   imgCoral = loadImage("assets/images/coral.png");
   imgBubbles = loadImage("assets/images/bubbles.png");
   imgsoup = loadImage("assets/images/soup.png");
-  imgkrab = loadImage("assets/images/krab.webp");
+  imgkrab = loadImage("assets/images/Krab.png");
   imgConstruct = loadImage("assets/images/constuct.png");
   imgBabykrab = loadImage("assets/images/dancing baby krab.gif");
+  imgBabyHat = loadImage("assets/images/krab with crown.gif")
+  imgScaredKrab = loadImage("assets/images/scrared krab.png")
   imgCrackS1 = loadImage("assets/images/Crack S1.png");
+  imgBeach = loadImage("assets/images/beach.jpg");
 }
 
 /**
@@ -304,16 +310,20 @@ function draw() {
 //all functions used
 function title() {
   push();
+  image(imgBeach,0,0,width,height);
   textSize(45);
   fill(33, 16, 97);
   textAlign(CENTER, CENTER);
   text(
-    "Touch the Magical SeaShell To Make The Evil Octopus Dissapear!!!",
+    "Get Your Kids Back From The Evil Octopus!!",
     width / 2,
-    height / 2
+    height / 3
   );
-  image(imgseaShell, 600, 100, 250, 250);
-  image(imgOctopus, 450, 450, 500, 400);
+ 
+  image(imgScaredKrab,250, 450, 250, 250);
+  image(imgOctopus, 700, 450, 300, 300);
+  image(imgBabykrab,970,600,200,200)
+  image(imgBabyHat,1100,500,200,200)
   pop();
 }
 function win() {
@@ -462,16 +472,20 @@ function display() {
 
   fill(74, 79, 82);
   ellipse(sand.bank1.x, sand.bank1.y, 100, 100);
-  // sand 2
-  ellipse(sand.bank2.x, sand.bank2.y, 150, 150);
-  // sand 3
-  ellipse(sand.bank3.x, sand.bank3.y, 60, 60);
-  // sand 4
-  ellipse(sand.bank4.x, sand.bank4.y, 70, 70);
-  //   // sand 5
-  //   ellipse(sand.bank5.x, sand.bank5.y, 180, 180);
-  // sand 6
-  ellipse(sand.bank6.x, sand.bank6.y, 100, 100);
+for(let bank in sand){
+  ellipse(sand[bank].x,sand[bank].y, 100,100)
+}
+
+//   // sand 2
+//   ellipse(sand.bank2.x, sand.bank2.y, 150, 150);
+//   // sand 3
+//   ellipse(sand.bank3.x, sand.bank3.y, 60, 60);
+//   // sand 4
+//   ellipse(sand.bank4.x, sand.bank4.y, 70, 70);
+//   //   // sand 5
+//   //   ellipse(sand.bank5.x, sand.bank5.y, 180, 180);
+//   // sand 6
+//   ellipse(sand.bank6.x, sand.bank6.y, 100, 100);
 }
 
 // check is crab touches borders
@@ -574,36 +588,41 @@ function checkOverlap() {
   ) {
     state = "loss";
   }
-  // over lap check for sand 1
-  let d1 = dist(krab.x, krab.y, sand.bank1.x, sand.bank1.y);
-  if (d1 < krab.size / 2 + sand.bank1.size / 2) {
+  for(let bank in sand){
+    let d = dist(krab.x,krab.y, sand[bank].x, sand[bank].y)
+    if (d < krab.size / 2 + sand[bank].size /2)
     state = "loss";
   }
-  // over lap check for sand 2
-  let d2 = dist(krab.x, krab.y, sand.bank2.x, sand.bank2.y);
-  if (d2 < krab.size / 2 + sand.bank2.size / 2) {
-    state = "loss";
-  }
-  // over lap check for sand 3
-  let d3 = dist(krab.x, krab.y, sand.bank3.x, sand.bank3.y);
-  if (d3 < krab.size / 2 + sand.bank3.size / 2) {
-    state = "loss";
-  }
-  // over lap check for sand 4
-  let d4 = dist(krab.x, krab.y, sand.bank4.x, sand.bank4.y);
-  if (d4 < krab.size / 2 + sand.bank4.size / 2) {
-    state = "loss";
-  }
-  // over lap check for sand 5
-  let d5 = dist(krab.x, krab.y, sand.bank5.x, sand.bank5.y);
-  if (d5 < krab.size / 2 + sand.bank5.size / 2) {
-    state = "loss";
-  }
-  // over lap check for sand 6
-  let d6 = dist(krab.x, krab.y, sand.bank6.x, sand.bank6.y);
-  if (d6 < krab.size / 2 + sand.bank6.size / 2) {
-    state = "loss";
-  }
+  // // over lap check for sand 1
+  // let d1 = dist(krab.x, krab.y, sand.bank1.x, sand.bank1.y);
+  // if (d1 < krab.size / 2 + sand.bank1.size / 2) {
+  //   state = "loss";
+  // }
+  // // over lap check for sand 2
+  // let d2 = dist(krab.x, krab.y, sand.bank2.x, sand.bank2.y);
+  // if (d2 < krab.size / 2 + sand.bank2.size / 2) {
+  //   state = "loss";
+  // }
+  // // over lap check for sand 3
+  // let d3 = dist(krab.x, krab.y, sand.bank3.x, sand.bank3.y);
+  // if (d3 < krab.size / 2 + sand.bank3.size / 2) {
+  //   state = "loss";
+  // }
+  // // over lap check for sand 4
+  // let d4 = dist(krab.x, krab.y, sand.bank4.x, sand.bank4.y);
+  // if (d4 < krab.size / 2 + sand.bank4.size / 2) {
+  //   state = "loss";
+  // }
+  // // over lap check for sand 5
+  // let d5 = dist(krab.x, krab.y, sand.bank5.x, sand.bank5.y);
+  // if (d5 < krab.size / 2 + sand.bank5.size / 2) {
+  //   state = "loss";
+  // }
+  // // over lap check for sand 6
+  // let d6 = dist(krab.x, krab.y, sand.bank6.x, sand.bank6.y);
+  // if (d6 < krab.size / 2 + sand.bank6.size / 2) {
+  //   state = "loss";
+  // }
   //over lap check for sharks
 
   // overlap shark 1
@@ -791,7 +810,7 @@ function checkOverlap2() {
   // overlap for 1st green and pink
   // green
   if (
-    krab.x + krab.w > colorWall.wall5.x &&
+    krab.x + krab.size > colorWall.wall5.x &&
     krab.x < colorWall.wall5.x + colorWall.wall5.w &&
     krab.y + krab.h > colorWall.wall5.y &&
     krab.y < colorWall.wall5.y + colorWall.wall5.h

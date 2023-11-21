@@ -9,7 +9,7 @@ class Title extends State {
       super();
   
       // Set our property determining the title of the simulation
-      this.titleString = "Help Mr.Krab Get his kids back form the evil octopus";
+      this.titleString = "Get Your Kids Back From The Evil Octopus!!";
     }
   
     // draw()
@@ -21,7 +21,7 @@ class Title extends State {
       super.draw();
   
 //    will change this to a drawn image 
-      background(0);
+      background(imgBeach,0,0,width,height);
   
     
       // the actual title text. More methods/functions is generally better.
@@ -31,11 +31,22 @@ class Title extends State {
     // displayTitle()
     // Sets style and then display the title in the titleString property on the canvas
     displayTitle() {
-      push();
-      fill(33, 16, 97);
-      textSize(30)
-      text(this.titleString, width / 2, height / 2);
-      pop();
+      // push();
+      // image(imgBeach,0,0,width,height);
+      // textSize(45);
+      // fill(33, 16, 97);
+      // textAlign(CENTER, CENTER);
+      // text(
+      //   "Get Your Kids Back From The Evil Octopus!!",
+      //   width / 2,
+      //   height / 3
+      // );
+     
+      // image(imgScaredKrab,250, 450, 250, 250);
+      // image(imgOctopus, 700, 450, 300, 300);
+      // image(imgBabykrab,970,600,200,200)
+      // image(imgBabyHat,1100,500,200,200)
+      // pop();
     }
   
     // keyPressed()
@@ -57,6 +68,6 @@ class Title extends State {
       // NOTE that creating a new Animation object like this automatically calls its
       // constructor(), which therefore acts like setup(), called once when the state
       // starts.
-      currentState = Animation();
+      currentState = new Animation();
     }
   }
