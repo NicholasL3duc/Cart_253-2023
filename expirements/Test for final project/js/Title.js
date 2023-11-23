@@ -40,7 +40,15 @@ class Title extends State {
         width / 2,
         height / 3
       );
-     
+     textSize(40);
+     fill(33,16,97);
+     textAlign(CENTER,CENTER);
+     text(
+      "Press Space To Start",
+      width /2,
+      height /2.2
+
+     )
       image(imgScaredKrab,250, 450, 250, 250);
       image(imgOctopus, 700, 450, 300, 300);
       image(imgBabykrab,970,600,200,200)

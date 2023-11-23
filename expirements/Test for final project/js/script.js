@@ -15,7 +15,9 @@ let imgConstruct;
 let imgCrackS1;
 let imgScaredKrab;
 let imgBeach;
+let imgBackdrop;
 function preload() {
+  imgBackdrop = loadImage("assets/images/Stage1Backdrop.jpg");
   imgHouse = loadImage("assets/images/Door S1.png");
   imgseaShell = loadImage("assets/images/seaShell.jpg");
   imgOctopus = loadImage("assets/images/evil+octpus.png");

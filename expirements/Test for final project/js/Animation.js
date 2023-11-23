@@ -28,7 +28,7 @@ class Animation extends State {
       size: 100,
       vx: 0,
       vy: 0,
-      speed: 3.5,
+      speed: 2.5,//3.5 set it back
     };
 
     this.waterMaze = {
@@ -159,15 +159,15 @@ class Animation extends State {
       },
     };
     this.home = {
-      x: undefined,
-      y: 450,
+      x: 730,
+      y: 460,
       size: 150,
     };
 
     this.shell = {
-      x: undefined,
-      y: 0,
-      size: 150,
+      x: 400,
+      y: 20,
+      size: 120,
       active: true,
     };
 
@@ -205,7 +205,7 @@ class Animation extends State {
     // just in case it does something important.
     super.draw();
 
-    background(11, 139, 230);
+    background(imgBackdrop)
 
     // Call the state's methods to make the animation work
     this.move();
@@ -214,7 +214,7 @@ class Animation extends State {
     this.checkOffscreen();
     this.movement();
     this.checkOverlapshark();
-    
+    this.house();
 
   }
 
@@ -248,7 +248,11 @@ class Animation extends State {
   // Displays the this.krab as an ellipse on the canvas
   display() {
     push();
-    ellipse(this.krab.x, this.krab.y, this.krab.size, this.krab.size);
+    image (imgkrab, this.krab.x, this.krab.y, this.krab.size, this.krab.size);
+    pop();
+
+    push();
+    image (imgHouse,this.home.x,this.home.y,this.home.size,this.home.size);
     pop();
 
     // water walls
@@ -367,7 +371,7 @@ class Animation extends State {
   checkOverlap() {
     // getting the shell
     this.k = dist(this.krab.x, this.krab.y, this.shell.x, this.shell.y);
-    if (this.k < this.krab.size / 4 + this.shell.size / 4) {
+    if (this.k < this.krab.size / 2 + this.shell.size / 2) {
       this.shell.active = false;
       this.octopus.active = false;
     }
@@ -396,7 +400,7 @@ class Animation extends State {
     if (this.octopus.active) {
       push();
       image(
-        imgOctopus,
+        imgCrackS1,
         this.octopus.x,
         this.octopus.y,
         this.octopus.size,
@@ -526,8 +530,8 @@ class Animation extends State {
   }
   // the ending goal of the cave
   house() {
-    this.h1 = dist(this.krab.x, this.krab.y, home.x, home.y);
-    if (this.h1 < home.size / 2 + this.krab.size / 2) {
+    this.h1 = dist(this.krab.x, this.krab.y, this.home.x, this.home.y);
+    if (this.h1 < this.home.size / 2 + this.krab.size / 2) {
       currentState = new Stage2();
     }
   }
