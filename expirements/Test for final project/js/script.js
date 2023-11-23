@@ -1,6 +1,37 @@
 // A variable to store the currently active state object (starts empty)
 let currentState;
 
+// the images used
+let imgHouse;
+let imgseaShell;
+let imgOctopus;
+let imgCoral;
+let imgBubbles;
+let imgsoup;
+let imgkrab;
+let imgBabykrab;
+let imgBabyHat
+let imgConstruct;
+let imgCrackS1;
+let imgScaredKrab;
+let imgBeach;
+function preload() {
+  imgHouse = loadImage("assets/images/Door S1.png");
+  imgseaShell = loadImage("assets/images/seaShell.jpg");
+  imgOctopus = loadImage("assets/images/evil+octpus.png");
+  imgCoral = loadImage("assets/images/coral.png");
+  imgBubbles = loadImage("assets/images/bubbles.png");
+  imgsoup = loadImage("assets/images/soup.png");
+  imgkrab = loadImage("assets/images/Krab.png");
+  imgConstruct = loadImage("assets/images/constuct.png");
+  imgBabykrab = loadImage("assets/images/dancing baby krab.gif");
+  imgBabyHat = loadImage("assets/images/krab with crown.gif")
+  imgScaredKrab = loadImage("assets/images/scrared krab.png")
+  imgCrackS1 = loadImage("assets/images/Crack S1.png");
+  imgBeach = loadImage("assets/images/beach.jpg");
+}
+
+
 // setup()
 // Create the canvas, start our program in the title state, set default text style
 function setup() {
@@ -8,7 +39,7 @@ function setup() {
 
 
 
-  
+
   // We can set the current state by creating a NEW object from the class
   // representing that state! This will call its constructor() which will work
   // like the `setup()` for that state.

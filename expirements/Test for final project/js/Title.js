@@ -13,8 +13,7 @@ class Title extends State {
     }
   
     // draw()
-    // Called every frame in the main script. Handles what the title
-    // state needs to do each frame, which is display the title.
+    
     draw() {
       // Always call the super() version of the method if there is one
       // just in case it does something important.
@@ -29,45 +28,31 @@ class Title extends State {
     }
   
     // displayTitle()
-    // Sets style and then display the title in the titleString property on the canvas
+   
     displayTitle() {
-      // push();
-      // image(imgBeach,0,0,width,height);
-      // textSize(45);
-      // fill(33, 16, 97);
-      // textAlign(CENTER, CENTER);
-      // text(
-      //   "Get Your Kids Back From The Evil Octopus!!",
-      //   width / 2,
-      //   height / 3
-      // );
+      push();
+      image(imgBeach,0,0,width,height);
+      textSize(45);
+      fill(33, 16, 97);
+      textAlign(CENTER, CENTER);
+      text(
+        "Get Your Kids Back From The Evil Octopus!!",
+        width / 2,
+        height / 3
+      );
      
-      // image(imgScaredKrab,250, 450, 250, 250);
-      // image(imgOctopus, 700, 450, 300, 300);
-      // image(imgBabykrab,970,600,200,200)
-      // image(imgBabyHat,1100,500,200,200)
-      // pop();
+      image(imgScaredKrab,250, 450, 250, 250);
+      image(imgOctopus, 700, 450, 300, 300);
+      image(imgBabykrab,970,600,200,200)
+      image(imgBabyHat,1100,500,200,200)
+      pop();
     }
   
-    // keyPressed()
-    // Called by the main script when a key is pressed! Switches to the Animation state
+    
     keyPressed() {
-      // Always call the superclass version of the method in case it does something or will
+    
       super.keyPressed();
   
-      // Switch to the animation state
-  
-      // NOTE how we do not need to check if the state is title,
-      // because this class IS the title state
-  
-      // NOTE that we switch states by changing what kind of state object is in
-      // the currentState variable from the main script. By putting a new Animation
-      // state object into it, the program will start using the Animation class to
-      // determine how to handle draw() and keyPressed()
-  
-      // NOTE that creating a new Animation object like this automatically calls its
-      // constructor(), which therefore acts like setup(), called once when the state
-      // starts.
       currentState = new Animation();
     }
   }
