@@ -18,7 +18,8 @@ let imgScaredKrab;
 let imgBeach;
 let imgBackdrop;
 let imgS2Backdrop;
-let imgS3Backdrop
+let imgS3Backdrop;
+let imgText;
 
 function preload() {
   imgBackdrop = loadImage("assets/images/Stage1Backdrop.jpg");
@@ -38,6 +39,7 @@ function preload() {
   imgScaredKrab = loadImage("assets/images/scrared krab.png");
   imgCrackS1 = loadImage("assets/images/Crack S1.png");
   imgBeach = loadImage("assets/images/beach.jpg");
+  imgText = loadImage ("assets/images/textBuble.png")
 }
 
 // setup()
@@ -48,7 +50,7 @@ function setup() {
   // We can set the current state by creating a NEW object from the class
   // representing that state! This will call its constructor() which will work
   // like the `setup()` for that state.
-  currentState = new Stage2(); // REVERT TO TITLE AFTER
+  currentState = new Stage3(); // REVERT TO TITLE AFTER
 
   // Text settings
   textSize(50);
