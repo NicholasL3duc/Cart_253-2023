@@ -238,6 +238,13 @@ mySpeechRec.continuous = true
 mySpeechRec.interimResults = true
 mySpeechRec.start(); // start listening
 
+// speech settings
+let mySpeechRec = new p5.SpeechRec(); // speech recognition object (will prompt for mic access)
+mySpeechRec.onResult = showResult; // bind callback function to trcwhen speech is recognized
+mySpeechRec.continuous = true
+mySpeechRec.interimResults = true
+mySpeechRec.start(); // start listening
+
 // the images used
 let imgDoor;
 let imgseaShell;
