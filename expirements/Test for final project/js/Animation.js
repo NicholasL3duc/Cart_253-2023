@@ -28,27 +28,27 @@ class Animation extends State {
       size: 100,
       vx: 0,
       vy: 0,
-      speed: 2.5,//3.5 set it back
+      speed: 2.5, //3.5 set it back
     };
 
     this.waterMaze = {
       wall1: {
         x: 120,
         y: 0,
-        w: 100,
+        w: 70,
         h: 460,
       },
       wall2: {
-        x: 220,
-        y: 360,
-        w: 260,
-        h: 100,
+        x: 190,
+        y: 390,
+        w: 200,
+        h: 70,
       },
       wall3: {
         x: 340,
         y: 130,
-        w: 260,
-        h: 110,
+        w: 200,
+        h: 70,
       },
       wall4: {
         x: 500,
@@ -86,6 +86,7 @@ class Animation extends State {
       y: 600,
       w: 110,
       h: 300,
+      active: true,
     };
 
     this.sand = {
@@ -170,18 +171,14 @@ class Animation extends State {
       size: 120,
       active: true,
     };
-
-    this.octopus = {
-      x: undefined,
-      y: 0,
-      size: 150,
-      active: true,
-    };
-
-    this.babyKrab2 = {
-      x: undefined,
-      y: 0,
-      size: 150,
+    // image(imgCrackS1, 860, 600, 200, 300);
+    // pop();
+    this.crack = {
+      x: 890,
+      y: 600,
+      w: 200,
+      h: 300,
+      size: 90,
       active: true,
     };
 
@@ -205,7 +202,7 @@ class Animation extends State {
     // just in case it does something important.
     super.draw();
 
-    background(imgBackdrop)
+    background(imgBackdrop);
 
     // Call the state's methods to make the animation work
     this.move();
@@ -215,7 +212,6 @@ class Animation extends State {
     this.movement();
     this.checkOverlapshark();
     this.house();
-
   }
 
   // move()
@@ -248,11 +244,11 @@ class Animation extends State {
   // Displays the this.krab as an ellipse on the canvas
   display() {
     push();
-    image (imgkrab, this.krab.x, this.krab.y, this.krab.size, this.krab.size);
+    image(imgkrab, this.krab.x, this.krab.y, this.krab.size, this.krab.size);
     pop();
 
     push();
-    image (imgHouse,this.home.x,this.home.y,this.home.size,this.home.size);
+    image(imgHouse, this.home.x, this.home.y, this.home.size, this.home.size);
     pop();
 
     // water walls
@@ -309,16 +305,13 @@ class Animation extends State {
     );
 
     // cracking disapering wall
-    push();
-    rect(
-      this.crackingWall.x,
-      this.crackingWall.y,
-      this.crackingWall.w,
-      this.crackingWall.h
-    );
-    image(imgCrackS1, 860, 600, 200, 300);
-    pop();
-    // shark Run
+    // push();
+    // rect(
+    //   this.crackingWall.x,
+    //   this.crackingWall.y,
+    //   this.crackingWall.w,
+    //   this.crackingWall.h
+    // );
 
     //   shark 1
 
@@ -373,16 +366,17 @@ class Animation extends State {
     this.k = dist(this.krab.x, this.krab.y, this.shell.x, this.shell.y);
     if (this.k < this.krab.size / 2 + this.shell.size / 2) {
       this.shell.active = false;
-      this.octopus.active = false;
+      this.crack.active = false;
+      this.crackingWall.active = false;
     }
-    // overlap for the this.octopus
+    // overlap for the this.crack
     if (
-      this.krab.x > this.octopus.x &&
-      this.octopus.active &&
-      this.krab.y > this.octopus.y &&
-      this.octopus.active
+      this.krab.x > this.crack.x &&
+      this.crack.active &&
+      this.krab.y > this.crack.y &&
+      this.crack.active
     ) {
-        currentState = new Ending();
+      currentState = new Ending();
     }
 
     // getting the shell overlap
@@ -397,17 +391,29 @@ class Animation extends State {
       this.shell.size
     );
     pop();
-    if (this.octopus.active) {
+    if (this.crackingWall.active)
+    push();
+  fill(194, 178, 128)
+    rect(
+      this.crackingWall.x,
+      this.crackingWall.y,
+      this.crackingWall.w,
+      this.crackingWall.h
+    );
+    pop();
+    if (this.crack.active) {
       push();
       image(
         imgCrackS1,
-        this.octopus.x,
-        this.octopus.y,
-        this.octopus.size,
-        this.octopus.size
+        this.crack.x,
+        this.crack.y,
+        this.crack.w,
+        this.crack.h,
+        this.crack.size
       );
       pop();
     }
+   
 
     //over lap check for wall 1
     if (
@@ -425,7 +431,7 @@ class Animation extends State {
       this.krab.y + this.krab.h > this.waterMaze.wall2.y &&
       this.krab.y < this.waterMaze.wall2.y + this.waterMaze.wall2.h
     ) {
-        currentState = new Ending();
+      currentState = new Ending();
     }
     //over lap check for wall 3
     if (
@@ -434,7 +440,7 @@ class Animation extends State {
       this.krab.y + this.krab.h > this.waterMaze.wall3.y &&
       this.krab.y < this.waterMaze.wall3.y + this.waterMaze.wall3.h
     ) {
-        currentState = new Ending();
+      currentState = new Ending();
     }
     //over lap check for wall 4
     if (
@@ -443,7 +449,7 @@ class Animation extends State {
       this.krab.y + this.krab.h > this.waterMaze.wall4.y &&
       this.krab.y < this.waterMaze.wall4.y + this.waterMaze.wall4.h
     ) {
-        currentState = new Ending();
+      currentState = new Ending();
     }
     //over lap check for wall 5
     if (
@@ -452,7 +458,7 @@ class Animation extends State {
       this.krab.y + this.krab.h > this.waterMaze.wall5.y &&
       this.krab.y < this.waterMaze.wall5.y + this.waterMaze.wall5.h
     ) {
-        currentState = new Ending();
+      currentState = new Ending();
     }
     //over lap check for wall 6
     //   if (
@@ -470,7 +476,7 @@ class Animation extends State {
       this.krab.y + this.krab.h > this.waterMaze.wall7.y &&
       this.krab.y < this.waterMaze.wall7.y + this.waterMaze.wall7.h
     ) {
-        currentState = new Ending();
+      currentState = new Ending();
     }
     for (let bank in this.sand) {
       this.d = dist(
@@ -480,7 +486,7 @@ class Animation extends State {
         this.sand[bank].y
       );
       if (this.d < this.krab.size / 2 + this.sand[bank].size / 2)
-          currentState = new Ending();
+        currentState = new Ending();
     }
 
     //over lap check for sharks
@@ -488,17 +494,17 @@ class Animation extends State {
     // overlap shark 1
     this.s1 = dist(this.krab.x, this.krab.y, this.shark.b1.x, this.shark.b1.y);
     if (this.s1 < this.krab.size / 2 + this.shark.b1.size / 2) {
-        currentState = new Ending();
+      currentState = new Ending();
     }
     // overlap shark 2
     this.s2 = dist(this.krab.x, this.krab.y, this.shark.b2.x, this.shark.b2.y);
     if (this.s2 < this.krab.size / 2 + this.shark.b2.size / 2) {
-        currentState = new Ending();
+      currentState = new Ending();
     }
     // overlap this.shark 3
     this.s3 = dist(this.krab.x, this.krab.y, this.shark.b3.x, this.shark.b3.y);
     if (this.s3 < this.krab.size / 2 + this.shark.b3.size / 2) {
-        currentState = new Ending();
+      currentState = new Ending();
     }
   }
   // movements for the sharks
