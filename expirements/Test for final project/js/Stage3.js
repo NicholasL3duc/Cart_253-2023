@@ -128,7 +128,19 @@ image(
 pop();
 
   }
-  checkEnding() {}
+  checkEnding() { if (
+    this.krab.x + this.krab.w > this.baby.x &&
+    this.krab.x < this.baby.x + this.baby.w &&
+    this.krab.y + this.krab.h > this.baby.y &&
+    this.krab.y < this.baby.y + this.baby.h
+  ) {
+    currentState = new GoodEnding();
+  }
+
+
+
+
+}
   checkOverlap() {}
 
   babyKrab() {

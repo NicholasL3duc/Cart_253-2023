@@ -6,7 +6,7 @@ class Ending {
   // state is created. Sets the ending message of the program.
   constructor() {
     // Set our property determining the ending message of the simulation
-    this.endingString = "Ah, mortality.";
+
   }
 
   // draw()

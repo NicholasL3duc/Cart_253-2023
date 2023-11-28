@@ -97,8 +97,8 @@ class Stage2 extends State {
       },
     };
     this.home = {
-      x: 100,
-      y: 50,
+      x: 1000,
+      y: 500,
       size: 150,
     };
 
@@ -125,7 +125,7 @@ class Stage2 extends State {
     this.checkEnding();
     this.checkOverlap();
     this.babyKrab();
-    this.house();
+  
   }
 
   // move()
@@ -161,22 +161,10 @@ class Stage2 extends State {
   // Checks if the krab has moved past the right hand side
   // of the canvas and changes to the Ending state if it has.
   checkEnding() {
-    if (this.krab.x > width) {
-      // Switch to the ending state
-
-      // NOTE how we do not need to check if the state is animation,
-      // because this class IS the animation state
-
-      // NOTE that we switch states by changing what kind of state object is in
-      // the currentState variable from the main script. By putting a new Ending
-      // state object into it, the program will start using the Ending class to
-      // determine how to handle draw() and keyPressed()
-
-      // NOTE that creating a new Ending object like this automatically calls its
-      // constructor(), which therefore acts like setup(), called once when the state
-      // starts.
-
-      currentState = new Stage2();
+    this.h1 = dist(this.krab.x, this.krab.y, this.home.x, this.home.y);
+    if (this.h1 < this.home.size / 2 + this.krab.size / 2) {
+      currentState = new Stage3();
+  
     }
   }
 
@@ -290,7 +278,7 @@ class Stage2 extends State {
       this.krab.y + this.krab.h > this.colorWall.wall5.y &&
       this.krab.y < this.colorWall.wall5.y + this.colorWall.wall5.h
     ) {
-      state = "loss";
+      currentState = new Ending();
     }
     // pink
     if (
@@ -299,7 +287,7 @@ class Stage2 extends State {
       this.krab.y + this.krab.h > this.colorWall.wall6.y &&
       this.krab.y < this.colorWall.wall6.y + this.colorWall.wall6.h
     ) {
-      state = "loss";
+      currentState = new Ending();
     }
 
     // over lap for the 2nd green and purple
@@ -311,7 +299,7 @@ class Stage2 extends State {
       this.krab.y + this.krab.h > this.colorWall.wall3.y &&
       this.krab.y < this.colorWall.wall3.y + this.colorWall.wall3.h
     ) {
-      state = "loss";
+      currentState = new Ending();
     }
     // green
     if (
@@ -320,21 +308,16 @@ class Stage2 extends State {
       this.krab.y + this.krab.h > this.colorWall.wall1.y &&
       this.krab.y < this.colorWall.wall1.y + this.colorWall.wall1.h
     ) {
-      state = "loss";
+      currentState = new Ending();
     }
   }
   babyKrab() {
     let b2 = dist(this.krab.x, this.krab.y, this.babyKrab2.x, this.babyKrab2.y);
     if (b2 < this.babyKrab2.size / 2 + this.krab.size / 2) {
-      state = "Ending";
+      currentState = new Ending();
     }
   }
   // the ending goal of the cave
-  house() {
-    this.h1 = dist(this.krab.x, this.krab.y, this.home.x, this.home.y);
-    if (this.h1 < this.home.size / 2 + this.krab.size / 2) {
-      currentState = new Animation();
-    }
-  }
-}
+
 // NO keyPressed() needed down here, it is handled by the State version
+}

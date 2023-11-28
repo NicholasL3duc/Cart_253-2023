@@ -4,6 +4,7 @@ let currentState;
 // the images used
 let imgHouse;
 let imgEnding;
+let imgGoodEnding;
 let imgseaShell;
 let imgOctopus;
 let imgCoral;
@@ -26,6 +27,7 @@ function preload() {
   imgS2Backdrop = loadImage("assets/images/Stage2Backdrop.jpg");
   imgS3Backdrop = loadImage("assets/images/Stage3Backdrop.jpg");
   imgEnding = loadImage("assets/images/ending.jpg");
+  imgGoodEnding = loadImage("assets/images/happy ending.gif");
   imgHouse = loadImage("assets/images/Door S1.png");
   imgseaShell = loadImage("assets/images/seaShell.jpg");
   imgOctopus = loadImage("assets/images/evil+octpus.png");
@@ -50,7 +52,7 @@ function setup() {
   // We can set the current state by creating a NEW object from the class
   // representing that state! This will call its constructor() which will work
   // like the `setup()` for that state.
-  currentState = new Stage3(); // REVERT TO TITLE AFTER
+  currentState = new Animation(); // REVERT TO TITLE AFTER
 
   // Text settings
   textSize(50);

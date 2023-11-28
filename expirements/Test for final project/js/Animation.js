@@ -243,6 +243,7 @@ class Animation extends State {
   // display()
   // Displays the this.krab as an ellipse on the canvas
   display() {
+   
     push();
     image(imgkrab, this.krab.x, this.krab.y, this.krab.size, this.krab.size);
     pop();
@@ -335,7 +336,16 @@ class Animation extends State {
     for (let bank in this.sand) {
       ellipse(this.sand[bank].x, this.sand[bank].y, 100, 100);
     }
-
+    // purple hint
+    push();
+    fill(95, 81, 240)
+    rect(600,500,100,50)
+    pop();
+    // pink hint
+    push();
+    fill(237, 92, 228)
+    rect(600,600,100,50)
+    pop();
     //   // sand 2
     //   ellipse(this.sand.bank2.x, this.sand.bank2.y, 150, 150);
     //   // sand 3
@@ -370,14 +380,14 @@ class Animation extends State {
       this.crackingWall.active = false;
     }
     // overlap for the this.crack
-    if (
-      this.krab.x > this.crack.x &&
-      this.crack.active &&
-      this.krab.y > this.crack.y &&
-      this.crack.active
-    ) {
-      currentState = new Ending();
-    }
+    // if (
+    //   this.krab.x > this.crack.x &&
+    //   this.crack.active &&
+    //   this.krab.y > this.crack.y &&
+    //   this.crack.active
+    // ) {
+    //   currentState = new Ending();
+    // }
 
     // getting the shell overlap
 
@@ -393,13 +403,13 @@ class Animation extends State {
     pop();
     if (this.crackingWall.active)
     push();
-  fill(194, 178, 128)
-    rect(
-      this.crackingWall.x,
-      this.crackingWall.y,
-      this.crackingWall.w,
-      this.crackingWall.h
-    );
+  // fill(194, 178, 128)
+  //   rect(
+  //     this.crackingWall.x,
+  //     this.crackingWall.y,
+  //     this.crackingWall.w,
+  //     this.crackingWall.h
+    // );
     pop();
     if (this.crack.active) {
       push();
@@ -470,24 +480,24 @@ class Animation extends State {
     //       currentState = new Ending();
     //   }
     //over lap check for wall 7
-    if (
-      this.krab.x + this.krab.w > this.waterMaze.wall7.x &&
-      this.krab.x < this.waterMaze.wall7.x + this.waterMaze.wall7.w &&
-      this.krab.y + this.krab.h > this.waterMaze.wall7.y &&
-      this.krab.y < this.waterMaze.wall7.y + this.waterMaze.wall7.h
-    ) {
-      currentState = new Ending();
-    }
-    for (let bank in this.sand) {
-      this.d = dist(
-        this.krab.x,
-        this.krab.y,
-        this.sand[bank].x,
-        this.sand[bank].y
-      );
-      if (this.d < this.krab.size / 2 + this.sand[bank].size / 2)
-        currentState = new Ending();
-    }
+    // if (
+    //   this.krab.x + this.krab.w > this.waterMaze.wall7.x &&
+    //   this.krab.x < this.waterMaze.wall7.x + this.waterMaze.wall7.w &&
+    //   this.krab.y + this.krab.h > this.waterMaze.wall7.y &&
+    //   this.krab.y < this.waterMaze.wall7.y + this.waterMaze.wall7.h
+    // ) {
+    // //   currentState = new Ending();
+    // // }
+    // for (let bank in this.sand) {
+    //   this.d = dist(
+    //     this.krab.x,
+    //     this.krab.y,
+    //     this.sand[bank].x,
+    //     this.sand[bank].y
+    //   );
+    //   if (this.d < this.krab.size / 2 + this.sand[bank].size / 3)
+    //     currentState = new Ending();
+    // }
 
     //over lap check for sharks
 
