@@ -44,26 +44,25 @@ class Stage3 extends State {
     };
     this.baby = {
       // place holder numbers
-      x: 400,
-      y: 400,
+      x: 200,
+      y: 650,
       w: 70,
       h: 100,
       size: 200,
     };
     this.baby2 = {
       // place holder numbers
-      x: 400,
-      y: 400,
-      w: 70,
-      h: 100,
+      x: 100,
+      y: 650,
+      w: 100,
+      h: 130,
       size: 200,
     };
     this.home = {
-        x: 100,
-        y: 50,
-        size: 150,
-      };
-  
+      x: 100,
+      y: 50,
+      size: 150,
+    };
   }
   // draw()
   // Called every frame in the main script. Handles what the title
@@ -104,10 +103,37 @@ class Stage3 extends State {
     push();
     image(imgkrab, this.krab.x, this.krab.y, this.krab.size, this.krab.size);
     pop();
+
+    // baby 1
+    push();
+    image(
+      imgBabyHat,
+      this.baby.x,
+      this.baby.y,
+      this.baby.w,
+      this.baby.h,
+    
+    );
+    pop();
+//baby 2
+push();
+image(
+  imgBabykrab,
+  this.baby2.x,
+  this.baby2.y,
+  this.baby2.w,
+  this.baby2.h,
+
+);
+pop();
+
   }
   checkEnding() {}
   checkOverlap() {}
-  babyKrab() {}
+
+  babyKrab() {
+    // baby 1
+  }
   octopusStage() {
     push();
     image(
@@ -121,18 +147,12 @@ class Stage3 extends State {
   }
   questions() {
     // question #1
-    push();
-    image(imgText,550,200);
-
-    pop();
+  
   }
-  door(){
+  door() {
     this.d1 = dist(this.krab.x, this.krab.y, this.home.x, this.home.y);
     if (this.d1 < this.home.size / 2 + this.krab.size / 2) {
       currentState = new GoodEnding();
     }
   }
-
-  }
-
-
+}

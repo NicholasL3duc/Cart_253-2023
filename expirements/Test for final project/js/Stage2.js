@@ -280,26 +280,6 @@ class Stage2 extends State {
     image(imgkrab, this.krab.x, this.krab.y, this.krab.size, this.krab.size);
   }
   checkOverlap() {
-    // start and end wall
-    // // starting wall
-    // if (
-    //   this.krab.x + this.krab.w > this.startWall.wall1.x &&
-    //   this.krab.x < this.startWall.wall1.x + this.startWall.wall1.h &&
-    //   this.krab.y + this.krab.h > this.startWall.wall1.y &&
-    //   this.krab.y < this.startWall.wall1.y + this.startWall.wall1.w
-    // ) {
-    //   state = "loss";
-    // }
-    // // ending wall
-    // if (
-    //   this.krab.x + this.krab.w > this.startWall.wall2.x &&
-    //   this.krab.x < this.startWall.wall2.x + this.startWall.wall2.h &&
-    //   this.krab.y + this.krab.h > this.startWall.wall2.y &&
-    //   this.krab.y < this.startWall.wall2.y + this.startWall.wall2.w
-    // ) {
-    //   state = "loss";
-    // }
-
     // the lose colours
 
     // overlap for 1st green and pink
