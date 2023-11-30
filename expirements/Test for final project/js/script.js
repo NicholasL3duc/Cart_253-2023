@@ -21,6 +21,14 @@ let imgBackdrop;
 let imgS2Backdrop;
 let imgS3Backdrop;
 let imgText;
+let imgSign;
+let imgCave;
+let imgDancingPenguin;
+let imgDjPenguin;
+let imgDancingPenguinBlack;
+let imgSecretBack;
+let imgDancingKrab;
+let imgClappingPenguin;
 
 function preload() {
   imgBackdrop = loadImage("assets/images/Stage1Backdrop.jpg");
@@ -29,6 +37,7 @@ function preload() {
   imgEnding = loadImage("assets/images/ending.jpg");
   imgGoodEnding = loadImage("assets/images/happy ending.gif");
   imgHouse = loadImage("assets/images/Door S1.png");
+  imgCave = loadImage("assets/images/Stage3Door.png");
   imgseaShell = loadImage("assets/images/seaShell.jpg");
   imgOctopus = loadImage("assets/images/evil+octpus.png");
   imgCoral = loadImage("assets/images/coral.png");
@@ -41,7 +50,15 @@ function preload() {
   imgScaredKrab = loadImage("assets/images/scrared krab.png");
   imgCrackS1 = loadImage("assets/images/Crack S1.png");
   imgBeach = loadImage("assets/images/beach.jpg");
-  imgText = loadImage ("assets/images/textBuble.png")
+  imgText = loadImage("assets/images/textBuble.png");
+  imgSign = loadImage("assets/images/SignS1.png");
+  imgDancingPenguin = loadImage("assets/images/dancingPenguinBlue.gif");
+  imgDancingPenguinBlack = loadImage("assets/images/Breakdance.webp");
+  imgSecretBack = loadImage(
+    "assets/images/Crysta-in-the-Night-Club-TV-Screen-crysta-38470479-766-576.gif"
+  );
+  imgDancingKrab = loadImage("assets/images/Klutzy_Special_Dance.webp");
+  imgClappingPenguin = loadImage("assets/images/clapping-gif-club-penguin.gif")
 }
 
 // setup()
@@ -52,7 +69,7 @@ function setup() {
   // We can set the current state by creating a NEW object from the class
   // representing that state! This will call its constructor() which will work
   // like the `setup()` for that state.
-  currentState = new Animation(); // REVERT TO TITLE AFTER
+  currentState = new Title(); // REVERT TO TITLE AFTER
 
   // Text settings
   textSize(50);

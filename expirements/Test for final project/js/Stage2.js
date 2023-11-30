@@ -24,7 +24,7 @@ class Stage2 extends State {
 
     this.krab = {
       x: 100,
-      y: 250,
+      y: 500,
       w: 30,
       h: 10,
       size: 100,
@@ -99,7 +99,19 @@ class Stage2 extends State {
     this.home = {
       x: 1000,
       y: 500,
-      size: 150,
+      size: 250,
+    };
+    this.cave = {
+      x: 20,
+      y: 20,
+      size: 250,
+
+    };
+
+    this.sign = {
+      x: 220,
+      y: 100,
+      size: 170,
     };
 
     // Set the velocity of the krab to its speed.
@@ -125,7 +137,7 @@ class Stage2 extends State {
     this.checkEnding();
     this.checkOverlap();
     this.babyKrab();
-  
+    this.return();
   }
 
   // move()
@@ -133,19 +145,21 @@ class Stage2 extends State {
   move() {
     this.krab.x = this.krab.x + this.krab.vx;
     this.krab.y = this.krab.y + this.krab.vy;
-    if (keyIsDown(87)) {
-      //moving using the W key
+    if (keyIsDown(38)) {
+      //moving using the up arrow key
       this.krab.vy = -this.krab.speed;
-    } else if (keyIsDown(83)) {
-      //moving using the W key
+    } else if (keyIsDown(40)) {
+      //moving using the down arrow key
       this.krab.vy = this.krab.speed;
     } else {
       this.krab.vy = 0;
     }
 
-    if (keyIsDown(68)) {
+    if (keyIsDown(39)) {
+      // moving using the right arrow key
       this.krab.vx = this.krab.speed;
-    } else if (keyIsDown(65)) {
+    } else if (keyIsDown(37)) {
+      // moving using the left arrow key
       this.krab.vx = -this.krab.speed;
     } else {
       this.krab.vx = 0;
@@ -164,37 +178,18 @@ class Stage2 extends State {
     this.h1 = dist(this.krab.x, this.krab.y, this.home.x, this.home.y);
     if (this.h1 < this.home.size / 2 + this.krab.size / 2) {
       currentState = new Stage3();
-  
     }
   }
 
   display() {
+    // stage exit
     push();
     image(imgHouse, this.home.x, this.home.y, this.home.size, this.home.size);
     pop();
-
-    // starting wall
-    // push();
-    // noStroke();
-    // fill(224, 222, 159);
-    // rect(
-    //   this.startWall.wall1.x,
-    //   this.startWall.wall1.y,
-    //   this.startWall.wall1.h,
-    //   this.startWall.wall1.w
-    // );
-    // pop();
-    // // ending wall
-    // push();
-    // noStroke();
-    // fill(224, 222, 159);
-    // rect(
-    //   this.startWall.wall2.x,
-    //   this.startWall.wall2.y,
-    //   this.startWall.wall2.h,
-    //   this.startWall.wall2.w
-    // );
-    // pop();
+    // stage return
+    push();
+    image(imgCave, this.cave.x, this.cave.y, this.cave.size, this.cave.size);
+    pop();
     // wall 1 display
     push();
     noStroke();
@@ -266,6 +261,14 @@ class Stage2 extends State {
     pop();
     // krab display
     image(imgkrab, this.krab.x, this.krab.y, this.krab.size, this.krab.size);
+    // sign display with text
+    push();
+    image(imgSign, this.sign.x, this.sign.y, this.sign.size, this.sign.size);
+    textSize(20);
+    fill(108, 150, 230);
+    textAlign(this.sign.x,this.sign.y,this.sign.size,this.sign.size);
+    text("If You Don't Remember, Go Back", 300, 140,150,);//this.sign.x,this.sign.y,this.sign.size,this.sign.size,
+    pop();
   }
   checkOverlap() {
     // the lose colours
@@ -318,6 +321,10 @@ class Stage2 extends State {
     }
   }
   // the ending goal of the cave
-
-// NO keyPressed() needed down here, it is handled by the State version
+  return() {
+    this.r1 = dist(this.krab.x, this.krab.y, this.cave.x, this.cave.y);
+    if (this.r1 < this.cave.size / 2 + this.krab.size / 2) {
+      currentState = new Animation();
+    }
+  }
 }

@@ -89,9 +89,9 @@ class Stage3 extends State {
   move() {
     this.krab.x = this.krab.x + this.krab.vx;
 
-    if (keyIsDown(68)) {
+    if (keyIsDown(39)) {
       this.krab.vx = this.krab.speed;
-    } else if (keyIsDown(65)) {
+    } else if (keyIsDown(37)) {
       this.krab.vx = -this.krab.speed;
     } else {
       this.krab.vx = 0;
