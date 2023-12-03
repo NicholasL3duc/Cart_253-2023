@@ -63,6 +63,42 @@ class Stage3 extends State {
       y: 50,
       size: 150,
     };
+    this.bubble = {
+      x: 400,
+      y: 20,
+      size: 120,
+      active: true,
+    };
+    this.questionStart = {
+      x: 900,
+      y: 650,
+      size: 120,
+      active: true,
+    };
+    this.question1 = {
+      x: 500,
+      y: 200,
+      w: 500,
+      h: 250,
+      size: 120,
+      active: true,
+    };
+    this.question2 = {
+        x: 500,
+        y: 200,
+        w: 500,
+        h: 250,
+        size: 120,
+        active: false,
+      };
+      this.question3 = {
+        x: 500,
+        y: 200,
+        w: 500,
+        h: 250,
+        size: 120,
+        active: false,
+      };
   }
   // draw()
   // Called every frame in the main script. Handles what the title
@@ -106,42 +142,46 @@ class Stage3 extends State {
 
     // baby 1
     push();
-    image(
-      imgBabyHat,
-      this.baby.x,
-      this.baby.y,
-      this.baby.w,
-      this.baby.h,
-    
-    );
+    image(imgBabyHat, this.baby.x, this.baby.y, this.baby.w, this.baby.h);
     pop();
-//baby 2
-push();
-image(
-  imgBabykrab,
-  this.baby2.x,
-  this.baby2.y,
-  this.baby2.w,
-  this.baby2.h,
-
-);
-pop();
-
+    //baby 2
+    push();
+    image(imgBabykrab, this.baby2.x, this.baby2.y, this.baby2.w, this.baby2.h);
+    pop();
+    rect(this.questionStart.x,this.questionStart.y,this.questionStart.size,this.questionStart.size)
   }
-  checkEnding() { if (
-    this.krab.x + this.krab.w > this.baby.x &&
-    this.krab.x < this.baby.x + this.baby.w &&
-    this.krab.y + this.krab.h > this.baby.y &&
-    this.krab.y < this.baby.y + this.baby.h
-  ) {
-    currentState = new GoodEnding();
+  checkEnding() {
+    if (
+      this.krab.x + this.krab.w > this.baby.x &&
+      this.krab.x < this.baby.x + this.baby.w &&
+      this.krab.y + this.krab.h > this.baby.y &&
+      this.krab.y < this.baby.y + this.baby.h
+    ) {
+      currentState = new GoodEnding();
+    }
   }
-
-
-
-
-}
-  checkOverlap() {}
+  checkOverlap() {
+    // question starter
+    this.q = dist(
+      this.krab.x,
+      this.krab.y,
+      this.questionStart.x,
+      this.questionStart.y
+    );
+    if (this.q < this.krab.size / 2 + this.questionStart.size / 2) {
+        push();
+        image(
+          imgText,
+          this.question1.x,
+          this.question1.y,
+          this.question1.w,
+          this.question1.h,
+        );
+        pop();
+        this.questionStart = false;
+      this.question1 = true;
+    }
+  }
 
   babyKrab() {
     // baby 1
@@ -158,8 +198,23 @@ pop();
     pop();
   }
   questions() {
+    // text bubble
+    // push();
+    // image(
+    //   imgText,
+    //   this.question1.x,
+    //   this.question1.y,
+    //   this.question1.w,
+    //   this.question1.h,
+    // );
+    // pop();
+
     // question #1
-  
+    push();
+    textSize(20);
+    fill(41, 30, 199);
+    text("Touch The Shell To Get Past The Crack", ); //this.sign.x,this.sign.y,this.sign.size,this.sign.size,
+    pop();
   }
   door() {
     this.d1 = dist(this.krab.x, this.krab.y, this.home.x, this.home.y);

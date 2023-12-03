@@ -29,6 +29,7 @@ let imgDancingPenguinBlack;
 let imgSecretBack;
 let imgDancingKrab;
 let imgClappingPenguin;
+let imgFish;
 
 function preload() {
   imgBackdrop = loadImage("assets/images/Stage1Backdrop.jpg");
@@ -54,11 +55,10 @@ function preload() {
   imgSign = loadImage("assets/images/SignS1.png");
   imgDancingPenguin = loadImage("assets/images/dancingPenguinBlue.gif");
   imgDancingPenguinBlack = loadImage("assets/images/Breakdance.webp");
-  imgSecretBack = loadImage(
-    "assets/images/Crysta-in-the-Night-Club-TV-Screen-crysta-38470479-766-576.gif"
-  );
+  imgSecretBack = loadImage( "assets/images/Crysta-in-the-Night-Club-TV-Screen-crysta-38470479-766-576.gif");
   imgDancingKrab = loadImage("assets/images/Klutzy_Special_Dance.webp");
-  imgClappingPenguin = loadImage("assets/images/clapping-gif-club-penguin.gif")
+  imgClappingPenguin = loadImage("assets/images/clapping-gif-club-penguin.gif");
+  imgFish = loadImage("assets/images/fish.webp");
 }
 
 // setup()
@@ -69,7 +69,7 @@ function setup() {
   // We can set the current state by creating a NEW object from the class
   // representing that state! This will call its constructor() which will work
   // like the `setup()` for that state.
-  currentState = new Title(); // REVERT TO TITLE AFTER
+  currentState = new Stage3(); // REVERT TO TITLE AFTER
 
   // Text settings
   textSize(50);

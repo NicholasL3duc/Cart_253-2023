@@ -23,12 +23,10 @@ class Animation extends State {
     this.krab = {
       x: 20,
       y: 20,
-      w: 30,
-      h: 10,
-      size: 100,
+      size: 60,
       vx: 0,
       vy: 0,
-      speed: 2.5, //3.5 set it back
+      speed: 3.5, //3.5 set it back
     };
 
     this.waterMaze = [
@@ -74,10 +72,15 @@ class Animation extends State {
         w: 110,
         h: 300,
       },
-    ]
+      // {
+      //   x: 900,
+      // y: 600,
+      // w: 110,
+      // h: 300,
+      // active: true,
+      // }
+    ];
 
-    
-    
     this.crackingWall = {
       x: 900,
       y: 600,
@@ -184,13 +187,17 @@ class Animation extends State {
       y: 0,
       size: 150,
     };
+    this.coral = {
+      x: -50,
+      y: 350,
+      size: 600,
+    };
 
     this.sign = {
       x: 220,
       y: 650,
       size: 170,
     };
-
     // Set the velocity of the krab to its speed.
     // NOTE: we cannot use this.krab.speed INSIDE the object
     // definition above. That's why this is on a separate line.
@@ -221,7 +228,6 @@ class Animation extends State {
   // move()
   // Updates the krab's position with its velocity
   move() {
- 
     if (keyIsDown(38)) {
       //moving using the up arrow key
       this.krab.vy = -this.krab.speed;
@@ -248,7 +254,6 @@ class Animation extends State {
   // display()
   // Displays the this.krab as an ellipse on the canvas
   display() {
-
     push();
     image(imgkrab, this.krab.x, this.krab.y, this.krab.size, this.krab.size);
     pop();
@@ -257,6 +262,15 @@ class Animation extends State {
     image(imgHouse, this.home.x, this.home.y, this.home.size, this.home.size);
     pop();
 
+    push();
+    image(
+      imgCoral,
+      this.coral.x,
+      this.coral.y,
+      this.coral.size,
+      this.coral.size
+    );
+    pop();
     // Water Walls display
     for (let wall in this.waterMaze) {
       push();
@@ -270,7 +284,7 @@ class Animation extends State {
       pop();
     }
 
-    // cracking disapering wall
+    // // cracking disapering wall
     // push();
     // rect(
     //   this.crackingWall.x,
@@ -294,6 +308,11 @@ class Animation extends State {
     noStroke();
     ellipse(this.shark.b3.x, this.shark.b3.y, 40, 70);
 
+
+
+
+
+
     // sand bank display
 
     fill(74, 79, 82);
@@ -311,24 +330,16 @@ class Animation extends State {
     fill(237, 92, 228);
     rect(600, 600, 100, 50);
     pop();
-    // sign hint
+    // welcome sign
     push();
     image(imgSign, this.sign.x, this.sign.y, this.sign.size, this.sign.size);
     textSize(20);
-    fill(108, 150, 230);
+    fill(41, 30, 199);
     textAlign(this.sign.x, this.sign.y, this.sign.size, this.sign.size);
-    text("Welcome To My Game, Enjoy", 300, 700, 150); //this.sign.x,this.sign.y,this.sign.size,this.sign.size,
+    text("Touch The Shell To Get Past The Crack", 300, 690, 150); //this.sign.x,this.sign.y,this.sign.size,this.sign.size,
     pop();
-    //   // sand 2
-    //   ellipse(this.sand.bank2.x, this.sand.bank2.y, 150, 150);
-    //   // sand 3
-    //   ellipse(this.sand.bank3.x, this.sand.bank3.y, 60, 60);
-    //   // sand 4
-    //   ellipse(this.sand.bank4.x, this.sand.bank4.y, 70, 70);
-    //   //   // sand 5
-    //   //   ellipse(this.sand.bank5.x, this.sand.bank5.y, 180, 180);
-    //   // sand 6
-    //   ellipse(this.sand.bank6.x, this.sand.bank6.y, 100, 100);
+   
+
   }
 
   // check is crab touches borders
@@ -344,27 +355,23 @@ class Animation extends State {
     }
   }
   checkOverlap(wall) {
-  
     // bouncing off the walls
     for (let i = 0; i < this.waterMaze.length; i++) {
-      console.log("checkoverlap")
-    if (
-      this.krab.x + this.krab.w  > this.waterMaze[i].x   &&
-      this.krab.x < this.waterMaze[i].x + this.waterMaze[i].w  &&
-      this.krab.y + this.krab.h > this.waterMaze[i].y  &&
-      this.krab.y< this.waterMaze[i].y + this.waterMaze[i].h  
-      
-    ){
-     
-this.krab.x -= this.krab.vx;
-this.krab.y -= this.krab.vy
+      if (
+        this.krab.x + this.krab.size > this.waterMaze[i].x &&
+        this.krab.x < this.waterMaze[i].x + this.waterMaze[i].w &&
+        this.krab.y + this.krab.size > this.waterMaze[i].y &&
+        this.krab.y < this.waterMaze[i].y + this.waterMaze[i].h
+      ) {
+        this.krab.x -= this.krab.vx;
+        this.krab.y -= this.krab.vy;
+      }
     }
-  }
 
-      // getting the shell
-      this.k = dist(this.krab.x, this.krab.y, this.shell.x, this.shell.y);
+    // getting the shell
+    this.k = dist(this.krab.x, this.krab.y, this.shell.x, this.shell.y);
     if (this.k < this.krab.size / 2 + this.shell.size / 2) {
-      this.shell.active = false;
+      this.shell = false;
       this.crack.active = false;
       this.crackingWall.active = false;
     }
@@ -377,6 +384,12 @@ this.krab.y -= this.krab.vy
     // ) {
     //   currentState = new Ending();
     // }
+
+   
+
+
+
+
 
     // getting the shell overlap
 

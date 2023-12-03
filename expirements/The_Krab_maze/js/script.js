@@ -524,7 +524,22 @@ function checkOverlap() {
     image(imgOctopus, octopus.x, octopus.y, octopus.size, octopus.size);
     pop();
   }
-
+  function setup() {
+    createCanvas(windowWidth, windowHeight);
+  
+    //   array for fish
+    for (let i = 0; i < 6; i++) {
+      school[i] = createFish(random(0, width), random(0, height));
+    }
+  
+    //    array for trash
+    for (let g = 0; g < 4; g++) {
+      garbage[g] = createFish(random(0, width), random(0, height));
+    }
+  
+    whale.x = 50;
+    whale.y = windowHeight / 2;
+  }
   //over lap check for wall 1
   if (
     krab.x + krab.w > waterMaze.wall1.x &&

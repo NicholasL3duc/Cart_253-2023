@@ -113,11 +113,22 @@ class Stage2 extends State {
       y: 100,
       size: 170,
     };
+    
 
     // Set the velocity of the krab to its speed.
     // NOTE: we cannot use this.krab.speed INSIDE the object
     // definition above. That's why this is on a separate line.
     this.krab.vx = this.krab.speed;
+  }
+
+  setup() {
+    createCanvas(windowWidth, windowHeight);
+  
+    //   array for fish
+    for (let i = 0; i < 6; i++) {
+      school[i] = createFish(random(0, width), random(0, height));
+    }
+  
   }
 
   // draw()
@@ -132,12 +143,27 @@ class Stage2 extends State {
     background(imgS2Backdrop);
 
     // Call the state's methods to make the animation work
+    this.createFish();
     this.move();
     this.display();
     this.checkEnding();
     this.checkOverlap();
     this.babyKrab();
     this.return();
+    this.moveFish();
+    this.displayFish();
+    this.createFish();
+  }
+  createFish(x, y) {
+    this.fish = {
+      x: x,
+      y: y,
+      size: 50,
+      vx: 0,
+      vy: 0,
+      speed: 2,
+    };
+    return this.fish;
   }
 
   // move()
@@ -184,11 +210,11 @@ class Stage2 extends State {
   display() {
     // stage exit
     push();
-    image(imgHouse, this.home.x, this.home.y, this.home.size, this.home.size);
+    image(imgCave, this.home.x, this.home.y, this.home.size, this.home.size);
     pop();
     // stage return
     push();
-    image(imgCave, this.cave.x, this.cave.y, this.cave.size, this.cave.size);
+    image(imgHouse, this.cave.x, this.cave.y, this.cave.size, this.cave.size);
     pop();
     // wall 1 display
     push();
@@ -269,6 +295,13 @@ class Stage2 extends State {
     textAlign(this.sign.x,this.sign.y,this.sign.size,this.sign.size);
     text("If You Don't Remember, Go Back", 300, 140,150,);//this.sign.x,this.sign.y,this.sign.size,this.sign.size,
     pop();
+    
+  }
+ displayFish(fish) {
+    push();
+    // display for the fish
+    image(imgFish, this.fish.x, this.fish.y, this.fish.size, this.fish.size);
+    pop();
   }
   checkOverlap() {
     // the lose colours
@@ -319,6 +352,23 @@ class Stage2 extends State {
     if (b2 < this.babyKrab2.size / 2 + this.krab.size / 2) {
       currentState = new Ending();
     }
+  }
+  moveFish(fish) {
+    // Choose whether to change direction
+    let change = random(0, 1);
+    if (change < 0.05) {
+      this.fish.vx = random(-this.fish.speed, this.fish.speed);
+      this.fish.vy = random(-this.fish.speed, this.fish.speed);
+    }
+  
+    // Move the fish
+    this.fish.x = this.fish.x + this.fish.vx;
+    this.fish.y = this.fish.y + this.fish.vy;
+  
+    // Constrain the fish to the canvas
+  
+    this.fish.x = constrain(this.fish.x, 0, width);
+    this.fish.y = constrain(this.fish.y, 0, height);
   }
   // the ending goal of the cave
   return() {
