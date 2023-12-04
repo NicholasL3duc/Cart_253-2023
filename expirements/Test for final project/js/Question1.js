@@ -1,4 +1,4 @@
-class Stage3 extends State {
+class Question1 extends State {
   // Acts as the setup() of the state, called when the
   // state is created. Creates a krab object and sets its
   // velocity.
@@ -78,33 +78,17 @@ class Stage3 extends State {
     this.question1 = {
       x: 500,
       y: 200,
-      w: 500,
+      w: 550,
       h: 250,
       size: 120,
       active: true,
     };
-    this.question2 = {
-      x: 500,
-      y: 200,
-      w: 500,
-      h: 250,
-      size: 120,
-      active: false,
-    };
-    this.question3 = {
-      x: 500,
-      y: 200,
-      w: 500,
-      h: 250,
-      size: 120,
-      active: false,
-    };
+   
     // question constructor
     this.typewriter = new Typewriter();
     this.typewriter.typewrite(
-      `So Youve gotten this far, 
-      \n BUT FIRST you must answer 
-      \n 3 DIFFICULT human riddles to pass by.`,
+      `what is the number 2 added to the number 4= ?? 
+      \n A) Seashell , B) Red,  C)6`,
     
       windowWidth - 920,
       windowHeight / 2.2
@@ -130,8 +114,8 @@ class Stage3 extends State {
     this.babyKrab();
     this.octopusStage();
     this.questions();
-    this.keyReleased();
     this.door();
+    this.keyReleased();
   }
 
   move() {
@@ -160,12 +144,7 @@ class Stage3 extends State {
     push();
     image(imgBabykrab, this.baby2.x, this.baby2.y, this.baby2.w, this.baby2.h);
     pop();
-    // rect(
-    //   this.questionStart.x,
-    //   this.questionStart.y,
-    //   this.questionStart.size,
-    //   this.questionStart.size
-    // );
+  
     
   }
   checkEnding() {
@@ -228,15 +207,26 @@ class Stage3 extends State {
     pop();
     // typewritter display
     this.typewriter.display();
+    // question #1
+    push();
+    textSize(20);
+    fill(41, 30, 199);
+    text("Touch The Shell To Get Past The Crack"); //this.sign.x,this.sign.y,this.sign.size,this.sign.size,
+    pop();
   }
-//   mousepress to move on
-keyReleased(){
-    if (keyCode === 32) {
-    currentState = new Question1();
-}
-    
-}
+  keyReleased(){
+    if (keyCode === 65) {
+        currentState = new Ending(); //if mouse clicks over choice 1 (paint white flowers...) then the cat image changes
+    }
 
+    else if (keyCode === 66) {
+        currentState = new Ending(); //if mouse hovers over choice 2 (cry) then the cat image changes
+    }
+
+    else if (keyCode === 67) {
+        currentState = new Question2(); //if mouse hovers over choice 3 (go home) then the cat image changes
+    }
+}
   door() {
     this.d1 = dist(this.krab.x, this.krab.y, this.home.x, this.home.y);
     if (this.d1 < this.home.size / 2 + this.krab.size / 2) {

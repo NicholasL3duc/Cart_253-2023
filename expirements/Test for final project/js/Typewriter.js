@@ -58,9 +58,9 @@ class Typewriter {
     // Display the current display text at the correct location
     display() {
       push();
-      fill(255);
+      fill(0);
       textFont(`Courier`);
-      textSize(18);
+      textSize(17);
       textAlign(LEFT, BOTTOM);
       text(this.displayText, this.x, this.y);
       pop();
