@@ -203,7 +203,7 @@ class Stage2 extends State {
   checkEnding() {
     this.h1 = dist(this.krab.x, this.krab.y, this.home.x, this.home.y);
     if (this.h1 < this.home.size / 2 + this.krab.size / 2) {
-      currentState = new Question1();
+      currentState = new Stage3();
     }
   }
 
