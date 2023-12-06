@@ -105,7 +105,7 @@ class Stage3 extends State {
       `So Youve gotten this far, 
       \n BUT FIRST you must answer 
       \n 3 DIFFICULT human riddles to pass by.`,
-    
+
       windowWidth - 920,
       windowHeight / 2.2
     );
@@ -121,7 +121,6 @@ class Stage3 extends State {
 
     background(imgS3Backdrop);
 
-
     // Call the state's methods to make the animation work
     this.move();
     this.display();
@@ -136,7 +135,6 @@ class Stage3 extends State {
 
   move() {
     // this.krab.x = this.krab.x + this.krab.vx;
-
     // if (keyIsDown(39)) {
     //   this.krab.vx = this.krab.speed;
     // } else if (keyIsDown(37)) {
@@ -160,13 +158,6 @@ class Stage3 extends State {
     push();
     image(imgBabykrab, this.baby2.x, this.baby2.y, this.baby2.w, this.baby2.h);
     pop();
-    // rect(
-    //   this.questionStart.x,
-    //   this.questionStart.y,
-    //   this.questionStart.size,
-    //   this.questionStart.size
-    // );
-    
   }
   checkEnding() {
     if (
@@ -196,8 +187,6 @@ class Stage3 extends State {
         this.question1.h
       );
       pop();
-    //   this.questionStart = false;
-    //   this.question1 = true;
     }
   }
 
@@ -223,19 +212,18 @@ class Stage3 extends State {
       this.question1.x,
       this.question1.y,
       this.question1.w,
-      this.question1.h,
+      this.question1.h
     );
     pop();
     // typewritter display
     this.typewriter.display();
   }
-//   mousepress to move on
-keyReleased(){
+  //   mousepress to move on
+  keyReleased() {
     if (keyCode === 32) {
-    currentState = new Question1();
-}
-    
-}
+      currentState = new Question1();
+    }
+  }
 
   door() {
     this.d1 = dist(this.krab.x, this.krab.y, this.home.x, this.home.y);

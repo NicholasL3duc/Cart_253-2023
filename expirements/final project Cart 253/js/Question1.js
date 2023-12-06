@@ -119,16 +119,7 @@ class Question1 extends State {
   }
 
   move() {
-    // this.krab.x = this.krab.x + this.krab.vx;
-
-    // if (keyIsDown(39)) {
-    //   this.krab.vx = this.krab.speed;
-    // } else if (keyIsDown(37)) {
-    //   this.krab.vx = -this.krab.speed;
-    // } else {
-    //   this.krab.vx = 0;
-    // }
-    // this.krab.x += this.krab.vx;
+;
   }
 
   display() {
@@ -175,8 +166,7 @@ class Question1 extends State {
         this.question1.h
       );
       pop();
-    //   this.questionStart = false;
-    //   this.question1 = true;
+  
     }
   }
 
@@ -216,15 +206,15 @@ class Question1 extends State {
   }
   keyReleased(){
     if (keyCode === 65) {
-        currentState = new Ending(); //if mouse clicks over choice 1 (paint white flowers...) then the cat image changes
+        currentState = new Ending(); //if mouse clicks over choice 1 bad ending
     }
 
     else if (keyCode === 66) {
-        currentState = new Ending(); //if mouse hovers over choice 2 (cry) then the cat image changes
+        currentState = new Ending(); //if mouse hovers over choice 2 bad ending
     }
 
     else if (keyCode === 67) {
-        currentState = new Question2(); //if mouse hovers over choice 3 (go home) then the cat image changes
+        currentState = new Question2(); //if mouse hovers over choice 3 good ending
     }
 }
   door() {

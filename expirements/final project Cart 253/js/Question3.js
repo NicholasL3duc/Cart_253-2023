@@ -151,6 +151,7 @@ class Question3 extends State {
     
   }
   checkEnding() {
+    // check for good ending
     if (
       this.krab.x + this.krab.w > this.baby.x &&
       this.krab.x < this.baby.x + this.baby.w &&
@@ -187,6 +188,7 @@ class Question3 extends State {
     // baby 1
   }
   octopusStage() {
+    // the scared octo
     push();
     image(
       imgScaredOcto,
@@ -214,15 +216,15 @@ class Question3 extends State {
   }
   keyReleased(){
     if (keyCode === 65) {
-        currentState = new Ending(); //if mouse clicks over choice 1 (paint white flowers...) then the cat image changes
+        currentState = new Ending(); //if mouse clicks over choice 1 bad ending
     }
 
     else if (keyCode === 66) {
-        currentState = new EndingStage(); //if mouse hovers over choice 2 (cry) then the cat image changes
+        currentState = new EndingStage(); //if mouse hovers over choice 2 good ending
     }
 
     else if (keyCode === 67) {
-        currentState = new Ending(); //if mouse hovers over choice 3 (go home) then the cat image changes
+        currentState = new Ending(); //if mouse hovers over choice 3 bad ending
     }
 }
   door() {

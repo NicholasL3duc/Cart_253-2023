@@ -19,7 +19,7 @@ class Animation extends State {
     // even if it doesn't do anything right now. It might
     // later!
     super();
-
+    // Krab object
     this.krab = {
       x: 20,
       y: 20,
@@ -28,7 +28,7 @@ class Animation extends State {
       vy: 0,
       speed: 3.5, //3.5 set it back
     };
-
+    // wall objects
     this.waterMaze = [
       {
         x: 120,
@@ -72,15 +72,8 @@ class Animation extends State {
         w: 110,
         h: 300,
       },
-      // {
-      //   x: 900,
-      // y: 600,
-      // w: 110,
-      // h: 300,
-      // active: true,
-      // }
     ];
-
+    // the cracking wall object
     this.crackingWall = {
       x: 900,
       y: 600,
@@ -88,7 +81,7 @@ class Animation extends State {
       h: 300,
       active: true,
     };
-
+    // grey cirlcles object
     this.sand = {
       bank1: {
         x: 1150,
@@ -120,6 +113,7 @@ class Animation extends State {
         y: 300,
         size: 20,
       },
+      // shark objects
     };
     this.shark = {
       b1: {
@@ -158,21 +152,21 @@ class Animation extends State {
         angle: 0,
         distance: 100,
       },
+      // home object
     };
     this.home = {
       x: 730,
       y: 460,
       size: 150,
     };
-
+    // shell object
     this.shell = {
       x: 400,
       y: 20,
       size: 120,
       active: true,
     };
-    // image(imgCrackS1, 860, 600, 200, 300);
-    // pop();
+    // crack object
     this.crack = {
       x: 890,
       y: 600,
@@ -181,18 +175,19 @@ class Animation extends State {
       size: 90,
       active: true,
     };
-
+    // mine object
     this.mine = {
       x: undefined,
       y: 0,
       size: 150,
     };
+    // coral object
     this.coral = {
       x: -50,
       y: 350,
       size: 600,
     };
-
+    // sign object
     this.sign = {
       x: 220,
       y: 650,
@@ -257,11 +252,11 @@ class Animation extends State {
     push();
     image(imgkrab, this.krab.x, this.krab.y, this.krab.size, this.krab.size);
     pop();
-
+    // Displays the this.home
     push();
     image(imgHouse, this.home.x, this.home.y, this.home.size, this.home.size);
     pop();
-
+    // displays the coral
     push();
     image(
       imgCoral,
@@ -284,15 +279,6 @@ class Animation extends State {
       pop();
     }
 
-    // // cracking disapering wall
-    // push();
-    // rect(
-    //   this.crackingWall.x,
-    //   this.crackingWall.y,
-    //   this.crackingWall.w,
-    //   this.crackingWall.h
-    // );
-
     //   shark 1
     push();
     fill(140, 154, 163);
@@ -307,11 +293,6 @@ class Animation extends State {
     fill(140, 154, 163);
     noStroke();
     ellipse(this.shark.b3.x, this.shark.b3.y, 40, 70);
-
-
-
-
-
 
     // sand bank display
 
@@ -338,8 +319,6 @@ class Animation extends State {
     textAlign(this.sign.x, this.sign.y, this.sign.size, this.sign.size);
     text("Touch The Shell To Get Past The Crack", 300, 690, 150); //this.sign.x,this.sign.y,this.sign.size,this.sign.size,
     pop();
-   
-
   }
 
   // check is crab touches borders
@@ -385,11 +364,7 @@ class Animation extends State {
     //   currentState = new Ending();
     // }
 
-   
-
-
-
-
+    // kept  ^^^^ incase i want it
 
     // getting the shell overlap
 
@@ -404,13 +379,7 @@ class Animation extends State {
     );
     pop();
     if (this.crackingWall.active) push();
-    // fill(194, 178, 128)
-    //   rect(
-    //     this.crackingWall.x,
-    //     this.crackingWall.y,
-    //     this.crackingWall.w,
-    //     this.crackingWall.h
-    // );
+
     pop();
     if (this.crack.active) {
       push();
